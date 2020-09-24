@@ -61,3 +61,6 @@ nnoremap <silent><leader>h :nohlsearch<Bar>:echo<CR>
 
 " FlyGrep settings
 nnoremap <leader>s :FlyGrep<cr>
+
+" Toggle CursorColumn
+map <silent><leader>v :set cursorcolumn!<CR>
