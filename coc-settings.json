@@ -1,0 +1,6 @@
+{
+ "diagnostic.checkCurrentLine": true,
+ "diagnostic.infoSign": "⚠",
+ "diagnostic.errorSign": ">>",
+ "diagnostic.warningSign": "--"
+}
