@@ -21,9 +21,10 @@ set background=dark
 " General view 
 set termguicolors
 
+" TODO: achieve the same with ColorScheme
 " Overwrite colorscheme line highlight color
-au Colorscheme * :hi CursorLine guibg=#212536 
-au Colorscheme * :hi CursorColumn guibg=#212536 
+au BufEnter * :hi CursorLine guibg=#212536 
+au BufEnter * :hi CursorColumn guibg=#212536 
 
 set cursorline  " Current line highlighted
 
