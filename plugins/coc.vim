@@ -1,6 +1,18 @@
 " Coc configuration
 
-let g:coc_global_extensions=[ 'coc-omnisharp', 'coc-python' ]
+let g:coc_global_extensions=[  
+      \ 'coc-css',
+      \ 'coc-json',
+      \ 'coc-marketplace',
+      \ 'coc-omnisharp',
+      \ 'coc-python', 
+      \ 'coc-sh',
+      \ 'coc-snippets',
+      \ 'coc-sql',
+      \ 'coc-vimlsp',
+      \ 'coc-xml',
+      \ 'coc-yaml',
+      \ ]
 
 " TextEdit might fail if hidden is not set.
 set hidden
