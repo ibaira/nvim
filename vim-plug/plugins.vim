@@ -9,19 +9,12 @@ Plug 'vim-airline/vim-airline-themes'  " themes for statusline
 Plug 'davidhalter/jedi-vim'   " jedi for python
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'  "to highlight files in nerdtree
 Plug 'Vimjas/vim-python-pep8-indent'  "better indenting for python
-Plug 'kien/ctrlp.vim'  " fuzzy search files
 Plug 'tweekmonster/impsort.vim'  " color and sort imports
 Plug 'wsdjeg/FlyGrep.vim'  " awesome grep on the fly
 Plug 'w0rp/ale'  " python linters
 Plug 'airblade/vim-gitgutter'  " show git changes to files in gutter
 Plug 'tpope/vim-commentary'  "comment-out by gc
 Plug 'roxma/nvim-yarp'  " dependency of ncm2
-Plug 'ncm2/ncm2'  " awesome autocomplete plugin
-" Fork for extra speed: https://github.com/HansPinckaers/ncm2-jedi
-Plug 'HansPinckaers/ncm2-jedi'  " fast python completion (use ncm2 if you want type info or snippet support)
-Plug 'ncm2/ncm2-bufword'  " buffer keyword completion
-Plug 'ncm2/ncm2-path'  " filepath completion
-Plug 'joshdick/onedark.vim'  " OneDark theme
 Plug 'neoclide/coc.nvim'  " Conquer of Completion
 Plug 'tpope/vim-fugitive'  " Git integration
 Plug 'kdheepak/lazygit.nvim', { 'branch': 'nvim-v0.4.3' }  
@@ -39,5 +32,9 @@ Plug 'puremourning/vimspector'  " Multi language graphical debugger
 Plug 'unblevable/quick-scope'  " Highligh characters when searching horizontaly
 Plug 'honza/vim-snippets'  " Snippets
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'OmniSharp/omnisharp-vim'  " C# utility
+Plug 'michaeljsmith/vim-indent-object'  " Indent object
+Plug 'sainnhe/gruvbox-material'  " More readable version of the GruvBox theme
 
 call plug#end()
