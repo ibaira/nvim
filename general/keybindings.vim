@@ -35,8 +35,8 @@ map <S-TAB> :bp<CR>
 map gb :b 
 
 " Search bindings
-map <space> /
-map <C-space> ?
+nmap <space> /
+nmap <C-space> ?
 
 " Better tabbing
 vnoremap < <gv
@@ -56,7 +56,7 @@ vnoremap K :m '<-2<CR>gv=gv
 "auto indent for brackets
 " update not write
 nnoremap <silent><leader>w :up!<cr>  
-nnoremap <silent><leader>q :lcl<cr>:q<cr>
+nnoremap <silent><leader>q :bd<cr>
 nnoremap <silent><leader>h :nohlsearch<Bar>:echo<CR>
 
 " FlyGrep settings
@@ -64,3 +64,9 @@ nnoremap <leader>s :FlyGrep<cr>
 
 " Toggle CursorColumn
 map <silent><leader>v :set cursorcolumn!<CR>
+
+" Presentation utilities
+nmap <leader>TT :.!toilet -w 200 -f standard<CR>
+nmap <leader>FF :.!toilet -w 200 -f small<CR>
+nmap <leader>FT :.!toilet -w 200 -f term -F border<CR>
+

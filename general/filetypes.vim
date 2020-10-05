@@ -50,6 +50,12 @@ augroup bracketmaps
 augroup END
 
 """"""""""""""""""""""""""""""
+" => Golang section
+"""""""""""""""""""""""""""""""
+au FileType go set foldmethod=syntax
+
+
+""""""""""""""""""""""""""""""
 " => JavaScript section
 """""""""""""""""""""""""""""""
 au FileType javascript call JavaScriptFold()
