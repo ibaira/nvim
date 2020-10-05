@@ -1,5 +1,4 @@
 " Settings
-
 syntax on
 filetype indent on
 

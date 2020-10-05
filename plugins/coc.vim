@@ -27,9 +27,10 @@ set updatetime=300
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
-au Colorscheme * :hi! CocErrorSign guifg=#e06c75
-au Colorscheme * :hi! CocInfoSign guifg=#abb2bf
-au Colorscheme * :hi! CocWarningSign guifg=#c678dd
+" OneDark
+" au Colorscheme * :hi! CocErrorSign guifg=#e06c75
+" au Colorscheme * :hi! CocInfoSign guifg=#abb2bf
+" au Colorscheme * :hi! CocWarningSign guifg=#c678dd
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
@@ -156,21 +157,21 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings for CoCList
 " Show all diagnostics.
-nnoremap <silent><nowait><space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait><leader>ca  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
-nnoremap <silent><nowait><space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent><nowait><leader>ce  :<C-u>CocList extensions<cr>
 " Show commands.
-nnoremap <silent><nowait><space>c  :<C-u>CocList commands<cr>
+nnoremap <silent><nowait><leader>cc  :<C-u>CocList commands<cr>
 " Find symbol of current document.
-nnoremap <silent><nowait><space>o  :<C-u>CocList outline<cr>
+nnoremap <silent><nowait><leader>co  :<C-u>CocList outline<cr>
 " Search workspace symbols.
-nnoremap <silent><nowait><space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent><nowait><leader>cs  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent><nowait><space>j  :<C-u>CocNext<CR>
+nnoremap <silent><nowait><leader>cj  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent><nowait><space>k  :<C-u>CocPrev<CR>
+nnoremap <silent><nowait><leader>ck  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-nnoremap <silent><nowait><space>p  :<C-u>CocListResume<CR>
+nnoremap <silent><nowait><leader>cp  :<C-u>CocListResume<CR>
 
 " Coc Snippets
 " Use <C-l> for trigger snippet expand.
@@ -188,11 +189,11 @@ imap <C-j> <Plug>(coc-snippets-expand-jump)
 " Use <leader>x for convert visual selected code to snippet
 xmap <leader>x  <Plug>(coc-convert-snippet)
 
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? coc#_select_confirm() :
+"       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
 
 function! s:check_back_space() abort
   let col = col('.') - 1
