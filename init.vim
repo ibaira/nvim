@@ -23,6 +23,7 @@ source $HOME/.config/nvim/plugins/rainbow.vim
 source $HOME/.config/nvim/plugins/vim-commentary.vim
 source $HOME/.config/nvim/plugins/vim-go.vim
 source $HOME/.config/nvim/plugins/vimspector.vim
+source $HOME/.config/nvim/plugins/auto-pairs.vim
 
 " Theme
 source $HOME/.config/nvim/themes/theme-config.vim

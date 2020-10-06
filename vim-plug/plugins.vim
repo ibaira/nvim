@@ -36,5 +36,6 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'OmniSharp/omnisharp-vim'  " C# utility
 Plug 'michaeljsmith/vim-indent-object'  " Indent object
 Plug 'sainnhe/gruvbox-material'  " More readable version of the GruvBox theme
+Plug 'jiangmiao/auto-pairs'  " Auto close brackets
 
 call plug#end()
