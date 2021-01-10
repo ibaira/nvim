@@ -19,4 +19,9 @@ au Colorscheme * highlight Cursor cterm=reverse gui=reverse ctermbg=NONE guibg=N
 " set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor
 "     \,sm:block-blinkwait175-blinkoff150-blinkon175
 
+" Codi
+au Colorscheme * highlight CodiVirtualText guifg=#89b482
+let g:codi#virtual_text_prefix = "❯ "
+
 colorscheme gruvbox-material
+au Colorscheme * highlight Cursor guifg=black guibg=green gui=reverse

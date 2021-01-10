@@ -38,5 +38,6 @@ Plug 'sainnhe/gruvbox-material'  " More readable version of the GruvBox theme
 Plug 'jiangmiao/auto-pairs'  " Auto close brackets
 Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':UpdateRemotePlugins'}  " Fast file system explorer
 Plug 'ryanoasis/vim-devicons'  " Developer icons used by chadtree, airline, etc
+Plug 'metakirby5/codi.vim'  " Codi tool
 
 call plug#end()
