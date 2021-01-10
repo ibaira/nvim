@@ -61,10 +61,10 @@ nnoremap <leader>r :set relativenumber!<CR>
 
 set pumheight=5
 
-" Default folding method to indent for Python
-setlocal foldmethod=indent
-setlocal foldlevelstart=99
+" Default folding method 
 set foldcolumn=0
+set foldmethod=syntax
+setlocal foldlevelstart=99
 
 " Indent character
 let g:indentLine_char_list = ['·']  "['┊', '¦', '┆'] https://en.wikipedia.org/wiki/Interpunct

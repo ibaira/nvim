@@ -26,6 +26,7 @@ au FileType python map <silent> <leader>J Ofrom pdb import set_trace; set_trace(
 " fix f-string syntax error in Python
 let g:pymode_python = 'python3'
 nnoremap <F6> :set foldmethod=indent<CR>:set foldlevel=99<CR>
+au FileType python set foldmethod=indent
 
 " highlight python and self function
 autocmd BufEnter * syntax match Type /\v\.[a-zA-Z0-9_]+\ze(\[|\s|$|,|\]|\)|\.|:)/hs=s+1
