@@ -1,24 +1,5 @@
 " Colorscheme options
 
-" onedark.vim override: Don't set a background color when running in a terminal;
-" if (has("autocmd") && !has("gui_running"))
-"   augroup colorset
-"     autocmd!
-"     let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" }
-"     autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white }) " `bg` will not be styled since there is no `bg` setting
-"   augroup END
-" endif
-" Onedark configuration
-" Overwrite colorscheme line highlight color
-" au Colorscheme * :hi CursorLine guibg=#212536 
-" au Colorscheme * :hi CursorColumn guibg=#212536 
-" CoC preview window backgroun
-" au Colorscheme * :hi Pmenu guibg=#212536 
-" A bit lighter comments for increased readability
-" au Colorscheme * :hi Comment guifg=#777c85
-" Options are in .pylintrc!
-" highlight VertSplit ctermbg=253
-
 " checks if your terminal has 24-bit color support
 if (has("termguicolors"))
     set termguicolors
@@ -29,5 +10,13 @@ set background=dark
 " General view 
 set termguicolors
 set cursorline  " Current line highlighted
+
+" Easy Motion target colors
+au Colorscheme * highlight EasyMotionTarget guifg=orange guibg=NONE
+au Colorscheme * highlight EasyMotionTarget2First guifg=orange guibg=NONE
+au Colorscheme * highlight EasyMotionTarget2Second guifg=orange guibg=NONE
+au Colorscheme * highlight Cursor cterm=reverse gui=reverse ctermbg=NONE guibg=NONE ctermfg=NONE guifg=NONE
+" set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor
+"     \,sm:block-blinkwait175-blinkoff150-blinkon175
 
 colorscheme gruvbox-material
