@@ -18,11 +18,11 @@ vnoremap x "_x
 
 " Keybinding to resize nerdtree window                                                                                                                 
 " resize horzontal split window
-nmap <C-Down> <C-W>-<C-W>-
-nmap <C-Up> <C-W>+<C-W>+
+nmap <C-S-Down> <C-W>-<C-W>-
+nmap <C-S-Up> <C-W>+<C-W>+
 " resize vertical split window
-nmap <C-Right> <C-W>><C-W>>
-nmap <C-Left> <C-W><<C-W><
+nmap <C-S-Right> <C-W>><C-W>>
+nmap <C-S-Left> <C-W><<C-W><
 
 " TODO: document
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
