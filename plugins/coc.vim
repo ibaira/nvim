@@ -12,6 +12,7 @@ let g:coc_global_extensions=[
       \ 'coc-vimlsp',
       \ 'coc-xml',
       \ 'coc-yaml',
+      \ 'coc-metals',
       \ ]
 
 " TextEdit might fail if hidden is not set.
@@ -26,11 +27,6 @@ set cmdheight=2
 set updatetime=300
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
-
-" OneDark
-" au Colorscheme * :hi! CocErrorSign guifg=#e06c75
-" au Colorscheme * :hi! CocInfoSign guifg=#abb2bf
-" au Colorscheme * :hi! CocWarningSign guifg=#c678dd
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
