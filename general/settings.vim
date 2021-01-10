@@ -52,7 +52,7 @@ set t_vb=
 set relativenumber
 set viminfo='20,<1000  " allow copying of more than 50 lines to other applications
 
-set clipboard=unnamedplus
+" set clipboard=unnamedplus
 set completeopt=menuone,noselect,noinsert,preview
 
 au! BufWritePost $MYVIMRC source %  " auto source when writting to init.vim
@@ -97,3 +97,12 @@ nnoremap <C-x> <Esc>
 " Enable Omni completion 
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
+
+" Copy to Windows clipboard
+let s:clip = '/mnt/c/Windows/System32/clip.exe'
+if executable(s:clip)
+    augroup WSLYank
+        autocmd!
+        autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
+    augroup END
+endif
