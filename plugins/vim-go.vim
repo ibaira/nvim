@@ -26,7 +26,7 @@ let g:go_highlight_string_spellcheck = 1
 let g:go_highlight_format_strings = 1
 let g:go_metalinter_autosave_enabled=['golint', 'govet']
 " Disable vim-go mapping for go to definition
-let g:go_def_mapping_enabled=0
+" let g:go_def_mapping_enabled=0
 
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
