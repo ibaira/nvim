@@ -11,10 +11,10 @@ let g:airline#extensions#coc#enabled = 1
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
-let g:airline#extensions#tabline#left_sep = '◣'
-let g:airline_left_sep = '◣'
-let g:airline_left_alt_sep = '╲'
-let g:airline_right_sep = '◢'
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
 let g:airline_section_x = ''
 let g:airline_section_y = '%{&fileformat}'
@@ -24,3 +24,4 @@ let g:airline#extensions#tabline#buffer_min_count = 2
 let g:airline#extensions#tabline#exclude_preview = 1
 let g:airline#extensions#tabline#buffers_label = ' '
 " let g:airline#extensions#tabline#buffers_label = '%{strftime("%H:%M")}'
+" let g:airline_symbols.dirty='❌'
