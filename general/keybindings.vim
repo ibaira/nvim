@@ -70,3 +70,5 @@ nmap <leader>TT :.!toilet -w 200 -f standard<CR>
 nmap <leader>FF :.!toilet -w 200 -f small<CR>
 nmap <leader>FT :.!toilet -w 200 -f term -F border<CR>
 
+" Easy-motion always bi-directional
+nmap <silent><leader><leader>f <Plug>(easymotion-s)
