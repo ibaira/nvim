@@ -106,3 +106,6 @@ if executable(s:clip)
         autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
     augroup END
 endif
+
+" Do not start automatically instant_markdown
+let g:instant_markdown_autostart = 0

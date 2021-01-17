@@ -31,7 +31,7 @@ Plug 'puremourning/vimspector'  " Multi language graphical debugger
 Plug 'unblevable/quick-scope'  " Highligh characters when searching horizontaly
 Plug 'honza/vim-snippets'  " Snippets
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 Plug 'OmniSharp/omnisharp-vim'  " C# utility
 Plug 'michaeljsmith/vim-indent-object'  " Indent object
 Plug 'sainnhe/gruvbox-material'  " More readable version of the GruvBox theme
