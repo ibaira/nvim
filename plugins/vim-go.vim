@@ -8,6 +8,7 @@
 
 au FileType go set completeopt-=preview
 au FileType go inoremap <C-l> <C-x><C-o>
+au FileType go inoremap <C-Space> <C-x><C-o>
 
 let g:go_highlight_array_whitespace_error = 1
 let g:go_highlight_chan_whitespace_error = 1
