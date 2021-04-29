@@ -1,3 +1,4 @@
+set laststatus=0
 
 " Vim Plug
 source $HOME/.config/nvim/vim-plug/plugins.vim
@@ -23,6 +24,7 @@ source $HOME/.config/nvim/plugins/vim-commentary.vim
 source $HOME/.config/nvim/plugins/vim-go.vim
 source $HOME/.config/nvim/plugins/vimspector.vim
 source $HOME/.config/nvim/plugins/auto-pairs.vim
+source $HOME/.config/nvim/plugins/vim-autoformat.vim
 source $HOME/.config/nvim/plugins/nvim-blame-line.vim
 source $HOME/.config/nvim/plugins/fzf.vim
 source $HOME/.config/nvim/plugins/vim-doge.vim
@@ -32,4 +34,3 @@ source $HOME/.config/nvim/plugins/vim-autoflake.vim
 
 " Theme
 source $HOME/.config/nvim/themes/theme-config.vim
-
