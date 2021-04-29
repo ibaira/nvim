@@ -112,7 +112,7 @@ set showmatch
 set mat=2
 
 " Show relative number lines
-set number relativenumber
+" set number relativenumber
 
 " No annoying sound on errors
 set noerrorbells
@@ -183,7 +183,7 @@ set lbr
 set tw=500
 
 set ai "Auto indent
-set si "Smart indent
+" set si "Smart indent
 set wrap "Wrap lines
 
 
@@ -207,10 +207,10 @@ map <C-space> ?
 map <silent> <leader><cr> :noh<cr>
 
 " Smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+" map <C-j> <C-W>j
+" map <C-k> <C-W>k
+" map <C-h> <C-W>h
+" map <C-l> <C-W>l
 
 " Close the current buffer
 map <leader>bd :Bclose<cr>:tabclose<cr>gT

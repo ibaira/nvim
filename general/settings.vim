@@ -49,7 +49,7 @@ set cpoptions+=x  " stay at seach item when <esc>
 set noerrorbells  " remove bells (i think this is default in neovim)
 set visualbell
 set t_vb=
-set relativenumber
+" set relativenumber
 set viminfo='20,<1000  " allow copying of more than 50 lines to other applications
 
 " set clipboard=unnamedplus
@@ -109,3 +109,30 @@ endif
 
 " Do not start automatically instant_markdown
 let g:instant_markdown_autostart = 0
+
+set clipboard+=unnamedplus
+
+" Neoterm vertical split by default instead of openning in current buffer
+" let g:neoterm_default_mod="vsplit"
+" nmap <leader>w :TREPLSendLine<CR>
+" vmap <leader>w :TREPLSendSelection<CR>
+
+" Vimspector signs
+sign define vimspectorBP         text=\ ● texthl=Orange
+sign define vimspectorBPCond     text=\ ◆ texthl=WarningMsg
+sign define vimspectorBPDisabled text=\ ● texthl=LineNr
+sign define vimspectorPC         text=\ ▶ texthl=Green linehl=CursorLine
+sign define vimspectorPCBP       text=●▶  texthl=Green linehl=CursorLine
+
+" Hide . directory in netwr
+let g:netrw_list_hide = '^\./$'
+let g:netrw_hide = 1
+
+" Explore directory with Netwr when running: 'vim .'
+augroup ProjectDrawer
+    autocmd!
+    autocmd VimEnter * if argv(0) == "." | Explore! | endif
+augroup END
+
+set pumheight=20
+set updatetime=10
