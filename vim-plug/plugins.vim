@@ -10,7 +10,7 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'  "to highlight files in nerdtree
 Plug 'Vimjas/vim-python-pep8-indent'  "better indenting for python
 Plug 'tweekmonster/impsort.vim'  " color and sort imports
 Plug 'wsdjeg/FlyGrep.vim'  " awesome grep on the fly
-Plug 'w0rp/ale'  " python linters
+Plug 'dense-analysis/ale'  " python linters
 Plug 'airblade/vim-gitgutter'  " show git changes to files in gutter
 Plug 'tpope/vim-commentary'  "comment-out by gc
 Plug 'roxma/nvim-yarp'  " dependency of ncm2
@@ -36,11 +36,16 @@ Plug 'OmniSharp/omnisharp-vim'  " C# utility
 Plug 'michaeljsmith/vim-indent-object'  " Indent object
 Plug 'sainnhe/gruvbox-material'  " More readable version of the GruvBox theme
 Plug 'jiangmiao/auto-pairs'  " Auto close brackets
-Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':UpdateRemotePlugins'}  " Fast file system explorer
-Plug 'ryanoasis/vim-devicons'  " Developer icons used by chadtree, airline, etc
 Plug 'metakirby5/codi.vim'  " Codi tool
+Plug 'tveskag/nvim-blame-line'  " Git blame information
 Plug 'christoomey/vim-tmux-navigator'  " Merge Tmux and Vim pane switching keybindings
 Plug 'benmills/vimux'  " Intergration with tmux
+Plug 'greghor/vim-pyShell'  " REPL interaction for python to send commands to it
+Plug 'julienr/vim-cellmode'  " Execute cells in REPL when between delimiters
+Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
+Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }  " Docstring generation
 Plug 'vim-test/vim-test'  " Run tests with keybindings
+Plug 'wookayin/vim-autoimport'
+Plug 'tell-k/vim-autoflake'
 
 call plug#end()

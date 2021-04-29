@@ -2,5 +2,63 @@
  "diagnostic.checkCurrentLine": true,
  "diagnostic.infoSign": "⚠",
  "diagnostic.errorSign": ">>",
- "diagnostic.warningSign": "--"
+ "diagnostic.warningSign": "--",
+
+ "languageserver": {
+    "dockerfile": {
+      "command": "docker-langserver",
+      "filetypes": ["dockerfile"],
+      "args": ["--stdio"]
+    },
+    "ccls": {
+      "command": "ccls",
+      "args": ["--log-file=/tmp/ccls.log", "-v=1"],
+      "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"],
+      "rootPatterns": [".ccls", "compile_commands.json"],
+      "initializationOptions": {
+         "cache": {
+           "directory": "/tmp/ccls"
+         },
+         "client": {
+          "snippetSupport": true
+         }
+       }
+    },
+    "terraform": {
+        "command": "terraform-ls",
+        "args": ["serve"],
+        "filetypes": [
+            "terraform",
+            "tf"
+        ],
+        "initializationOptions": {},
+        "settings": {}
+    }
+  },
+  "coc.preferences.formatOnType": true,
+  "coc.preferences.formatOnSaveFiletypes": ["python"],
+  /* "coc.preferences.previewAutoClose": true, */
+
+  "explorer.width": 30,
+  "explorer.icon.enableNerdfont": true,
+  "explorer.previewAction.onHover": false,
+  "explorer.keyMappings.global": {
+      "<CR>": ["expendable?", "expand", "open"],
+      "v": "open:vsplit"
+  },
+  "python.analysis.autoImportCompletions": true,
+  "python.formatting.provider": "black",
+  "python.formatting.blackArgs": ["-l", "88"],
+  "python.linting.flake8Enabled": true,
+  "python.linting.flake8Args": ["--max-line-length", "88"],
+  "python.linting.pylintEnabled": true,
+  "python.linting.pylintArgs": [
+      "-j", "0", 
+      "-d", "C0116,W0613,E1206"
+  ],
+  "python.linting.pydocstyleEnabled": true,
+  "python.linting.pydocstyleArgs": ["--convention=google"],
+  "python.linting.banditEnabled": true,
+  "python.sortImports.path": "isort",
+  "pyright.organizeimports.provider": "isort"
 }

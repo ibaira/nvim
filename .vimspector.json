@@ -1,0 +1,16 @@
+{
+  "configurations": {
+    "Python -> Debug current script": {
+      "adapter": "debugpy",
+      "configuration": {
+        "name": "Python -> Debug current script",
+        "type": "python",
+        "request": "launch",
+        "stopOnEntry": true,
+        "debugOptions": [],
+        "args": [],
+        "program": "${file}"
+      }
+    }
+  }
+}

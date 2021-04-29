@@ -1,18 +1,17 @@
 " Coc configuration
 
 let g:coc_global_extensions=[  
+      \ 'coc-cmake',
       \ 'coc-css',
       \ 'coc-json',
       \ 'coc-marketplace',
-      \ 'coc-omnisharp',
-      \ 'coc-python', 
+      \ 'coc-pyright',
       \ 'coc-sh',
       \ 'coc-snippets',
       \ 'coc-sql',
       \ 'coc-vimlsp',
       \ 'coc-xml',
       \ 'coc-yaml',
-      \ 'coc-metals',
       \ ]
 
 " TextEdit might fail if hidden is not set.
@@ -24,7 +23,7 @@ set nowritebackup
 set cmdheight=2
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
-set updatetime=300
+set updatetime=100
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
@@ -79,6 +78,10 @@ nmap <silent>gy <Plug>(coc-type-definition)
 nmap <silent>gi <Plug>(coc-implementation)
 nmap <silent>gr <Plug>(coc-references)
 
+nmap <silent>\gd :vsp<CR><Plug>(coc-definition)
+nmap <silent>\gi :vsp<CR><Plug>(coc-implementation)
+nmap <silent>\gr :vsp<CR><Plug>(coc-references)
+
 " Show signature help on placeholder jump
 autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 
@@ -113,13 +116,13 @@ augroup end
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
-xmap <leader>a <Plug>(coc-codeaction-selected)
-nmap <leader>a <Plug>(coc-codeaction-selected)
+xmap <leader>a <Plug>(coc-codeaction-selected)<CR>
+nmap <leader>a <Plug>(coc-codeaction-selected)<CR>
 
 " Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac <Plug>(coc-codeaction)
+" nmap <leader>ac <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
-nmap <leader>qf <Plug>(coc-fix-current)
+nmap <leader>cf <Plug>(coc-fix-current)
 
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
@@ -197,3 +200,5 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
+
+nnoremap <leader>n :CocCommand explorer<CR>

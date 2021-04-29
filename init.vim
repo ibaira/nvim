@@ -28,6 +28,7 @@ source $HOME/.config/nvim/plugins/fzf.vim
 source $HOME/.config/nvim/plugins/vim-doge.vim
 source $HOME/.config/nvim/plugins/startify.vim
 source $HOME/.config/nvim/plugins/vim-test.vim
+source $HOME/.config/nvim/plugins/vim-autoflake.vim
 
 " Theme
 source $HOME/.config/nvim/themes/theme-config.vim
