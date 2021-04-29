@@ -39,5 +39,7 @@ Plug 'jiangmiao/auto-pairs'  " Auto close brackets
 Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':UpdateRemotePlugins'}  " Fast file system explorer
 Plug 'ryanoasis/vim-devicons'  " Developer icons used by chadtree, airline, etc
 Plug 'metakirby5/codi.vim'  " Codi tool
+Plug 'christoomey/vim-tmux-navigator'  " Merge Tmux and Vim pane switching keybindings
+Plug 'benmills/vimux'  " Intergration with tmux
 
 call plug#end()
