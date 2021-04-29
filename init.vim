@@ -26,6 +26,7 @@ source $HOME/.config/nvim/plugins/auto-pairs.vim
 source $HOME/.config/nvim/plugins/nvim-blame-line.vim
 source $HOME/.config/nvim/plugins/fzf.vim
 source $HOME/.config/nvim/plugins/startify.vim
+source $HOME/.config/nvim/plugins/vim-test.vim
 
 " Theme
 source $HOME/.config/nvim/themes/theme-config.vim
