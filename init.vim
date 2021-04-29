@@ -25,6 +25,7 @@ source $HOME/.config/nvim/plugins/vimspector.vim
 source $HOME/.config/nvim/plugins/auto-pairs.vim
 source $HOME/.config/nvim/plugins/nvim-blame-line.vim
 source $HOME/.config/nvim/plugins/fzf.vim
+source $HOME/.config/nvim/plugins/vim-doge.vim
 source $HOME/.config/nvim/plugins/startify.vim
 source $HOME/.config/nvim/plugins/vim-test.vim
 
