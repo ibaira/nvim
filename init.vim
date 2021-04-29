@@ -24,6 +24,7 @@ source $HOME/.config/nvim/plugins/vim-go.vim
 source $HOME/.config/nvim/plugins/vimspector.vim
 source $HOME/.config/nvim/plugins/auto-pairs.vim
 source $HOME/.config/nvim/plugins/chadtree.vim
+source $HOME/.config/nvim/plugins/startify.vim
 
 " Theme
 source $HOME/.config/nvim/themes/theme-config.vim
