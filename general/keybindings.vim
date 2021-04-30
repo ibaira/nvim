@@ -122,3 +122,6 @@ imap <silent><M-CR> <Esc>:ImportSymbol<CR>:CocCommand python.sortImports<CR>a
 
 " Doge auto-docstring
 let g:doge_mapping='<leader><leader>d'
+
+" Git browse
+nmap gb :GBrowse<CR>
