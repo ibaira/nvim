@@ -1,4 +1,5 @@
-# nvim
+# Nvim
+
 Awesome NeoVim Configuration
 
 ## Installation
@@ -7,7 +8,8 @@ Awesome NeoVim Configuration
 git clone https://github.com/ibaira/nvim.git ~/.config/nvim
 ```
 
-Install python and node support
+Install python and node support.
+
 ```bash
 pip install -U pynvim
 ```
