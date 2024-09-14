@@ -185,7 +185,32 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers["
 })
 
 -- Remove virtual text in line for diagnostics
-vim.diagnostic.config({ virtual_text = true, float = { source = true, border = "rounded" } })
+local active_diagnostics_config =
+	{ virtual_text = true, sign = true, source = true, float = { source = true, border = "rounded" } }
+local inactive_diagnostics_config = { virtual_text = false, sign = false, source = true, float = false }
+
+vim.g.diagnostic_active = true
+vim.diagnostic.config(active_diagnostics_config)
+
+function _G.nolint()
+	if vim.g.diagnostic_active then
+		vim.diagnostic.config(inactive_diagnostics_config)
+		vim.g.diagnostic_active = false
+	else
+		vim.diagnostic.config(active_diagnostics_config)
+		vim.g.diagnostic_active = true
+	end
+end
+
+-- Open diagnostic window when in diagnostic line without "Diagnostics:" header
+vim.o.updatetime = 50
+
+vim.api.nvim_create_autocmd({ "CursorHold" }, {
+	pattern = "*",
+	command = "lua if vim.g.diagnostic_active then vim.diagnostic.open_float({header = '', focus=false}) end",
+})
+-- Not in CursorHoldI so that it doesn't hide the lsp signature help
+-- vim.cmd([[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float({header = "", focus=false})]])
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 	virtual_text = false,
@@ -203,9 +228,3 @@ for type, icon in pairs(signs) do
 	local hl = "DiagnosticSign" .. type
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
-
--- Open diagnostic window when in diagnostic line without "Diagnostics:" header
-vim.o.updatetime = 50
-vim.cmd([[autocmd CursorHold * lua vim.diagnostic.open_float({header = "", focus=false})]])
--- Not in CursorHoldI so that it doesn't hide the lsp signature help
--- vim.cmd([[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float({header = "", focus=false})]])

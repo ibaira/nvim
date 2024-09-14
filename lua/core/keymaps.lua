@@ -140,6 +140,9 @@ vim.api.nvim_set_keymap(
 	{ silent = true }
 )
 
+-- Toggle lints
+vim.keymap.set("n", "<leader><leader>l", ":lua _G.nolint()<CR>", { silent = true })
+
 -- inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 -- inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 -- inoremap <silent> <expr> <CR> (pumvisible() && empty(v:completed_item)) ?  "\<c-y>\<cr>" : "\<CR>"
