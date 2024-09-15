@@ -838,7 +838,7 @@ cmp.setup({
 			else
 				fallback()
 			end
-		end, { "i", "s" }),
+		end, { "i", "s", "c" }),
 		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item()
@@ -847,7 +847,7 @@ cmp.setup({
 			else
 				fallback()
 			end
-		end, { "i", "s" }),
+		end, { "i", "s", "c" }),
 	},
 	-- The order of the sources matter (by default). It gives them priority
 	sources = cmp.config.sources({
