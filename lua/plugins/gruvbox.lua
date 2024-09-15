@@ -134,7 +134,10 @@ local overrides = {
 	StatusLineNC = { fg = _G.colors.bg, bg = _G.colors.bg },
 
 	-- Diagnostic messages
-	DiagnosticSignWarn = { link = "GruvboxOrangeSign" },
+	DiagnosticSignError = { fg = _G.colors.red, bg = _G.colors.bg },
+	DiagnosticSignHint = { fg = _G.colors.cyan, bg = _G.colors.bg },
+	DiagnosticSignInfo = { fg = _G.colors.blue, bg = _G.colors.bg },
+	DiagnosticSignWarn = { fg = _G.colors.orange, bg = _G.colors.bg },
 	DiagnosticWarn = { link = "GruvboxOrange" },
 	DiagnosticVirtualTextWarn = { link = "GruvboxOrange" },
 }
