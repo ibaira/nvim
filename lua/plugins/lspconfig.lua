@@ -185,9 +185,13 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers["
 })
 
 -- Remove virtual text in line for diagnostics
-local active_diagnostics_config =
-	{ virtual_text = true, sign = true, source = true, float = { source = true, border = "rounded" } }
-local inactive_diagnostics_config = { virtual_text = false, sign = false, source = true, float = false }
+local active_diagnostics_config = {
+	virtual_text = true,
+	underline = true,
+	sign = true,
+	float = { source = true, border = "rounded" },
+}
+local inactive_diagnostics_config = { virtual_text = false, underline = false, sign = false, float = false }
 
 vim.g.diagnostic_active = true
 vim.diagnostic.config(active_diagnostics_config)
@@ -225,6 +229,8 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 -- Edit lsp diagnostic line icon
 local signs = { Error = "", Warn = "", Hint = "", Info = "" } -- "● ", Info = " "
 for type, icon in pairs(signs) do
-	local hl = "DiagnosticSign" .. type
-	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+	if vim.g.diagnostic_active then
+		local hl = "DiagnosticSign" .. type
+		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+	end
 end
