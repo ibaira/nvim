@@ -207,7 +207,7 @@ function _G.nolint()
 end
 
 -- Open diagnostic window when in diagnostic line without "Diagnostics:" header
-vim.o.updatetime = 50
+vim.opt.updatetime = 50
 
 vim.api.nvim_create_autocmd({ "CursorHold" }, {
 	pattern = "*",

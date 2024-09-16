@@ -24,7 +24,7 @@ vim.opt.foldtext = "" -- The first line of the fold will be syntax highlighted
 -- vim.opt.foldmethod = "expr"
 -- vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
-vim.opt.undodir = "/home/baira/.vim/undodir"
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true -- save undos
 vim.opt.undolevels = 10000 -- maximum number of changes that can be undone
 vim.opt.undoreload = 100000 -- maximum number lines to save for undo on a buffer reload
@@ -44,6 +44,8 @@ vim.g.mapleader = ","
 -- Sets how many lines of history VIM has to remember
 vim.opt.history = 500
 vim.opt.signcolumn = "yes"
+
+vim.opt.termguicolors = true
 
 ---------------------------------
 -- VIM user interface
@@ -119,9 +121,8 @@ vim.opt.fileformats = { "unix", "dos", "mac" }
 ---------------------------------
 
 -- Turn backup off, since most stuff is in SVN, git etc. anyway...
--- vim.opt.nobackup=true
--- vim.opt.nowb=true
--- vim.opt.noswapfil=truee
+vim.opt.backup = false
+vim.opt.swapfile = false
 
 ---------------------------------
 -- Text, tab and indent related
@@ -135,7 +136,6 @@ vim.opt.smarttab = true
 
 --  1 tab == 4 spaces
 vim.opt.shiftwidth = 4
-vim.opt.tabstop = 4
 
 --  Linebreak on 500 characters
 vim.opt.linebreak = true

@@ -18,8 +18,8 @@ require("plugins.formatter")
 require("plugins.hop")
 require("plugins.autopairs")
 require("plugins.dap")
--- require("plugins.neotest")
--- require("plugins.neogen")
+-- require("plugins.neotest") -- tests
+-- require("plugins.neogen") -- auto-documentation
 
 require("core.settings")
 require("core.filetypes")

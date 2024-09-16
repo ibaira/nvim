@@ -13,43 +13,43 @@ vim.keymap.set("n", "<F2>", require("telescope.builtin").keymaps, { silent = tru
 -- NvimTree toggle
 vim.keymap.set("n", "<leader>n", ":NvimTreeFindFileToggle<CR>", { silent = true })
 
-vim.keymap.set("c", "<Esc>", "<C-c>", {})
-vim.keymap.set("i", "<C-c>", "<Esc>", {})
-vim.keymap.set("n", "<C-z>", "<Esc>", {}) -- disable terminal ctrl-z
+vim.keymap.set("c", "<Esc>", "<C-c>")
+vim.keymap.set("i", "<C-c>", "<Esc>")
+vim.keymap.set("n", "<C-z>", "<Esc>") -- disable terminal ctrl-z
 
 -- Map S to replace current word with pasteboard
-vim.keymap.set("n", "S", 'diw"0P', {})
-vim.keymap.set("n", "cc", '"_cc', {})
+vim.keymap.set("n", "S", 'diw"0P')
+vim.keymap.set("n", "cc", '"_cc')
 
 -- Map paste, yank and delete to named register so the content will not be overwritten
-vim.keymap.set("n", "x", '"_x', {})
-vim.keymap.set("v", "x", '"_x', {})
+vim.keymap.set("n", "x", '"_x')
+vim.keymap.set("v", "x", '"_x')
 
 -- Rresize horzontal split window
-vim.keymap.set("n", "<C-S-Down>", "<C-W>-<C-W>-", {})
-vim.keymap.set("n", "<C-S-Up>", "<C-W>+<C-W>+", {})
+vim.keymap.set("n", "<C-S-Down>", "<C-W>-<C-W>-")
+vim.keymap.set("n", "<C-S-Up>", "<C-W>+<C-W>+")
 
 -- Resize vertical split window
-vim.keymap.set("n", "<C-Right>", "<C-W>><C-W>>", {})
-vim.keymap.set("n", "<C-Left>", "<C-W><<C-W><", {})
+vim.keymap.set("n", "<C-Right>", "<C-W>><C-W>>")
+vim.keymap.set("n", "<C-Left>", "<C-W><<C-W><")
 
 -- Toggle relative line numbers
 vim.keymap.set("n", "<leader>r", ":set relativenumber!<CR>", { silent = true })
 
 -- Search bindings
-vim.keymap.set("n", "<space>", "/", {})
-vim.keymap.set("n", "<C-space>", "?", {})
+vim.keymap.set("n", "<space>", "/")
+vim.keymap.set("n", "<C-space>", "?")
 
 -- Better indenting keeping highlighted block after indent
-vim.keymap.set("v", "<", "<gv", {})
-vim.keymap.set("v", ">", ">gv", {})
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("v", ">", ">gv")
 
 -- Remove hightlight by pressing escape twice
 vim.keymap.set("n", "<esc><esc>", ":noh<CR>", { silent = true })
 
 -- Move lines in visual mode
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", {})
-vim.keymap.set("v", "J", ":m ''<-2<CR>gv=gv", {})
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
 
 -- Update not write unless changed
 vim.keymap.set("n", "<leader>w", ":up!<CR>", { silent = true })
@@ -63,21 +63,26 @@ vim.keymap.set("n", "<leader>v", ":set cursorcolumn!<CR>", { silent = true })
 vim.keymap.set("n", "<M-g>", ":Gitsigns toggle_current_line_blame<CR>", { silent = true })
 
 -- Keep the cursor centerd in place when moving across searches or joining lines
-vim.keymap.set("n", "n", "nzzzv", {})
-vim.keymap.set("n", "N", "Nzzzv", {})
-vim.keymap.set("n", "J", "mzJ`z", {})
-vim.keymap.set("n", "<C-o>", "<C-o>zz", {})
-vim.keymap.set("n", "<C-i>", "<C-i>zz", {})
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+vim.keymap.set("n", "J", "mzJ`z")
+vim.keymap.set("n", "<C-o>", "<C-o>zz")
+vim.keymap.set("n", "<C-i>", "<C-i>zz")
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+
+-- Paste on highlighted without losing prev register
+vim.keymap.set("x", "<leader>p", '"_dP')
 
 -- Avoid undo from removing too many things by breaking work in items
-vim.keymap.set("i", ",", ",<C-g>u", {})
-vim.keymap.set("i", ".", ".<C-g>u", {})
-vim.keymap.set("i", "=", "=<C-g>u", {})
-vim.keymap.set("i", ")", ")<C-g>u", {})
-vim.keymap.set("i", "]", "]<C-g>u", {})
-vim.keymap.set("i", "}", "}<C-g>u", {})
-vim.keymap.set("i", "!", "!<C-g>u", {})
-vim.keymap.set("i", "?", "?<C-g>u", {})
+vim.keymap.set("i", ",", ",<C-g>u")
+vim.keymap.set("i", ".", ".<C-g>u")
+vim.keymap.set("i", "=", "=<C-g>u")
+vim.keymap.set("i", ")", ")<C-g>u")
+vim.keymap.set("i", "]", "]<C-g>u")
+vim.keymap.set("i", "}", "}<C-g>u")
+vim.keymap.set("i", "!", "!<C-g>u")
+vim.keymap.set("i", "?", "?<C-g>u")
 
 -- Comment
 vim.keymap.set("", "<M-m>", "gccj", { remap = true })

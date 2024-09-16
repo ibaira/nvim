@@ -1,6 +1,4 @@
 -- Gruvbox configuration
-vim.opt.termguicolors = true
-
 local gruvbox_palette = {
 	dark0_hard = "#1d2021",
 	dark0 = "#282828",
