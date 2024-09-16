@@ -8,22 +8,23 @@ end
 vim.g.startify_lists = {
 	{ type = "files", header = { "   Files" } },
 	{ type = "dir", header = { "   In " .. vim.fn.getcwd():gsub(home_path, "~") } },
-	{ type = "sessions", header = { "   Sessions" } },
 	{ type = "bookmarks", header = { "   Bookmarks" } },
 }
 
 vim.g.startify_bookmarks = {
 	{ c = "~/.config/kitty/kitty.conf" },
+	{ g = "~/.config/nvim/lua/plugins/gruvbox.lua" },
 	{ i = "~/.config/nvim/init.vim" },
 	{ K = "~/.config/nvim/lua/core/keymaps.lua" },
-	{ p = "~/.config/nvim/lua/core/lazy.lua" },
-	{ r = "~/.config/ruff/pyproject.toml" },
+	{ l = "~/.config/nvim/lua/core/lazy.lua" },
 	{ o = "~/notes/todo.md" },
+	{ r = "~/.config/ruff/pyproject.toml" },
 	{ t = "~/.tmux.conf" },
-	{ T = "~/.config/nvim/lua/plugins/gruvbox.lua" },
 	{ z = "~/.zshrc" },
 }
 
 -- Get rid of empty buffer and quit
 vim.g.startify_enable_special = 0
-vim.g.startify_custom_header = "startify#pad(startify#fortune#cowsay())"
+vim.g.startify_fortune_use_unicode = true
+vim.g.startify_custom_header = "startify#pad(startify#fortune#boxed())"
+-- vim.g.startify_custom_header = "startify#pad(startify#fortune#cowsay())"
