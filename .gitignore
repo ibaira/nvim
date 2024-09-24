@@ -1,3 +1,4 @@
 *.log
 *.db
 .netrwhist
+lazy-lock.json
