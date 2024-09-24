@@ -148,6 +148,11 @@ vim.api.nvim_set_keymap(
 -- Toggle lints
 vim.keymap.set("n", "<leader><leader>l", ":lua _G.nolint()<CR>", { silent = true })
 
+-- Toggle blocks of code
+vim.keymap.set("n", "<leader>J", function()
+	require("treesj").toggle({ split = { recursive = true } })
+end)
+
 -- inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 -- inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 -- inoremap <silent> <expr> <CR> (pumvisible() && empty(v:completed_item)) ?  "\<c-y>\<cr>" : "\<CR>"

@@ -122,12 +122,7 @@ local plugins = {
 					button = { "", "" },
 					imp_sign = " ",
 				},
-				hover = {
-					max_width = 0.9,
-					max_height = 0.8,
-					open_link = "gx",
-					open_cmd = "!chrome",
-				},
+				hover = { max_width = 0.9, max_height = 0.8, open_link = "gx", open_cmd = "!chrome" },
 				diagnostic = {
 					show_layout = "float",
 					show_normal_height = 10,
@@ -262,13 +257,7 @@ local plugins = {
 						toggle_or_req = "u",
 					},
 				},
-				implement = {
-					enable = false,
-					sign = false,
-					lang = {},
-					virtual_text = false,
-					priority = 100,
-				},
+				implement = { enable = false, sign = false, lang = {}, virtual_text = false, priority = 100 },
 				beacon = { enable = false, frequency = 7 },
 				floaterm = { height = 0.7, width = 0.7 },
 			})
@@ -516,6 +505,13 @@ local plugins = {
 					["_"] = { "trim_whitespace" },
 				},
 			})
+		end,
+	},
+	{
+		"Wansmer/treesj", -- keys = { "<leader>m", "<leader>j", "<leader>s" },
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		config = function()
+			require("treesj").setup({})
 		end,
 	},
 }
