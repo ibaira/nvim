@@ -335,62 +335,6 @@ local plugins = {
 		end,
 	},
 	{
-		"mhartington/formatter.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("formatter").setup({
-				filetype = {
-					sql = {
-						function()
-							return {
-								exe = "sql-formatter-cli",
-								args = { "-" },
-								stdin = true,
-							}
-						end,
-					},
-					python = {
-						-- require("formatter.filetypes.python").isort,
-						require("formatter.filetypes.python").black,
-						function()
-							return {
-								exe = "ruff",
-								args = {
-									"check",
-									"--fix",
-									"--target-version=py312",
-									"--select",
-									"I", -- Isort-like behavior
-									"--silent",
-									"-",
-								},
-								stdin = true,
-							}
-						end,
-					},
-					c = { require("formatter.filetypes.c").clangformat },
-					cpp = { require("formatter.filetypes.cpp").clangformat },
-					cs = { require("formatter.filetypes.cs").clangformat },
-					go = {
-						require("formatter.filetypes.go").gofmt,
-						require("formatter.filetypes.go").goimports,
-					},
-					json = { require("formatter.filetypes.json").fixjson },
-					lua = { require("formatter.filetypes.lua").stylua },
-					markdown = { require("formatter.filetypes.markdown").prettierd },
-					rust = { require("formatter.filetypes.rust").rustfmt },
-					sh = { require("formatter.filetypes.sh").shfmt },
-					terraform = { require("formatter.filetypes.terraform").terraformfmt },
-					toml = { require("formatter.filetypes.toml").taplo },
-					yaml = { require("formatter.filetypes.yaml").prettierd },
-
-					-- "*" filetype for defining formatter configurations on any filetype
-					["*"] = { require("formatter.filetypes.any").remove_trailing_whitespace },
-				},
-			})
-		end,
-	},
-	{
 		"SmiteshP/nvim-navic",
 		event = "VeryLazy",
 		dependencies = { "neovim/nvim-lspconfig" },
@@ -545,6 +489,32 @@ local plugins = {
 			require("nvim-tmux-navigation").setup({
 				disable_when_zoomed = true,
 				keybindings = { left = "<M-h>", down = "<M-j>", up = "<M-k>", right = "<M-l>", last_active = "<M-\\>" },
+			})
+		end,
+	},
+	{
+		"stevearc/conform.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("conform").setup({ ---@diagnostic disable-line: different-requires
+				formatters_by_ft = {
+					c = { "clangformat" },
+					cpp = { "clangformat" },
+					cs = { "clangformat" },
+					json = { "fixjson" },
+					lua = { "stylua" },
+					markdown = { "prettierd" },
+					python = { "isort", "ruff_fix", "ruff_format" }, -- multiple formatters sequentially
+					sh = { "shfmt" },
+					terraform = { "terraformfmt" },
+					toml = { "taplo" },
+					yaml = { "prettierd" },
+					rust = { "rustfmt", lsp_format = "fallback" },
+					go = { "goimports", "gofmt" },
+					-- Conform will run the first available formatter
+					javascript = { "prettierd", "prettier", stop_after_first = true },
+					["_"] = { "trim_whitespace" },
+				},
 			})
 		end,
 	},
