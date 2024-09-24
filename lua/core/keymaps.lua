@@ -98,6 +98,7 @@ vim.keymap.set("n", "<M-a>", ":Lspsaga code_action<CR>", { silent = true })
 
 -- Gitsigns
 vim.keymap.set("n", "<leader>d", ":Gitsigns toggle_signs<CR>", { silent = true })
+vim.keymap.set("n", "<leader>g", ":Gitsigns preview_hunk<CR>", { silent = true })
 
 -- LazyGit
 vim.keymap.set("n", "<leader>lg", ":LazyGit<CR>", { silent = true })

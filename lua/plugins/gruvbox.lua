@@ -122,6 +122,8 @@ local overrides = {
 	GitSignsAdd = { fg = _G.colors.green, bg = _G.colors.bg1 },
 	GitSignsDelete = { fg = _G.colors.red, bg = _G.colors.bg1 },
 	GitSignsChange = { fg = _G.colors.purple, bg = _G.colors.bg1 },
+	GitSignsAddPreview = { fg = _G.colors.green, bg = _G.colors.bg },
+	GitSignsDeletePreview = { fg = _G.colors.red, bg = _G.colors.bg },
 
 	-- Incline
 	InclineNormal = { fg = _G.colors.yellow, bg = _G.colors.bg1 },

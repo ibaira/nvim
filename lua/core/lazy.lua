@@ -110,7 +110,6 @@ local plugins = {
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		config = function()
 			require("lspsaga").setup({
-
 				ui = {
 					winbar_prefix = "",
 					border = "rounded",
@@ -508,10 +507,10 @@ local plugins = {
 		end,
 	},
 	{
-		"Wansmer/treesj", -- keys = { "<leader>m", "<leader>j", "<leader>s" },
+		"Wansmer/treesj",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		config = function()
-			require("treesj").setup({})
+			require("treesj").setup()
 		end,
 	},
 }
