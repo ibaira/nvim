@@ -187,7 +187,7 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers["
 -- Remove virtual text in line for diagnostics
 local active_diagnostics_config = {
 	virtual_text = true,
-	underline = true,
+	underline = false,
 	sign = true,
 	float = { source = true, border = "rounded" },
 }
@@ -220,7 +220,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 	virtual_text = false,
 	signs = true,
 	update_in_insert = false,
-	underline = true,
+	underline = false,
 	border = "rounded",
 	max_width = 80,
 	source = true,
