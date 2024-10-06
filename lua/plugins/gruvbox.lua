@@ -7,6 +7,7 @@ local gruvbox_palette = {
 	dark2 = "#504945",
 	dark3 = "#665c54",
 	dark4 = "#7c6f64",
+
 	light0_hard = "#f9f5d7",
 	light0 = "#fbf1c7",
 	light0_soft = "#f2e5bc",
@@ -14,6 +15,7 @@ local gruvbox_palette = {
 	light2 = "#d5c4a1",
 	light3 = "#bdae93",
 	light4 = "#a89984",
+
 	bright_red = "#fb4934",
 	bright_green = "#b8bb26",
 	bright_yellow = "#fabd2f",
@@ -21,6 +23,7 @@ local gruvbox_palette = {
 	bright_purple = "#d3869b",
 	bright_aqua = "#8ec07c",
 	bright_orange = "#fe8019",
+
 	neutral_red = "#cc241d",
 	neutral_green = "#98971a",
 	neutral_yellow = "#d79921",
@@ -28,6 +31,7 @@ local gruvbox_palette = {
 	neutral_purple = "#b16286",
 	neutral_aqua = "#689d6a",
 	neutral_orange = "#d65d0e",
+
 	faded_red = "#9d0006",
 	faded_green = "#79740e",
 	faded_yellow = "#b57614",
@@ -35,6 +39,7 @@ local gruvbox_palette = {
 	faded_purple = "#8f3f71",
 	faded_aqua = "#427b58",
 	faded_orange = "#af3a03",
+
 	dark_red_hard = "#792329",
 	dark_red = "#722529",
 	dark_red_soft = "#7b2c2f",
@@ -56,22 +61,27 @@ local gruvbox_palette = {
 	gray = "#928374",
 }
 
--- local gruvbox_material_palette = {
--- 	fg0 = "#d4be98", fg1 = "#ddc7a1", red = "#ea6962",
--- 	orange = "#e78a4e", yellow = "#d8a657", green = "#a9b665",
--- 	aqua = "#89b482", blue = "#7daea3", purple = "#d3869b", }
+local gruvbox_material_palette = { -- fg0 = "#d4be98", fg1 = "#ddc7a1",
+	bright_red = "#ea6962",
+	bright_orange = "#e78a4e",
+	bright_yellow = "#d8a657",
+	bright_green = "#a9b665",
+	bright_aqua = "#89b482",
+	bright_blue = "#7daea3",
+	bright_purple = "#d3869b",
+}
 
 _G.colors = {
 	bg = gruvbox_palette.dark0,
 	bg1 = gruvbox_palette.dark1,
 	fg = gruvbox_palette.light1,
-	blue = gruvbox_palette.bright_blue,
+	-- blue = gruvbox_palette.bright_blue,
 	yellow = gruvbox_palette.bright_yellow,
 	purple = gruvbox_palette.bright_purple,
 	red = gruvbox_palette.bright_red,
 	green = gruvbox_palette.bright_green,
 	orange = gruvbox_palette.bright_orange,
-	cyan = gruvbox_palette.bright_aqua,
+	-- cyan = gruvbox_palette.bright_aqua,
 	comment = gruvbox_palette.gray,
 	neutral_blue = gruvbox_palette.neutral_blue,
 	darkblue = gruvbox_palette.faded_blue,
@@ -79,16 +89,101 @@ _G.colors = {
 	magenta = gruvbox_palette.bright_purple,
 	grey = gruvbox_palette.dark1, -- grey = "#363636"
 	grey2 = gruvbox_palette.dark3, -- grey2 = "#777777"
+
+	-- bg = gruvbox_material_palette.dark0,
+	-- bg1 = gruvbox_material_palette.dark1,
+	-- fg = gruvbox_material_palette.light1,
+	blue = gruvbox_material_palette.bright_blue,
+	-- yellow = gruvbox_material_palette.bright_yellow,
+	-- purple = gruvbox_material_palette.bright_purple,
+	-- red = gruvbox_material_palette.bright_red,
+	-- green = gruvbox_material_palette.bright_green,
+	-- orange = gruvbox_material_palette.bright_orange,
+	cyan = gruvbox_material_palette.bright_aqua,
+	-- comment = gruvbox_material_palette.gray,
+	-- neutral_blue = gruvbox_material_palette.neutral_blue,
+	-- darkblue = gruvbox_material_palette.faded_blue,
+	-- violet = gruvbox_material_palette.bright_purple,
+	-- magenta = gruvbox_material_palette.bright_purple,
+	-- grey = gruvbox_palette.dark1, -- grey = "#363636"
+	-- grey2 = gruvbox_palette.dark3, -- grey2 = "#777777"
 }
+
+local function_color = _G.colors.cyan
 
 local overrides = {
 	-- Lua
-	["@function.call.lua"] = { fg = require("gruvbox").palette.bright_orange },
-	["@lsp.type.function.lua"] = { fg = require("gruvbox").palette.bright_orange },
+	["@function.call.lua"] = { fg = _G.colors.bright_orange },
+	["@lsp.type.function.lua"] = { fg = function_color },
+	["@lsp.type.method.lua"] = { fg = function_color },
+
+	-- Python
+	["@constant.builtin.python"] = { fg = _G.colors.purple },
+	["@constructor.python"] = { fg = _G.colors.purple },
+
+	["@function.builtin.python"] = { fg = function_color },
+	["@function.call.python"] = { fg = function_color },
+	["@function.method.call.python"] = { fg = function_color },
+	["@function.method.python"] = { fg = function_color },
+	["@function.python"] = { fg = function_color },
+
+	["@keyword.import.python"] = { fg = _G.colors.red },
+	["@variable.builtin.python"] = { fg = _G.colors.purple },
+
+	-- Go
+	["@constant.builtin.go"] = { fg = _G.colors.purple },
+	["@constructor.go"] = { fg = _G.colors.purple },
+
+	["@function.call.go"] = { fg = function_color },
+	["@function.go"] = { fg = function_color },
+	["@function.method.call.go"] = { fg = function_color },
+	["@function.method.go"] = { fg = function_color },
+
+	["@keyword.import.go"] = { fg = _G.colors.red },
+
+	-- Cpp
+	["@constant.builtin.cpp"] = { fg = _G.colors.purple },
+	["@constructor.cpp"] = { fg = _G.colors.purple },
+
+	["@function.call.cpp"] = { fg = function_color },
+	["@function.cpp"] = { fg = function_color },
+	["@function.method.call.cpp"] = { fg = function_color },
+	["@function.method.cpp"] = { fg = function_color },
+
+	["@keyword.import.cpp"] = { fg = _G.colors.red },
+
+	-- C
+	["@constant.builtin.c"] = { fg = _G.colors.purple },
+	["@constructor.c"] = { fg = _G.colors.purple },
+
+	["@function.call.c"] = { fg = function_color },
+	["@function.c"] = { fg = function_color },
+	["@function.method.call.c"] = { fg = function_color },
+	["@function.method.c"] = { fg = function_color },
+
+	["@keyword.import.c"] = { fg = _G.colors.red },
+
+	-- Rust
+	["@constant.builtin.rust"] = { fg = _G.colors.purple },
+	["@constructor.rust"] = { fg = _G.colors.purple },
+
+	["@function.call.rust"] = { fg = function_color },
+	["@function.rust"] = { fg = function_color },
+	["@function.method.call.rust"] = { fg = function_color },
+	["@function.method.rust"] = { fg = function_color },
+
+	["@keyword.import.rust"] = { fg = _G.colors.red },
+
+	-- Markdown
+	["@markup.heading.1.markdown"] = { fg = _G.colors.red },
+	["@markup.heading.2.markdown"] = { fg = _G.colors.red },
+	["@markup.heading.3.markdown"] = { fg = _G.colors.red },
+	["@markup.heading.4.markdown"] = { fg = _G.colors.red },
+	["@markup.list.markdown"] = { fg = _G.colors.purple },
 
 	-- Floating window
+	FloatBorder = { fg = gruvbox_palette.light3 },
 	NormalFloat = { bg = _G.colors.bg },
-	FloatBorder = { fg = _G.colors.orange },
 
 	-- Noice's command line window icon and border
 	NoiceCmdlinePopupTitleInput = { fg = _G.colors.blue, bg = _G.colors.bg },
@@ -112,10 +207,15 @@ local overrides = {
 	HopNextKey2 = { fg = _G.colors.red, bg = _G.colors.bg },
 
 	-- Nvim-tree
-	NvimTreeOpenedFile = { fg = _G.colors.purple, bg = _G.colors.bg },
 	NvimTreeFolderArrowOpen = { fg = _G.colors.blue, bg = _G.colors.bg },
-	NvimTreeOpenedHL = { fg = _G.colors.purple, bg = _G.colors.bg1 },
+	NvimTreeFolderName = { fg = _G.colors.blue, bg = _G.colors.bg },
+	NvimTreeGitDirty = { fg = _G.colors.red, bg = _G.colors.bg },
+	NvimTreeGitNewIcon = { fg = _G.colors.orange, bg = _G.colors.bg },
 	NvimTreeIndentMarker = { fg = _G.colors.neutral_blue, bg = _G.colors.bg },
+	NvimTreeOpenedFile = { fg = _G.colors.purple, bg = _G.colors.bg },
+	NvimTreeOpenedFolderName = { fg = _G.colors.blue, bg = _G.colors.bg },
+	NvimTreeOpenedHL = { fg = _G.colors.purple, bg = _G.colors.bg1 },
+	NvimTreeSpecialFile = { fg = _G.colors.yellow, bg = _G.colors.bg },
 	NvimTreeStatusLine = { fg = _G.colors.bg, bg = _G.colors.bg }, -- Fix annoying offset
 
 	-- Gitsigns
@@ -158,7 +258,15 @@ require("gruvbox").setup({
 	overrides = overrides,
 	dim_inactive = false,
 	transparent_mode = false,
-	palette_overrides = {}, -- bright_blue = _G.colors.neutral_blue
+	palette_overrides = {
+		bright_blue = gruvbox_material_palette.bright_blue,
+		-- bright_red = gruvbox_material_palette.bright_red,
+		-- bright_yellow = gruvbox_material_palette.bright_yellow,
+		-- bright_purple = gruvbox_material_palette.bright_purple,
+		-- bright_aqua = gruvbox_material_palette.bright_aqua,
+		-- bright_orange = gruvbox_material_palette.bright_orange,
+		-- bright_green = gruvbox_material_palette.bright_green,
+	},
 })
 
 vim.cmd.colorscheme("gruvbox")
