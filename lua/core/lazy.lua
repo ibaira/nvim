@@ -509,10 +509,34 @@ local plugins = {
 	{
 		"Wansmer/treesj",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		keys = {}, -- remove default <space>-keybindings
 		config = function()
 			require("treesj").setup()
 		end,
 	},
+	-- Themes
+	{ "savq/melange-nvim" },
+	{ "rebelot/kanagawa.nvim" },
+	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+	{
+		"neanias/everforest-nvim",
+		config = function()
+			require("everforest").setup({
+				---Controls the "hardness" of the background. Options are "soft", "medium" or "hard".
+				---Default is "medium".
+				background = "hard",
+				---By default, the colour of the sign column background is the same as the as normal text
+				---background, but you can use a grey background by setting this to `"grey"`.
+				sign_column_background = "grey",
+				---The contrast of line numbers, indent lines, etc. Options are `"high"` or
+				---`"low"` (default).
+				ui_contrast = "high",
+			})
+		end,
+	},
+	{ "rose-pine/neovim", name = "rose-pine" },
+	{ "EdenEast/nightfox.nvim" },
+	{ "yorickpeterse/vim-paper" },
 }
 
 require("lazy").setup(plugins, {})
