@@ -1,9 +1,20 @@
 -- Lualine configuration
 
 local colors = {
-	-- bg = "#292929", fg = "#ddc7a1", yellow = "#d8a657", cyan = "#89b482", darkblue = "#7daea3",
-	-- green = "#a9b665", orange = "#e78a4e", violet = "#d3869b", magenta = "#d3869b", blue = "#7daea3", red = "#ea6962",
-	-- grey = "#363636", grey2 = "#777777",
+	-- bg = "#292929",
+	-- fg = "#ddc7a1",
+	-- yellow = "#d8a657",
+	-- cyan = "#89b482",
+	-- darkblue = "#7daea3",
+	-- green = "#a9b665",
+	-- orange = "#e78a4e",
+	-- violet = "#d3869b",
+	-- magenta = "#d3869b",
+	-- blue = "#7daea3",
+	-- red = "#ea6962",
+	-- grey = "#363636",
+	-- grey2 = "#777777",
+
 	bg = _G.colors.bg,
 	fg = _G.colors.fg,
 	yellow = _G.colors.yellow,
@@ -172,7 +183,7 @@ ins_left({
 	condition = function()
 		return navic.is_available()
 	end,
-	color = { fg = colors.grey2, bg = colors.bg },
+	color = { fg = colors.grey2 },
 	padding = { left = 1 },
 })
 
@@ -236,11 +247,11 @@ ins_right({
 
 ins_right({
 	"progress",
-	color = { fg = colors.cyan, bg = colors.grey, gui = "bold" },
+	color = { fg = colors.cyan, bg = colors.bg, gui = "bold" },
 	padding = { left = 1, right = 2 },
 })
 
-ins_right({ "location", color = { bg = colors.grey }, padding = { right = 1 } })
+ins_right({ "location", color = { bg = colors.bg }, padding = { right = 1 } })
 
 -- Initialize lualine
 require("lualine").setup(config)
