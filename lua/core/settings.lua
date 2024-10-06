@@ -15,14 +15,14 @@ vim.opt.softtabstop = 4
 
 -- Default folding method:
 -- https://www.jackfranklin.co.uk/blog/code-folding-in-vim-neovim/
-vim.opt.fillchars:append("fold: ") --  remove chars from fold endings
 vim.opt.foldcolumn = "0"
 vim.opt.foldlevel = 99
-vim.opt.foldlevelstart = 1
+vim.opt.foldlevelstart = 99
 vim.opt.foldtext = "" -- The first line of the fold will be syntax highlighted
 -- Use treesitter as source of truth for folding instead of LSP
 -- vim.opt.foldmethod = "expr"
 -- vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- vim.opt.fillchars:append("fold: ") --  remove chars from fold endings
 
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true -- save undos
