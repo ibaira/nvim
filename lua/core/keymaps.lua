@@ -121,6 +121,9 @@ vim.keymap.set("n", "\\gd", ":vsp<CR>:lua vim.lsp.buf.definition()<CR>", { silen
 vim.keymap.set("n", "gr", ":lua vim.lsp.buf.references()<CR>", { silent = true })
 vim.keymap.set("n", "\\gr", ":vsp<CR>:lua vim.lsp.buf.references()<CR>", { silent = true })
 
+-- Avoid not being able to open fold when at end of line
+vim.keymap.set("n", "zc", "zc0", { silent = true })
+
 -- Show signature help
 vim.keymap.set("i", "<C-k>", function()
 	vim.lsp.buf.signature_help()
