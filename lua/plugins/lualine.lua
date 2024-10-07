@@ -94,35 +94,32 @@ local pyenv = os.getenv("CONDA_DEFAULT_ENV")
 ins_left({
 	-- Change color according to Neovim's mode
 	function()
-		local mode_color = {
-			n = colors.grey2,
-			i = colors.green,
-			v = colors.red,
-			[""] = colors.red,
-			V = colors.red,
-			c = colors.blue,
-			no = colors.red,
-			s = colors.orange,
-			S = colors.orange,
-			[""] = colors.orange,
-			ic = colors.yellow,
-			R = colors.violet,
-			Rv = colors.violet,
-			cv = colors.red,
-			ce = colors.red,
-			r = colors.cyan,
-			rm = colors.cyan,
-			["r?"] = colors.cyan,
-			["!"] = colors.red,
-			t = colors.red,
-		}
+		-- local mode_color = {
+		-- 	n = colors.grey2,
+		-- 	i = colors.green,
+		-- 	v = colors.red,
+		-- 	[""] = colors.red,
+		-- 	V = colors.red,
+		-- 	c = colors.blue,
+		-- 	no = colors.red,
+		-- 	s = colors.orange,
+		-- 	S = colors.orange,
+		-- 	[""] = colors.orange,
+		-- 	ic = colors.yellow,
+		-- 	R = colors.violet,
+		-- 	Rv = colors.violet,
+		-- 	cv = colors.red,
+		-- 	ce = colors.red,
+		-- 	r = colors.cyan,
+		-- 	rm = colors.cyan,
+		-- 	["r?"] = colors.cyan,
+		-- 	["!"] = colors.red,
+		-- 	t = colors.red,
+		-- }
+		-- vim.api.nvim_command("hi! LualineMode guibg=" .. mode_color[vim.fn.mode()] .. " guifg=" .. colors.bg .. " gui=bold")
+		-- vim.api.nvim_command("hi! LualineModeReverse guifg=" .. mode_color[vim.fn.mode()] .. " guibg=" .. colors.bg)
 
-		vim.api.nvim_command(
-			"hi! LualineMode guibg=" .. mode_color[vim.fn.mode()] .. " guifg=" .. colors.bg .. " gui=bold"
-		)
-		vim.api.nvim_command("hi! LualineModeReverse guifg=" .. mode_color[vim.fn.mode()] .. " guibg=" .. colors.bg)
-
-		return pyenv .. " " -- return vim.fn.mode():upper() .. " "
+		return pyenv -- return vim.fn.mode():upper() .. " "
 	end,
 	color = "LualineMode",
 	padding = { left = 1, right = 0 },
@@ -214,6 +211,20 @@ ins_left({
 -- 	color_hint = colors.cyan,
 -- 	symbols = { error = "", warn = "", info = "", hint = "" },
 -- })
+
+ins_right({
+	-- Display recording macro message
+	function()
+		local mode = require("noice").api.statusline.mode.get()
+		if string.find(mode, "recording") then
+			return mode
+		else
+			return ""
+		end
+	end,
+	condition = require("noice").api.statusline.mode.has,
+	color = { fg = "#ff9e64" },
+})
 
 ins_right({
 	-- Lsp server name
