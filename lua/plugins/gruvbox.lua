@@ -214,7 +214,8 @@ local overrides = {
 	NvimTreeIndentMarker = { fg = _G.colors.neutral_blue, bg = _G.colors.bg },
 	NvimTreeOpenedFile = { fg = _G.colors.purple, bg = _G.colors.bg },
 	NvimTreeOpenedFolderName = { fg = _G.colors.blue, bg = _G.colors.bg },
-	NvimTreeOpenedHL = { fg = _G.colors.purple, bg = _G.colors.bg1 },
+	NvimTreeOpenedHL = { fg = _G.colors.purple, bg = _G.colors.bg },
+	NvimTreeRootFolder = { fg = _G.colors.purple, bg = _G.colors.bg },
 	NvimTreeSpecialFile = { fg = _G.colors.yellow, bg = _G.colors.bg },
 	NvimTreeStatusLine = { fg = _G.colors.bg, bg = _G.colors.bg }, -- Fix annoying offset
 
