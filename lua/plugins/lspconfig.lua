@@ -5,7 +5,6 @@
 local servers = {
 	"pyright",
 	"ruff",
-	-- "ruff_lsp",
 	"dockerls",
 	"ccls",
 	"terraformls",
