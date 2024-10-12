@@ -715,13 +715,11 @@ ls.filetype_extend("lua", { "c" })
 -- in a cpp file: search c-snippets, then all-snippets only (no cpp-snippets!!).
 ls.filetype_set("cpp", { "c" })
 
---[[
 -- Beside defining your own snippets you can also load snippets from "vscode-like" packages
 -- that expose snippets in json files, for example <https://github.com/rafamadriz/friendly-snippets>.
 -- Mind that this will extend  `ls.snippets` so you need to do it after your own snippets or you
 -- will need to extend the table yourself instead of setting a new one.
-]]
-require("luasnip/loaders/from_vscode").load({ include = { "python" } }) -- Load only python snippets
+-- require("luasnip/loaders/from_vscode").load({ include = { "python" } }) -- Load only python snippets
 -- require("luasnip/loaders/from_vscode").load({ paths = { "./my-snippets" } }) -- Load snippets from my-snippets folder
 
 -- You can also use lazy loading so you only get in memory snippets of languages you use
@@ -730,7 +728,6 @@ require("luasnip/loaders/from_vscode").lazy_load() -- You can pass { paths = "./
 -- LSPKind to show suggestion source
 require("lspkind").init({
 	-- enables text annotations
-	-- with_text = true,
 	mode = "symbol_text",
 	-- default symbol map
 	-- can be either 'default' (requires nerd-fonts font) or
@@ -782,11 +779,11 @@ cmp.setup({
 				with_text = true,
 				menu = {
 					buffer = "[BUF]",
-					nvim_lsp = "[LSP]",
-					nvim_lua = "[API]",
-					path = "[PATH]",
-					luasnip = "[SNIP]",
 					gh_issues = "[ISSUES]",
+					luasnip = "[SNIP]",
+					nvim_lsp = "[LSP]",
+					nvim_lua = "[LUA]",
+					path = "[PATH]",
 				},
 			})(entry, item)
 			if color_item.abbr_hl_group then
@@ -796,7 +793,7 @@ cmp.setup({
 			return item
 		end,
 	},
-	snippet = { -- REQUIRED - you must specify a snippet engine
+	snippet = {
 		expand = function(args)
 			require("luasnip").lsp_expand(args.body)
 		end,
@@ -855,7 +852,7 @@ cmp.setup({
 		{ name = "nvim_lsp" },
 		{ name = "path" },
 		{ name = "buffer", keyword_length = 3 },
-		{ name = "gh_issues" },
+		-- { name = "gh_issues" },
 		-- { name = 'nvim_lua' },
 	}),
 })

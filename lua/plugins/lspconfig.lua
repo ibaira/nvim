@@ -4,12 +4,12 @@
 -- map buffer local keybindings when the language server attaches
 local servers = {
 	"pyright",
-	"ruff",
-	"dockerls",
-	"ccls",
-	"terraformls",
 	"bashls",
+	"ccls",
+	"dockerls",
 	"rls",
+	"ruff",
+	"terraformls",
 }
 for _, lsp in ipairs(servers) do
 	require("lspconfig")[lsp].setup({ flags = { debounce_text_changes = 150 } })
@@ -73,8 +73,8 @@ require("lspconfig").lua_ls.setup({
 
 		client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
 			runtime = {
-				-- Tell the language server which version of Lua you're using
-				-- (most likely LuaJIT in the case of Neovim)
+				-- Tell the language server which version of Lua you're using (most
+				-- likely LuaJIT in the case of Neovim)
 				version = "LuaJIT",
 			},
 			-- Make the server aware of Neovim runtime files
@@ -84,7 +84,6 @@ require("lspconfig").lua_ls.setup({
 					vim.env.VIMRUNTIME,
 					-- Depending on the usage, you might want to add additional paths here.
 					-- "${3rd}/luv/library"
-					-- "${3rd}/busted/library",
 				},
 				-- or pull in all of 'runtimepath'. NOTE: this is a lot slower
 				-- library = vim.api.nvim_get_runtime_file("", true)

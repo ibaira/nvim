@@ -185,14 +185,6 @@ ins_left({
 })
 
 -- ins_left {
---   function()
---     return ''
---   end,
---   color = {fg = colors.grey, bg = colors.bg},
---   padding = { left = -1, right = 0 }
--- }
-
--- ins_left {
 --   'diff',
 --   symbols = {added = '+', modified = '~', removed = '-'},
 --   color_added = colors.green,
