@@ -34,7 +34,7 @@ local conditions = {
 	buffer_not_empty = function()
 		return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
 	end,
-	hide_in_width = function()
+	width_above_80 = function()
 		return vim.fn.winwidth(0) > 80
 	end,
 	check_git_workspace = function()
@@ -89,79 +89,13 @@ local function ins_right(component)
 end
 
 -- Python environment with nvim mode colored background
-local pyenv = os.getenv("CONDA_DEFAULT_ENV")
-
 ins_left({
-	-- Change color according to Neovim's mode
 	function()
-		-- local mode_color = {
-		-- 	n = colors.grey2,
-		-- 	i = colors.green,
-		-- 	v = colors.red,
-		-- 	[""] = colors.red,
-		-- 	V = colors.red,
-		-- 	c = colors.blue,
-		-- 	no = colors.red,
-		-- 	s = colors.orange,
-		-- 	S = colors.orange,
-		-- 	[""] = colors.orange,
-		-- 	ic = colors.yellow,
-		-- 	R = colors.violet,
-		-- 	Rv = colors.violet,
-		-- 	cv = colors.red,
-		-- 	ce = colors.red,
-		-- 	r = colors.cyan,
-		-- 	rm = colors.cyan,
-		-- 	["r?"] = colors.cyan,
-		-- 	["!"] = colors.red,
-		-- 	t = colors.red,
-		-- }
-		-- vim.api.nvim_command("hi! LualineMode guibg=" .. mode_color[vim.fn.mode()] .. " guifg=" .. colors.bg .. " gui=bold")
-		-- vim.api.nvim_command("hi! LualineModeReverse guifg=" .. mode_color[vim.fn.mode()] .. " guibg=" .. colors.bg)
-
-		return pyenv -- return vim.fn.mode():upper() .. " "
+		return os.getenv("CONDA_DEFAULT_ENV")
 	end,
 	color = "LualineMode",
 	padding = { left = 1, right = 0 },
 })
-
--- ins_left({
--- 	function()
--- 		-- auto change color according to neovims mode
--- 		local mode_color = {
--- 			n = colors.grey2, i = colors.green, v = colors.red,
--- 			[""] = colors.red,
--- 			V = colors.red, c = colors.blue, no = colors.red,
--- 			s = colors.orange, S = colors.orange,
--- 			[""] = colors.orange,
--- 			ic = colors.yellow, R = colors.violet, Rv = colors.violet, cv = colors.red,
--- 			ce = colors.red, r = colors.cyan, rm = colors.cyan, ["r?"] = colors.cyan,
--- 			["!"] = colors.red, t = colors.red,
--- 		}
--- 		vim.api.nvim_command("hi! LualineModeReverse guifg=" .. mode_color[vim.fn.mode()] .. " guibg=" .. colors.bg)
--- 		-- return ''
--- 		return "▉"
--- 	end,
--- 	color = "LualineModeReverse", padding = { left = -1 }, })
-
-local function getLastEntry(table)
-	local count = (table and #table or false)
-	if count then
-		return table[count]
-	end
-	return false
-end
-
-function Split(s, delimiter)
-	if s == nil or s == "" then
-		return ""
-	end
-	local result = {}
-	for match in (s .. delimiter):gmatch("(.-)" .. delimiter) do
-		table.insert(result, match)
-	end
-	return getLastEntry(result)
-end
 
 ins_left({
 	"filename",
@@ -177,9 +111,7 @@ ins_left({
 	function()
 		return ":: " .. navic.get_location()
 	end,
-	condition = function()
-		return navic.is_available()
-	end,
+	condition = navic.is_available,
 	color = { fg = colors.grey2 },
 	padding = { left = 1 },
 })
@@ -210,16 +142,15 @@ ins_right({
 		local mode = require("noice").api.statusline.mode.get()
 		if string.find(mode, "recording") then
 			return mode
-		else
-			return ""
 		end
+		return ""
 	end,
 	condition = require("noice").api.statusline.mode.has,
-	color = { fg = "#ff9e64" },
+	color = { fg = colors.orange },
 })
 
 ins_right({
-	-- Lsp server name
+	-- LSP server name
 	function()
 		local msg = ""
 		local buf_ft = vim.api.nvim_get_option_value("filetype", {})
@@ -237,24 +168,25 @@ ins_right({
 		return msg
 	end,
 	icon = "",
+	condition = conditions.width_above_80,
 	color = { fg = colors.blue, gui = "bold" },
 })
 
 ins_right({
 	"branch",
 	icon = "",
-	-- condition = conditions.check_git_workspace, -- flickering when nvim-tree
-	color = { fg = colors.cyan, bg = colors.bg, gui = "bold" },
+	condition = conditions.check_git_workspace, -- flickering when nvim-tree
+	color = { fg = colors.cyan, gui = "bold" },
 	padding = { left = 0, right = 1 },
 })
 
 ins_right({
 	"progress",
-	color = { fg = colors.cyan, bg = colors.bg, gui = "bold" },
+	color = { fg = colors.yellow, gui = "bold" },
 	padding = { left = 1, right = 2 },
 })
 
-ins_right({ "location", color = { bg = colors.bg }, padding = { right = 1 } })
+ins_right({ "location", padding = { right = 1 } })
 
 -- Initialize lualine
 require("lualine").setup(config)
