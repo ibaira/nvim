@@ -10,13 +10,11 @@ local servers = {
 	"rls",
 	"ruff",
 	"terraformls",
+	"gopls",
 }
 for _, lsp in ipairs(servers) do
 	require("lspconfig")[lsp].setup({ flags = { debounce_text_changes = 150 } })
 end
-
--- Golang language server
-require("lspconfig").gopls.setup({})
 
 -- YAML
 require("lspconfig").yamlls.setup({
