@@ -57,9 +57,7 @@ vim.opt.scrolloff = 7
 vim.opt.cursorline = true
 
 -- Avoid garbled characters in Chinese language windows OS
-vim.opt.langmenu = "en" -- let $LANG='en'
--- source $VIMRUNTIME/delmenu.vim
--- source $VIMRUNTIME/menu.vim
+vim.opt.langmenu = "en"
 
 -- Turn on the Wild menu
 vim.opt.wildmenu = true
@@ -204,8 +202,8 @@ vim.api.nvim_create_autocmd({ "InsertEnter", "WinLeave" }, {
 -- Status line
 ---------------------------------
 
--- Always show the status line
-vim.opt.laststatus = 2
+-- Global status line
+vim.opt.laststatus = 3
 
 ---------------------------------
 -- Editing mappings
@@ -249,8 +247,6 @@ vim.opt.laststatus = 2
 -- set nowrap  " i turn on wrap manually when needed
 -- set noshowmode  " keep command line clean
 -- set noshowcmd
---
--- set laststatus=2  " always slow statusline
 
 -- set hlsearch  " highlight search and search while typing
 -- set incsearch
@@ -282,9 +278,6 @@ vim.opt.laststatus = 2
 -- nnoremap <silent><nowait> ] ]]
 --
 -- au BufEnter * if &buftype == 'terminal' | :startinsert | endif
--- nnoremap <C-a> <Esc>
--- nnoremap <C-x> <Esc>
---
 --
 --#region
 -- Copy to Windows clipboard
