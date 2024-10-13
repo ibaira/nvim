@@ -114,14 +114,12 @@ ins_left({
 	padding = { left = 2 },
 })
 
-local navic = require("nvim-navic")
 ins_left({
 	function()
-		return ":: " .. navic.get_location()
+		return require("nvim-navic").get_location()
 	end,
-	condition = navic.is_available,
 	color = { fg = colors.grey2 },
-	padding = { left = 1 },
+	padding = { left = 2 },
 })
 
 -- ins_left {
