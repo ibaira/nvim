@@ -119,67 +119,18 @@ local overrides = {
 	["@comment.warning.comment"] = { fg = _G.colors.orange, bold = true },
 	["@punctuation.delimiter.comment"] = { fg = _G.colors.comment },
 
-	-- Lua
-	["@function.call.lua"] = { fg = _G.colors.bright_orange },
-	["@lsp.type.function.lua"] = { fg = function_color },
-	["@lsp.type.method.lua"] = { fg = function_color },
+	-- Languages
+	["@constant.builtin"] = { fg = _G.colors.purple },
+	["@constructor"] = { fg = _G.colors.purple },
 
-	-- Python
-	["@constant.builtin.python"] = { fg = _G.colors.purple },
-	["@constructor.python"] = { fg = _G.colors.purple },
+	["@function"] = { fg = function_color },
+	["@function.builtin"] = { fg = function_color },
+	["@function.call"] = { fg = function_color },
+	["@function.method"] = { fg = function_color },
 
-	["@function.builtin.python"] = { fg = function_color },
-	["@function.call.python"] = { fg = function_color },
-	["@function.method.call.python"] = { fg = function_color },
-	["@function.method.python"] = { fg = function_color },
-	["@function.python"] = { fg = function_color },
-
-	["@keyword.import.python"] = { fg = _G.colors.red },
-	["@variable.builtin.python"] = { fg = _G.colors.purple },
-
-	-- Go
-	["@constant.builtin.go"] = { fg = _G.colors.purple },
-	["@constructor.go"] = { fg = _G.colors.purple },
-
-	["@function.call.go"] = { fg = function_color },
-	["@function.go"] = { fg = function_color },
-	["@function.method.call.go"] = { fg = function_color },
-	["@function.method.go"] = { fg = function_color },
-
-	["@keyword.import.go"] = { fg = _G.colors.red },
-
-	-- Cpp
-	["@constant.builtin.cpp"] = { fg = _G.colors.purple },
-	["@constructor.cpp"] = { fg = _G.colors.purple },
-
-	["@function.call.cpp"] = { fg = function_color },
-	["@function.cpp"] = { fg = function_color },
-	["@function.method.call.cpp"] = { fg = function_color },
-	["@function.method.cpp"] = { fg = function_color },
-
-	["@keyword.import.cpp"] = { fg = _G.colors.red },
-
-	-- C
-	["@constant.builtin.c"] = { fg = _G.colors.purple },
-	["@constructor.c"] = { fg = _G.colors.purple },
-
-	["@function.call.c"] = { fg = function_color },
-	["@function.c"] = { fg = function_color },
-	["@function.method.call.c"] = { fg = function_color },
-	["@function.method.c"] = { fg = function_color },
-
-	["@keyword.import.c"] = { fg = _G.colors.red },
-
-	-- Rust
-	["@constant.builtin.rust"] = { fg = _G.colors.purple },
-	["@constructor.rust"] = { fg = _G.colors.purple },
-
-	["@function.call.rust"] = { fg = function_color },
-	["@function.rust"] = { fg = function_color },
-	["@function.method.call.rust"] = { fg = function_color },
-	["@function.method.rust"] = { fg = function_color },
-
-	["@keyword.import.rust"] = { fg = _G.colors.red },
+	["@keyword.import"] = { fg = _G.colors.red },
+	["@lsp.type.method"] = { fg = function_color },
+	["@variable.builtin"] = { fg = _G.colors.purple },
 
 	-- Markdown
 	["@markup.heading.1.markdown"] = { fg = _G.colors.red },
