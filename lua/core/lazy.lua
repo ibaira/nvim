@@ -554,6 +554,7 @@ local plugins = {
 			require("refactoring").setup()
 		end,
 	},
+	{ "nvim-tree/nvim-web-devicons", event = "VeryLazy" },
 
 	-- Themes
 	{ "savq/melange-nvim" },
