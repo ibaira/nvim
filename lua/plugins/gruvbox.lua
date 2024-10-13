@@ -205,7 +205,7 @@ local overrides = {
 }
 
 require("gruvbox").setup({
-	terminal_colors = true, -- add neovim terminal colors
+	terminal_colors = false, -- wrong colors for lazygit
 	undercurl = true,
 	underline = true,
 	bold = true,
