@@ -161,6 +161,9 @@ vim.keymap.set("n", "<leader>J", function()
 	require("treesj").toggle({ split = { recursive = true } })
 end)
 
+-- Open mini.files
+vim.keymap.set("n", "<leader>N", ":lua MiniFiles.open()<CR>", { silent = true })
+
 -- inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 -- inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 -- inoremap <silent> <expr> <CR> (pumvisible() && empty(v:completed_item)) ?  "\<c-y>\<cr>" : "\<CR>"

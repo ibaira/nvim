@@ -68,7 +68,9 @@ local plugins = {
 		"ruifm/gitlinker.nvim",
 		event = "VeryLazy",
 		config = function()
-			require("gitlinker").setup({})
+			require("gitlinker").setup({
+				-- callbacks = { ["gitlab.<custom-domain>.com"] = require("gitlinker.hosts").get_gitlab_type_url }
+			})
 		end,
 	},
 	{
@@ -474,6 +476,35 @@ local plugins = {
 				-- 'cover_or_nearest', 'next', 'previous', 'nearest'.
 				search_method = "cover_or_next",
 				silent = false,
+			})
+		end,
+	},
+	{
+		"echasnovski/mini.files",
+		event = "VeryLazy",
+		version = "*",
+		config = function()
+			require("mini.files").setup({
+				mappings = { -- Module mappings created only inside explorer
+					close = "<Esc>",
+					go_in = "l",
+					go_in_plus = "L",
+					go_out = "h",
+					go_out_plus = "H",
+					mark_goto = "'",
+					mark_set = "m",
+					reset = "<BS>",
+					reveal_cwd = "@",
+					show_help = "g?",
+					synchronize = "=",
+					trim_left = "<",
+					trim_right = ">",
+				},
+				options = {
+					permanent_delete = false, -- Whether to delete permanently or move into module-specific trash
+					use_as_default_explorer = true, -- Whether to use for editing directories
+				},
+				windows = { preview = true, width_preview = 80 },
 			})
 		end,
 	},
