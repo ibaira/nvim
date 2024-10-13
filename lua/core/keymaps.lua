@@ -124,6 +124,10 @@ vim.keymap.set("n", "\\gr", ":vsp<CR>:lua vim.lsp.buf.references()<CR>", { silen
 -- Avoid not being able to open fold when at end of line
 vim.keymap.set("n", "zc", "zc0", { silent = true })
 
+-- Move back and forth between buffers
+vim.keymap.set("n", "<C-h>", ":bprevious<CR>", { silent = true })
+vim.keymap.set("n", "<C-l>", ":bnext<CR>", { silent = true })
+
 -- Show signature help
 vim.keymap.set("i", "<C-k>", function()
 	vim.lsp.buf.signature_help()
