@@ -222,12 +222,12 @@ require("gruvbox").setup({
 	transparent_mode = false,
 	palette_overrides = {
 		bright_blue = gruvbox_material_palette.bright_blue,
+		bright_aqua = gruvbox_material_palette.bright_aqua,
+		bright_green = gruvbox_material_palette.bright_green,
 		-- bright_red = gruvbox_material_palette.bright_red,
 		-- bright_yellow = gruvbox_material_palette.bright_yellow,
-		-- bright_purple = gruvbox_material_palette.bright_purple,
-		-- bright_aqua = gruvbox_material_palette.bright_aqua,
 		-- bright_orange = gruvbox_material_palette.bright_orange,
-		-- bright_green = gruvbox_material_palette.bright_green,
+		-- bright_purple = gruvbox_material_palette.bright_purple,
 	},
 })
 
