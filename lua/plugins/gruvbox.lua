@@ -79,7 +79,7 @@ _G.colors = {
 	yellow = gruvbox_palette.bright_yellow,
 	purple = gruvbox_palette.bright_purple,
 	red = gruvbox_palette.bright_red,
-	green = gruvbox_palette.bright_green,
+	-- green = gruvbox_palette.bright_green,
 	orange = gruvbox_palette.bright_orange,
 	-- cyan = gruvbox_palette.bright_aqua,
 	comment = gruvbox_palette.gray,
@@ -97,7 +97,7 @@ _G.colors = {
 	-- yellow = gruvbox_material_palette.bright_yellow,
 	-- purple = gruvbox_material_palette.bright_purple,
 	-- red = gruvbox_material_palette.bright_red,
-	-- green = gruvbox_material_palette.bright_green,
+	green = gruvbox_material_palette.bright_green,
 	-- orange = gruvbox_material_palette.bright_orange,
 	cyan = gruvbox_material_palette.bright_aqua,
 	-- comment = gruvbox_material_palette.gray,
@@ -179,6 +179,15 @@ local overrides = {
 	NvimTreeRootFolder = { fg = _G.colors.purple },
 	NvimTreeSpecialFile = { fg = _G.colors.yellow },
 	NvimTreeStatusLine = { fg = _G.colors.bg }, -- Fix annoying offset
+
+	-- Startify
+	StartifyBracket = { fg = _G.colors.bg },
+	StartifyHeader = { fg = _G.colors.green },
+	StartifyNumber = { fg = _G.colors.yellow },
+	StartifyPath = { fg = _G.colors.blue },
+	StartifySection = { fg = _G.colors.red },
+	StartifySelect = { fg = _G.colors.yellow },
+	StartifySlash = { fg = _G.colors.blue },
 
 	-- Gitsigns
 	GitSignsAdd = { fg = _G.colors.green, bg = _G.colors.bg1 },

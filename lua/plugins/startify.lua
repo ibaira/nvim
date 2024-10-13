@@ -6,9 +6,9 @@ if home_path == nil then
 end
 
 vim.g.startify_lists = {
-	{ type = "files", header = { "   Files" } },
-	{ type = "dir", header = { "   In " .. vim.fn.getcwd():gsub(home_path, "~") } },
-	{ type = "bookmarks", header = { "   Bookmarks" } },
+	{ type = "files" },
+	{ type = "dir", header = { "    CWD: " .. vim.fn.getcwd():gsub(home_path, "~") } },
+	{ type = "bookmarks", header = { "    Bookmarks" } },
 }
 
 vim.g.startify_bookmarks = {
