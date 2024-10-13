@@ -112,6 +112,12 @@ _G.colors = {
 local function_color = _G.colors.cyan
 
 local overrides = {
+	["@comment.todo.comment"] = { fg = _G.colors.green, bold = true },
+	["@comment.error.comment"] = { fg = _G.colors.red, bold = true },
+	["@comment.note.comment"] = { fg = _G.colors.purple, bold = true },
+	["@comment.warning.comment"] = { fg = _G.colors.orange, bold = true },
+	["@punctuation.delimiter.comment"] = { fg = _G.colors.comment },
+
 	-- Lua
 	["@function.call.lua"] = { fg = _G.colors.bright_orange },
 	["@lsp.type.function.lua"] = { fg = function_color },

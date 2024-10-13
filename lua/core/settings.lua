@@ -3,7 +3,7 @@
 ---------------------------------
 
 vim.opt.fileformat = "unix"
-vim.opt.shortmess:append("c") -- set shortmess+=c
+vim.opt.shortmess:append("c")
 
 vim.opt.number = true --  always show current line number
 
@@ -29,7 +29,7 @@ vim.opt.undofile = true -- save undos
 vim.opt.undolevels = 10000 -- maximum number of changes that can be undone
 vim.opt.undoreload = 100000 -- maximum number lines to save for undo on a buffer reload
 
-vim.opt.splitright = true -- i prefer splitting right and below
+vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 -- Copy to/from Windows

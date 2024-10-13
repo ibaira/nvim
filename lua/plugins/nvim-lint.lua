@@ -132,7 +132,7 @@ end
 
 -- Set linters for each language
 require("lint").linters_by_ft = {
-	python = { "mypy" }, -- "safety"
+	python = { "mypy" },
 	terraform = { "tflint" },
 	markdown = { "markdownlint" },
 	dockerfile = { "hadolint" },
