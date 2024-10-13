@@ -112,6 +112,7 @@ _G.colors = {
 local function_color = _G.colors.cyan
 
 local overrides = {
+	-- `TODO` comments
 	["@comment.todo.comment"] = { fg = _G.colors.green, bold = true },
 	["@comment.error.comment"] = { fg = _G.colors.red, bold = true },
 	["@comment.note.comment"] = { fg = _G.colors.purple, bold = true },
@@ -216,17 +217,17 @@ local overrides = {
 	HopNextKey2 = { fg = _G.colors.red, bg = _G.colors.bg },
 
 	-- Nvim-tree
-	NvimTreeFolderArrowOpen = { fg = _G.colors.blue, bg = _G.colors.bg },
-	NvimTreeFolderName = { fg = _G.colors.blue, bg = _G.colors.bg },
-	NvimTreeGitDirty = { fg = _G.colors.red, bg = _G.colors.bg },
-	NvimTreeGitNewIcon = { fg = _G.colors.orange, bg = _G.colors.bg },
-	NvimTreeIndentMarker = { fg = _G.colors.neutral_blue, bg = _G.colors.bg },
-	NvimTreeOpenedFile = { fg = _G.colors.purple, bg = _G.colors.bg },
-	NvimTreeOpenedFolderName = { fg = _G.colors.blue, bg = _G.colors.bg },
-	NvimTreeOpenedHL = { fg = _G.colors.purple, bg = _G.colors.bg },
-	NvimTreeRootFolder = { fg = _G.colors.purple, bg = _G.colors.bg },
-	NvimTreeSpecialFile = { fg = _G.colors.yellow, bg = _G.colors.bg },
-	NvimTreeStatusLine = { fg = _G.colors.bg, bg = _G.colors.bg }, -- Fix annoying offset
+	NvimTreeFolderArrowOpen = { fg = _G.colors.blue },
+	NvimTreeFolderName = { fg = _G.colors.blue },
+	NvimTreeGitDirty = { fg = _G.colors.red },
+	NvimTreeGitNewIcon = { fg = _G.colors.orange },
+	NvimTreeIndentMarker = { fg = _G.colors.neutral_blue },
+	NvimTreeOpenedFile = { fg = _G.colors.purple },
+	NvimTreeOpenedFolderName = { fg = _G.colors.blue },
+	NvimTreeOpenedHL = { fg = _G.colors.purple },
+	NvimTreeRootFolder = { fg = _G.colors.purple },
+	NvimTreeSpecialFile = { fg = _G.colors.yellow },
+	NvimTreeStatusLine = { fg = _G.colors.bg }, -- Fix annoying offset
 
 	-- Gitsigns
 	GitSignsAdd = { fg = _G.colors.green, bg = _G.colors.bg1 },

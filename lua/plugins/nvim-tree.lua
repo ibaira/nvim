@@ -111,7 +111,6 @@ require("nvim-tree").setup({
 				bookmark = "",
 				modified = "",
 				hidden = "",
-				folder = { default = "🗀 ", open = "🗀 " },
 				git = {
 					unstaged = "*",
 					staged = "✓",
