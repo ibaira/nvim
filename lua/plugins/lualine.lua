@@ -91,7 +91,15 @@ end
 -- Python environment with nvim mode colored background
 ins_left({
 	function()
-		return os.getenv("CONDA_DEFAULT_ENV")
+		local venv = os.getenv("VIRTUAL_ENV_PROMPT")
+		if venv then
+			return venv
+		end
+		local conda_env = os.getenv("CONDA_DEFAULT_ENV")
+		if conda_env then
+			return conda_env
+		end
+		return ""
 	end,
 	color = "LualineMode",
 	padding = { left = 1, right = 0 },

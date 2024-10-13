@@ -1,10 +1,21 @@
 -- DAP configuration
 
 -- Python adapter definition
-local pyenv = os.getenv("CONDA_DEFAULT_ENV")
-local conda_python = "/home/baira/miniconda3/envs/" .. pyenv .. "/bin/python"
+local env = os.getenv("CONDA_DEFAULT_ENV")
+local env_python = ""
 
-require("dap-python").setup(conda_python)
+if not env or env == "base" then
+	local env_path = os.getenv("VIRTUAL_ENV")
+	if env_path then
+		env_python = env_path .. "/bin/python"
+	end
+else
+	env_python = os.getenv("HOME") .. "/miniconda3/envs/" .. env .. "/bin/python"
+end
+
+if env_python then
+	require("dap-python").setup(env_python)
+end
 
 -- Python configuration
 local dap = require("dap")
@@ -19,7 +30,7 @@ dap.configurations.python = {
 		pythonPath = function()
 			local cwd = vim.fn.getcwd()
 
-			if pyenv then
+			if env then
 				return conda_python
 			elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
 				return cwd .. "/.venv/bin/python"

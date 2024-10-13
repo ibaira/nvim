@@ -55,7 +55,7 @@ require("lspconfig").yamlls.setup({
 			},
 			schemas = {
 				kubernetes = "/*.yaml",
-				["/home/baira/.config/nvim/.gitlab-ci.json"] = "/*gitlab-ci*",
+				[os.getenv("HOME") .. "/.config/nvim/.gitlab-ci.json"] = "/*gitlab-ci*",
 			},
 		},
 	},
