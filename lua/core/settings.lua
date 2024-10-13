@@ -206,6 +206,19 @@ vim.api.nvim_create_autocmd({ "InsertEnter", "WinLeave" }, {
 vim.opt.laststatus = 3
 
 ---------------------------------
+-- Folds
+---------------------------------
+
+function Custom_fold_text()
+	local indentation_value = vim.fn.indent(vim.v.foldstart)
+	local space_offset = string.rep(" ", indentation_value)
+	local number_folded_lines = vim.v.foldend - vim.v.foldstart
+	return space_offset .. "+--- " .. number_folded_lines .. " lines "
+end
+
+vim.opt.foldtext = "v:lua.Custom_fold_text()"
+
+---------------------------------
 -- Editing mappings
 ---------------------------------
 
@@ -310,27 +323,3 @@ vim.opt.laststatus = 3
 
 -- set pumheight=20
 -- set updatetime=10
-
--- Vimscript
--- ```vim
--- function CustomFoldText()
---     local indentation = indent(v:foldstart)
---     let expansionString = repeat(" ", indentation)
---     let foldLevelStr = "+---"
---     let foldSize = v:foldend - v:foldstart
---     let foldSizeStr = " " . foldSize . " lines"
---     "To show line ocntent too => getline(v:foldstart)"
---     return expansionString . foldLevelStr . foldSizeStr . " "
---
--- end
--- set foldtext=CustomFoldText()
--- ```
--- function Custom_fold_text()
--- 	local line = vim.fn.getline(vim.v.foldstart)
--- 	local line_count = vim.v.foldend - vim.v.foldstart + 1
--- 	return "+-- " .. line .. ": " .. line_count .. " lines"
--- end
--- vim.opt.foldtext = "v:lua.Custom_fold_text()"
-
--- syntax on
--- filetype indent on

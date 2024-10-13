@@ -187,6 +187,9 @@ local overrides = {
 	["@markup.heading.4.markdown"] = { fg = _G.colors.red },
 	["@markup.list.markdown"] = { fg = _G.colors.purple },
 
+	-- Folds
+	Folded = { fg = _G.colors.comment, bg = _G.colors.bg, italic = true },
+
 	-- Floating window
 	FloatBorder = { fg = gruvbox_palette.light3 },
 	NormalFloat = { bg = _G.colors.bg },
