@@ -72,6 +72,7 @@ local gruvbox_material_palette = { -- fg0 = "#d4be98", fg1 = "#ddc7a1",
 }
 
 _G.colors = {
+	bg0 = gruvbox_palette.dark0_hard,
 	bg = gruvbox_palette.dark0,
 	bg1 = gruvbox_palette.dark1,
 	fg = gruvbox_palette.light1,
@@ -197,8 +198,8 @@ local overrides = {
 	GitSignsDeletePreview = { fg = _G.colors.red, bg = _G.colors.bg },
 
 	-- Incline
-	InclineNormal = { fg = _G.colors.yellow, bg = _G.colors.bg1 },
-	InclineNormalNC = { fg = _G.colors.yellow, bg = _G.colors.bg1 },
+	InclineNormal = { fg = _G.colors.yellow, bg = _G.colors.bg1, bold = true },
+	InclineNormalNC = { fg = _G.colors.yellow, bg = _G.colors.bg1, bold = true },
 
 	-- Fix annotying space with wrong bg color
 	StatusLine = { fg = _G.colors.bg, bg = _G.colors.bg },

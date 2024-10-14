@@ -530,7 +530,7 @@ local plugins = {
 		"b0o/incline.nvim",
 		event = "VeryLazy",
 		config = function()
-			require("incline").setup()
+			require("incline").setup({ window = { margin = { horizontal = 0 } } })
 		end,
 	},
 	{
