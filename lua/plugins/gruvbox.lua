@@ -138,6 +138,9 @@ local overrides = {
 	["@markup.heading.2.markdown"] = { fg = _G.colors.red },
 	["@markup.heading.3.markdown"] = { fg = _G.colors.red },
 	["@markup.heading.4.markdown"] = { fg = _G.colors.red },
+	["@markup.link.label.markdown_inline"] = { fg = _G.colors.purple },
+	["@markup.link.markdown_inline"] = { fg = _G.colors.purple },
+	["@markup.link.url.markdown_inline"] = { fg = _G.colors.blue },
 	["@markup.list.markdown"] = { fg = _G.colors.purple },
 
 	-- Folds
