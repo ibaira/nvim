@@ -11,6 +11,7 @@ local servers = {
 	"rust_analyzer",
 	"terraformls",
 	"gopls",
+	"mojo",
 }
 for _, lsp in ipairs(servers) do
 	require("lspconfig")[lsp].setup({ flags = { debounce_text_changes = 150 } })

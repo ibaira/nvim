@@ -556,6 +556,7 @@ local plugins = {
 					lua = { "stylua" },
 					markdown = { "prettierd" },
 					python = { "isort", "ruff_fix", "ruff_format" }, -- multiple formatters sequentially
+					mojo = { "mojo_format" },
 					sh = { "shfmt" },
 					terraform = { "terraformfmt" },
 					toml = { "taplo" },
