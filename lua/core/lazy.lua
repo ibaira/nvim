@@ -558,6 +558,7 @@ local plugins = {
 					python = { "isort", "ruff_fix", "ruff_format" }, -- multiple formatters sequentially
 					mojo = { "mojo_format" },
 					sh = { "shfmt" },
+					zsh = { "beautysh" },
 					terraform = { "terraformfmt" },
 					toml = { "taplo" },
 					yaml = { "prettierd" },
