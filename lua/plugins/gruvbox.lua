@@ -63,7 +63,8 @@ local gruvbox_palette = {
 
 local gruvbox_material_palette = { -- fg0 = "#d4be98", fg1 = "#ddc7a1",
 	bright_red = "#ea6962",
-	bright_orange = "#f28534", -- bright_orange = "#e78a4e",
+	-- bright_orange = "#f28534",
+	bright_orange = "#e78a4e",
 	bright_yellow = "#d8a657",
 	bright_green = "#a9b665",
 	bright_aqua = "#89b482",
@@ -86,8 +87,8 @@ _G.colors = {
 	neutral_blue = gruvbox_palette.neutral_blue,
 	orange = gruvbox_material_palette.bright_orange,
 	purple = gruvbox_palette.bright_purple,
-	red = gruvbox_palette.bright_red,
-	yellow = gruvbox_palette.bright_yellow,
+	red = gruvbox_material_palette.bright_red,
+	yellow = gruvbox_material_palette.bright_yellow,
 
 	comment = gruvbox_palette.gray,
 }
@@ -197,6 +198,14 @@ local overrides = {
 	DiagnosticSignWarn = { fg = _G.colors.orange, bg = _G.colors.bg },
 	DiagnosticWarn = { link = "GruvboxOrange" },
 	DiagnosticVirtualTextWarn = { link = "GruvboxOrange" },
+
+	-- Rainbow delimiters
+	RainbowDelimiterBlue = { fg = _G.colors.blue },
+	RainbowDelimiterCyan = { fg = _G.colors.cyan },
+	RainbowDelimiterGreen = { fg = _G.colors.green },
+	RainbowDelimiterOrange = { fg = _G.colors.orange },
+	RainbowDelimiterRed = { fg = _G.colors.red },
+	RainbowDelimiterYellow = { fg = _G.colors.yellow },
 }
 
 require("gruvbox").setup({

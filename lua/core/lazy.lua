@@ -82,13 +82,7 @@ local plugins = {
 		end,
 		ft = { "markdown" },
 	},
-	{
-		"HiPhish/rainbow-delimiters.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("rainbow-delimiters.setup").setup()
-		end,
-	},
+	{ "HiPhish/rainbow-delimiters.nvim", event = "VeryLazy" },
 	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
@@ -381,7 +375,7 @@ local plugins = {
 				lsp = { auto_attach = true, preference = nil },
 				highlight = false,
 				separator = " > ",
-				depth_limit = 0,
+				depth_limit = 3,
 				depth_limit_indicator = "..",
 				safe_output = true,
 				lazy_update_context = false,

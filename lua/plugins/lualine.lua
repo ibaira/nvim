@@ -1,31 +1,16 @@
 -- Lualine configuration
 
 local colors = {
-	-- bg = "#292929",
-	-- fg = "#ddc7a1",
-	-- yellow = "#d8a657",
-	-- cyan = "#89b482",
-	-- darkblue = "#7daea3",
-	-- green = "#a9b665",
-	-- orange = "#e78a4e",
-	-- violet = "#d3869b",
-	-- magenta = "#d3869b",
-	-- blue = "#7daea3",
-	-- red = "#ea6962",
-	-- grey = "#363636",
-	-- grey2 = "#777777",
-
 	bg = _G.colors.bg,
 	fg = _G.colors.fg,
-	yellow = _G.colors.yellow,
+	blue = _G.colors.blue,
 	cyan = _G.colors.cyan,
 	darkblue = _G.colors.darkblue,
 	green = _G.colors.green,
 	orange = _G.colors.orange,
-	violet = _G.colors.violet,
-	magenta = _G.colors.magenta,
-	blue = "#7daea3",
+	purple = _G.colors.purple,
 	red = _G.colors.red,
+	yellow = _G.colors.yellow,
 	grey = _G.colors.grey,
 	grey2 = _G.colors.comment,
 }
@@ -36,6 +21,9 @@ local conditions = {
 	end,
 	width_above_80 = function()
 		return vim.fn.winwidth(0) > 80
+	end,
+	width_above_88 = function()
+		return vim.fn.winwidth(0) > 88
 	end,
 	check_git_workspace = function()
 		local filepath = vim.fn.expand("%:p:h")
@@ -51,7 +39,10 @@ local config = {
 		component_separators = "",
 		section_separators = "",
 		theme = { normal = { c = "gruvbox" }, inactive = { c = "gruvbox" } },
-		disabled_filetypes = { "NvimTree", "startify" },
+		disabled_filetypes = {},
+		disabled_filetypes = { "startify" },
+		globalstatus = true,
+		icons_enabled = true,
 	},
 	sections = {
 		-- Remove the defaults
@@ -73,7 +64,7 @@ local config = {
 		lualine_c = {},
 		lualine_x = {},
 	},
-	extensions = { "nvim-tree" },
+	-- extensions = { "nvim-tree" },
 }
 
 -- Inserts a component in lualine_c at left section
@@ -108,39 +99,49 @@ ins_left({
 ins_left({
 	"filename",
 	condition = conditions.buffer_not_empty,
-	path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
+	path = 0, -- 0 = just filename, 1 = relative path, 2 = absolute path
 	file_status = true,
 	color = { fg = colors.yellow, bg = colors.bg, gui = "bold" },
-	padding = { left = 2 },
+	padding = { left = 2, right = 0 },
+	fmt = function(str)
+		return string.format("%-15s", str)
+	end,
 })
 
 ins_left({
+	"progress",
+	color = { fg = colors.green, gui = "bold" },
+	padding = { left = 3 },
+})
+
+ins_left({ "location", padding = { left = 2 } })
+
+ins_left({
+	"branch",
+	icon = "",
+	cond = conditions.check_git_workspace,
+	color = { fg = colors.cyan, gui = "bold" },
+	padding = { left = 1 },
+	fmt = function(str)
+		return "(" .. str .. ")"
+	end,
+})
+
+ins_left({
+	"fileformat",
+	color = { fg = colors.purple },
+	padding = { left = 2, right = 0 },
+})
+
+ins_left({
+	-- Navic breadcrumbs
 	function()
 		return require("nvim-navic").get_location()
 	end,
+	cond = conditions.width_above_88,
 	color = { fg = colors.grey2 },
 	padding = { left = 2 },
 })
-
--- ins_left {
---   'diff',
---   symbols = {added = '+', modified = '~', removed = '-'},
---   color_added = colors.green,
---   color_modified = colors.orange,
---   color_removed = colors.red,
---   condition = conditions.hide_in_width,
---   padding = { left = 2, right = 0 }
--- }
-
--- ins_right({
--- 	"diagnostics",
--- 	sources = { "nvim_diagnostic" },
--- 	color_error = colors.red,
--- 	color_warn = colors.orange,
--- 	color_info = colors.blue,
--- 	color_hint = colors.cyan,
--- 	symbols = { error = "", warn = "", info = "", hint = "" },
--- })
 
 ins_right({
 	-- Display recording macro message
@@ -151,8 +152,9 @@ ins_right({
 		end
 		return ""
 	end,
-	condition = require("noice").api.statusline.mode.has,
+	cond = require("noice").api.statusline.mode.has,
 	color = { fg = colors.orange },
+	padding = { left = 2 },
 })
 
 ins_right({
@@ -173,26 +175,26 @@ ins_right({
 		end
 		return msg
 	end,
-	icon = "",
-	condition = conditions.width_above_80,
+	cond = conditions.width_above_80,
 	color = { fg = colors.blue, gui = "bold" },
+	padding = { left = 1, right = 1 },
 })
 
-ins_right({
-	"branch",
-	icon = "",
-	condition = conditions.check_git_workspace, -- flickering when nvim-tree
-	color = { fg = colors.cyan, gui = "bold" },
-	padding = { left = 0, right = 1 },
-})
+-- ins_left {
+--   'diff',
+--   symbols = {added = '+', modified = '~', removed = '-'},
+--   color_added = colors.green,
+--   color_modified = colors.orange,
+--   color_removed = colors.red, }
 
-ins_right({
-	"progress",
-	color = { fg = colors.yellow, gui = "bold" },
-	padding = { left = 1, right = 2 },
-})
-
-ins_right({ "location", padding = { right = 1 } })
+-- ins_right({
+-- 	"diagnostics",
+-- 	sources = { "nvim_diagnostic" },
+-- 	color_error = colors.red,
+-- 	color_warn = colors.orange,
+-- 	color_info = colors.blue,
+-- 	color_hint = colors.cyan,
+-- 	symbols = { error = "", warn = "", info = "", hint = "" }, })
 
 -- Initialize lualine
 require("lualine").setup(config)
