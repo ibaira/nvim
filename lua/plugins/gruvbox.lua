@@ -63,51 +63,33 @@ local gruvbox_palette = {
 
 local gruvbox_material_palette = { -- fg0 = "#d4be98", fg1 = "#ddc7a1",
 	bright_red = "#ea6962",
-	bright_orange = "#e78a4e",
+	bright_orange = "#f28534", -- bright_orange = "#e78a4e",
 	bright_yellow = "#d8a657",
 	bright_green = "#a9b665",
 	bright_aqua = "#89b482",
 	bright_blue = "#7daea3",
-	bright_purple = "#d3869b",
 }
 
+-- This is the single entrypoint to modify the default color palette
 _G.colors = {
 	bg0 = gruvbox_palette.dark0_hard,
 	bg = gruvbox_palette.dark0,
 	bg1 = gruvbox_palette.dark1,
 	fg = gruvbox_palette.light1,
-	-- blue = gruvbox_palette.bright_blue,
-	yellow = gruvbox_palette.bright_yellow,
+
+	blue = gruvbox_material_palette.bright_blue,
+	cyan = gruvbox_material_palette.bright_aqua,
+	darkblue = gruvbox_palette.faded_blue,
+	green = gruvbox_material_palette.bright_green,
+	grey = gruvbox_palette.dark1,
+	grey2 = gruvbox_palette.dark3,
+	neutral_blue = gruvbox_palette.neutral_blue,
+	orange = gruvbox_material_palette.bright_orange,
 	purple = gruvbox_palette.bright_purple,
 	red = gruvbox_palette.bright_red,
-	-- green = gruvbox_palette.bright_green,
-	orange = gruvbox_palette.bright_orange,
-	-- cyan = gruvbox_palette.bright_aqua,
-	comment = gruvbox_palette.gray,
-	neutral_blue = gruvbox_palette.neutral_blue,
-	darkblue = gruvbox_palette.faded_blue,
-	violet = gruvbox_palette.bright_purple,
-	magenta = gruvbox_palette.bright_purple,
-	grey = gruvbox_palette.dark1, -- grey = "#363636"
-	grey2 = gruvbox_palette.dark3, -- grey2 = "#777777"
+	yellow = gruvbox_palette.bright_yellow,
 
-	-- bg = gruvbox_material_palette.dark0,
-	-- bg1 = gruvbox_material_palette.dark1,
-	-- fg = gruvbox_material_palette.light1,
-	blue = gruvbox_material_palette.bright_blue,
-	-- yellow = gruvbox_material_palette.bright_yellow,
-	-- purple = gruvbox_material_palette.bright_purple,
-	-- red = gruvbox_material_palette.bright_red,
-	green = gruvbox_material_palette.bright_green,
-	-- orange = gruvbox_material_palette.bright_orange,
-	cyan = gruvbox_material_palette.bright_aqua,
-	-- comment = gruvbox_material_palette.gray,
-	-- neutral_blue = gruvbox_material_palette.neutral_blue,
-	-- darkblue = gruvbox_material_palette.faded_blue,
-	-- violet = gruvbox_material_palette.bright_purple,
-	-- magenta = gruvbox_material_palette.bright_purple,
-	-- grey = gruvbox_palette.dark1, -- grey = "#363636"
-	-- grey2 = gruvbox_palette.dark3, -- grey2 = "#777777"
+	comment = gruvbox_palette.gray,
 }
 
 local function_color = _G.colors.cyan
@@ -234,13 +216,13 @@ require("gruvbox").setup({
 	dim_inactive = false,
 	transparent_mode = false,
 	palette_overrides = {
-		bright_blue = gruvbox_material_palette.bright_blue,
-		bright_aqua = gruvbox_material_palette.bright_aqua,
-		bright_green = gruvbox_material_palette.bright_green,
-		-- bright_red = gruvbox_material_palette.bright_red,
-		-- bright_yellow = gruvbox_material_palette.bright_yellow,
-		-- bright_orange = gruvbox_material_palette.bright_orange,
-		-- bright_purple = gruvbox_material_palette.bright_purple,
+		bright_aqua = _G.colors.cyan,
+		bright_blue = _G.colors.blue,
+		bright_green = _G.colors.green,
+		bright_orange = _G.colors.orange,
+		bright_purple = _G.colors.purple,
+		bright_red = _G.colors.red,
+		bright_yellow = _G.colors.yellow,
 	},
 })
 
