@@ -42,7 +42,7 @@ local config = {
 		disabled_filetypes = {},
 		disabled_filetypes = { "startify" },
 		globalstatus = true,
-		icons_enabled = true,
+		icons_enabled = false,
 	},
 	sections = {
 		-- Remove the defaults
@@ -114,7 +114,7 @@ ins_left({
 	padding = { left = 3 },
 })
 
-ins_left({ "location", padding = { left = 2 } })
+ins_left({ "location", padding = { left = 1 } })
 
 ins_left({
 	"branch",
@@ -130,7 +130,7 @@ ins_left({
 ins_left({
 	"fileformat",
 	color = { fg = colors.purple },
-	padding = { left = 2, right = 0 },
+	padding = { left = 1, right = 0 },
 })
 
 ins_left({
