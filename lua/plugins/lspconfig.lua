@@ -5,7 +5,7 @@
 local servers = {
 	"pyright",
 	"bashls",
-	"ccls",
+	"clangd",
 	"dockerls",
 	"ruff",
 	"rust_analyzer",
