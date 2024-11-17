@@ -543,9 +543,9 @@ local plugins = {
 		config = function()
 			require("conform").setup({ ---@diagnostic disable-line: different-requires
 				formatters_by_ft = {
-					c = { "clangformat" },
-					cpp = { "clangformat" },
-					cs = { "clangformat" },
+					c = { "clang-format" },
+					cpp = { "clang-format" },
+					cs = { "clang-format" },
 					json = { "fixjson" },
 					lua = { "stylua" },
 					markdown = { "prettierd" },
