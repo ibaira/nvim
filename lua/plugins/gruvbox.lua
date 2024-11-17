@@ -127,7 +127,7 @@ local overrides = {
 	["@markup.list.markdown"] = { fg = _G.colors.purple },
 
 	-- Folds
-	Folded = { fg = _G.colors.comment, bg = _G.colors.bg, italic = true },
+	Folded = { fg = _G.colors.comment, bg = "none", italic = true },
 
 	-- Floating window
 	FloatBorder = { fg = gruvbox_palette.light3 },
@@ -200,6 +200,7 @@ local overrides = {
 	DiagnosticVirtualTextWarn = { link = "GruvboxOrange" },
 
 	-- Rainbow delimiters
+	["@punctuation.bracket.python"] = { fg = _G.colors.red },
 	RainbowDelimiterBlue = { fg = _G.colors.blue },
 	RainbowDelimiterCyan = { fg = _G.colors.cyan },
 	RainbowDelimiterGreen = { fg = _G.colors.green },
