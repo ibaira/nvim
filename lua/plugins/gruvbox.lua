@@ -126,6 +126,9 @@ local overrides = {
 	["@markup.link.url.markdown_inline"] = { fg = _G.colors.blue },
 	["@markup.list.markdown"] = { fg = _G.colors.purple },
 
+	-- Current line number
+	CursorLineNr = { fg = _G.colors.yellow, bg = "none", bold = true },
+
 	-- Folds
 	Folded = { fg = _G.colors.comment, bg = "none", italic = true },
 
@@ -192,12 +195,12 @@ local overrides = {
 	StatusLineNC = { fg = _G.colors.bg, bg = _G.colors.bg },
 
 	-- Diagnostic messages
-	DiagnosticSignError = { fg = _G.colors.red, bg = _G.colors.bg },
-	DiagnosticSignHint = { fg = _G.colors.cyan, bg = _G.colors.bg },
-	DiagnosticSignInfo = { fg = _G.colors.blue, bg = _G.colors.bg },
-	DiagnosticSignWarn = { fg = _G.colors.orange, bg = _G.colors.bg },
-	DiagnosticWarn = { link = "GruvboxOrange" },
-	DiagnosticVirtualTextWarn = { link = "GruvboxOrange" },
+	DiagnosticSignError = { fg = _G.colors.red, bg = "none" },
+	DiagnosticSignHint = { fg = _G.colors.cyan, bg = "none" },
+	DiagnosticSignInfo = { fg = _G.colors.blue, bg = "none" },
+	DiagnosticSignWarn = { fg = _G.colors.orange, bg = "none" },
+	DiagnosticVirtualTextWarn = { fg = _G.colors.orange, bg = "none" },
+	DiagnosticWarn = { fg = _G.colors.orange, bg = "none" },
 
 	-- Rainbow delimiters
 	["@punctuation.bracket.python"] = { fg = _G.colors.red },

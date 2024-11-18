@@ -106,10 +106,16 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers["
 local active_diagnostics_config = {
 	virtual_text = true,
 	underline = false,
-	sign = true,
+	signs = true,
 	float = { source = true, border = "rounded" },
+	severity_sort = true,
 }
-local inactive_diagnostics_config = { virtual_text = false, underline = false, sign = false, float = false }
+local inactive_diagnostics_config = {
+	virtual_text = false,
+	underline = false,
+	signs = false,
+	float = false,
+}
 
 vim.g.diagnostic_active = true
 vim.diagnostic.config(active_diagnostics_config)
@@ -149,6 +155,6 @@ local signs = { Error = "", Warn = "", Hint = "", Info = "" } -- "● ", Info = 
 for type, icon in pairs(signs) do
 	if vim.g.diagnostic_active then
 		local hl = "DiagnosticSign" .. type
-		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+		vim.fn.sign_define(hl, { text = icon, numhl = hl })
 	end
 end
