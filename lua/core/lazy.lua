@@ -373,16 +373,13 @@ local plugins = {
 					TypeParameter = "",
 				},
 				lsp = { auto_attach = true, preference = nil },
-				highlight = false,
+				highlight = true,
 				separator = " > ",
 				depth_limit = 3,
 				depth_limit_indicator = "..",
 				safe_output = true,
 				lazy_update_context = false,
-				click = false,
-				format_text = function(text)
-					return text
-				end,
+				click = true,
 			})
 		end,
 	},

@@ -126,9 +126,6 @@ local overrides = {
 	["@markup.link.url.markdown_inline"] = { fg = _G.colors.blue },
 	["@markup.list.markdown"] = { fg = _G.colors.purple },
 
-	-- Current line number
-	CursorLineNr = { fg = _G.colors.yellow, bg = "none", bold = true },
-
 	-- Folds
 	Folded = { fg = _G.colors.comment, bg = "none", italic = true },
 
@@ -210,6 +207,12 @@ local overrides = {
 	RainbowDelimiterOrange = { fg = _G.colors.orange },
 	RainbowDelimiterRed = { fg = _G.colors.red },
 	RainbowDelimiterYellow = { fg = _G.colors.yellow },
+
+	-- Consistent line number even when diagnostic signs are active
+	CursorLineNr = { fg = _G.colors.fg, bg = "none", bold = true },
+
+	-- Navic
+	NavicSeparator = { fg = _G.colors.comment, bg = "none", bold = true },
 }
 
 require("gruvbox").setup({
