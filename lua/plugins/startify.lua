@@ -17,6 +17,7 @@ vim.g.startify_bookmarks = {
 	{ i = "~/.config/nvim/init.vim" },
 	{ K = "~/.config/nvim/lua/core/keymaps.lua" },
 	{ l = "~/.config/nvim/lua/core/lazy.lua" },
+	{ L = "~/.config/lazygit/config.yml" },
 	{ o = "~/notes/todo.md" },
 	{ r = "~/.config/ruff/pyproject.toml" },
 	{ t = "~/.tmux.conf" },
