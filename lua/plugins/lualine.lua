@@ -64,7 +64,6 @@ local config = {
 		lualine_c = {},
 		lualine_x = {},
 	},
-	-- extensions = { "nvim-tree" },
 }
 
 -- Inserts a component in lualine_c at left section
@@ -92,7 +91,8 @@ ins_left({
 		end
 		return ""
 	end,
-	color = "LualineMode",
+	color = { fg = _G.colors.fg },
+	-- color = "LualineMode",
 	padding = { left = 1, right = 0 },
 })
 
@@ -101,7 +101,7 @@ ins_left({
 	condition = conditions.buffer_not_empty,
 	path = 0, -- 0 = just filename, 1 = relative path, 2 = absolute path
 	file_status = true,
-	color = { fg = colors.yellow, bg = colors.bg, gui = "bold" },
+	color = { fg = colors.yellow, gui = "bold" },
 	padding = { left = 2, right = 0 },
 	fmt = function(str)
 		return string.format("%-15s", str)
@@ -110,18 +110,24 @@ ins_left({
 
 ins_left({
 	"progress",
-	color = { fg = colors.green, gui = "bold" },
+	color = { fg = colors.green },
 	padding = { left = 3 },
 })
 
-ins_left({ "location", padding = { left = 1 } })
+ins_left({
+	function()
+		return "col: " .. vim.api.nvim_win_get_cursor(0)[2] -- column value only
+	end,
+	padding = { left = 2 },
+	color = { fg = colors.fg, gui = "bold" },
+})
 
 ins_left({
 	"branch",
 	icon = "",
 	cond = conditions.check_git_workspace,
 	color = { fg = colors.cyan, gui = "bold" },
-	padding = { left = 1 },
+	padding = { left = 2 },
 	fmt = function(str)
 		return "(" .. str .. ")"
 	end,
@@ -130,7 +136,7 @@ ins_left({
 ins_left({
 	"fileformat",
 	color = { fg = colors.purple },
-	padding = { left = 1, right = 0 },
+	padding = { left = 2, right = 0 },
 })
 
 ins_left({
@@ -139,7 +145,6 @@ ins_left({
 		return require("nvim-navic").get_location()
 	end,
 	cond = conditions.width_above_88,
-	color = { fg = colors.grey2 },
 	padding = { left = 2 },
 })
 
@@ -179,22 +184,6 @@ ins_right({
 	color = { fg = colors.blue, gui = "bold" },
 	padding = { left = 1, right = 1 },
 })
-
--- ins_left {
---   'diff',
---   symbols = {added = '+', modified = '~', removed = '-'},
---   color_added = colors.green,
---   color_modified = colors.orange,
---   color_removed = colors.red, }
-
--- ins_right({
--- 	"diagnostics",
--- 	sources = { "nvim_diagnostic" },
--- 	color_error = colors.red,
--- 	color_warn = colors.orange,
--- 	color_info = colors.blue,
--- 	color_hint = colors.cyan,
--- 	symbols = { error = "", warn = "", info = "", hint = "" }, })
 
 -- Initialize lualine
 require("lualine").setup(config)
