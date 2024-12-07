@@ -63,7 +63,6 @@ local gruvbox_palette = {
 
 local gruvbox_material_palette = { -- fg0 = "#d4be98", fg1 = "#ddc7a1",
 	bright_red = "#ea6962",
-	-- bright_orange = "#f28534",
 	bright_orange = "#e78a4e",
 	bright_yellow = "#d8a657",
 	bright_green = "#a9b665",
@@ -79,9 +78,9 @@ _G.colors = {
 	fg = gruvbox_palette.light1,
 
 	blue = gruvbox_material_palette.bright_blue,
-	cyan = gruvbox_material_palette.bright_aqua,
+	cyan = gruvbox_palette.bright_aqua,
 	darkblue = gruvbox_palette.faded_blue,
-	green = gruvbox_material_palette.bright_green,
+	green = gruvbox_palette.bright_green,
 	grey = gruvbox_palette.dark1,
 	grey2 = gruvbox_palette.dark3,
 	neutral_blue = gruvbox_palette.neutral_blue,
@@ -107,10 +106,10 @@ local overrides = {
 	["@constant.builtin"] = { fg = _G.colors.purple },
 	["@constructor"] = { fg = _G.colors.purple },
 
-	["@function"] = { fg = function_color },
-	["@function.builtin"] = { fg = function_color },
-	["@function.call"] = { fg = function_color },
-	["@function.method"] = { fg = function_color },
+	["@function"] = { fg = function_color, bold = true },
+	["@function.builtin"] = { fg = function_color, bold = true },
+	["@function.call"] = { fg = function_color, bold = true },
+	["@function.method"] = { fg = function_color, bold = true },
 
 	["@keyword.import"] = { fg = _G.colors.red },
 	["@lsp.type.method"] = { fg = function_color },
@@ -213,6 +212,12 @@ local overrides = {
 
 	-- Navic
 	NavicSeparator = { fg = _G.colors.comment, bg = "none", bold = true },
+
+	-- Telescope
+	TelescopeBorder = { fg = _G.colors.green },
+	TelescopePromptBorder = { fg = _G.colors.green },
+	TelescopePreviewBorder = { fg = _G.colors.green },
+	TelescopeResultsBorder = { fg = _G.colors.green },
 }
 
 require("gruvbox").setup({
@@ -234,7 +239,6 @@ require("gruvbox").setup({
 	palette_overrides = {
 		bright_aqua = _G.colors.cyan,
 		bright_blue = _G.colors.blue,
-		bright_green = _G.colors.green,
 		bright_orange = _G.colors.orange,
 		bright_purple = _G.colors.purple,
 		bright_red = _G.colors.red,
