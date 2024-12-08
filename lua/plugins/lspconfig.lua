@@ -1,4 +1,5 @@
 -- LSP config
+local lspconfig = require("lspconfig")
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
@@ -13,14 +14,14 @@ local servers = {
 	"gopls",
 	"mojo",
 	"lemminx",
-	"cmake-language-server",
+	"cmake",
 }
 for _, lsp in ipairs(servers) do
-	require("lspconfig")[lsp].setup({ flags = { debounce_text_changes = 150 } })
+	lspconfig[lsp].setup({ flags = { debounce_text_changes = 150 } })
 end
 
 -- YAML
-require("lspconfig").yamlls.setup({
+lspconfig.yamlls.setup({
 	cmd = { "yaml-language-server", "--stdio" },
 	filetypes = { "yaml", "yml", "yaml.docker-compose" },
 	flags = { debounce_text_changes = 150 },
@@ -65,7 +66,7 @@ require("lspconfig").yamlls.setup({
 })
 
 -- Lua
-require("lspconfig").lua_ls.setup({
+lspconfig.lua_ls.setup({
 	on_init = function(client)
 		local path = client.workspace_folders[1].name
 		if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
@@ -97,10 +98,16 @@ require("lspconfig").lua_ls.setup({
 -- Lsp saga formatting
 
 -- Hover doc popup
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", max_width = 80 })
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers["signature_help"], {
-	border = "rounded",
-	max_width = 80,
+local border = "rounded"
+local max_width = 80
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+	border = border,
+	max_width = max_width,
+})
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+	border = border,
+	max_width = max_width,
 	close_events = { "CursorMoved", "BufHidden", "InsertCharPre" },
 })
 
@@ -109,7 +116,7 @@ local active_diagnostics_config = {
 	virtual_text = true,
 	underline = false,
 	signs = true,
-	float = { source = true, border = "rounded" },
+	float = { source = true, border = border },
 	severity_sort = true,
 }
 local inactive_diagnostics_config = {
@@ -132,31 +139,34 @@ function _G.nolint()
 	end
 end
 
--- Open diagnostic window when in diagnostic line without "Diagnostics:" header
-vim.opt.updatetime = 50
+-- This is the configuration for the LSPs like Pyright
+if vim.g.diagnostic_active then
+	-- TODO: why does the LSP stil show sign highlights after deactivation?
+	vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+		virtual_text = false,
+		signs = true,
+		update_in_insert = false,
+		underline = false,
+		border = border,
+		max_width = max_width,
+		source = true,
+	})
 
-vim.api.nvim_create_autocmd({ "CursorHold" }, {
-	pattern = "*",
-	command = "lua if vim.g.diagnostic_active then vim.diagnostic.open_float({header = '', focus=false}) end",
-})
--- Not in CursorHoldI so that it doesn't hide the lsp signature help
--- vim.cmd([[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float({header = "", focus=false})]])
-
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-	virtual_text = false,
-	signs = true,
-	update_in_insert = false,
-	underline = false,
-	border = "rounded",
-	max_width = 80,
-	source = true,
-})
-
--- Edit lsp diagnostic line icon
-local signs = { Error = "", Warn = "", Hint = "", Info = "" } -- "● ", Info = " "
-for type, icon in pairs(signs) do
-	if vim.g.diagnostic_active then
+	-- Edit lsp diagnostic line icon and highlight the corresponding line number
+	local signs = { Error = "", Warn = "", Hint = "", Info = "" } -- "● ", Info = " "
+	for type, icon in pairs(signs) do
 		local hl = "DiagnosticSign" .. type
-		vim.fn.sign_define(hl, { text = icon }) -- numhl = hl,
+		vim.fn.sign_define(hl, { text = icon, numhl = hl }) -- numhl = hl,
 	end
 end
+
+-- Open diagnostic window when in diagnostic line without "Diagnostics:" header
+vim.opt.updatetime = 50
+vim.api.nvim_create_autocmd({ "CursorHold" }, { -- Not when CursorHoldI so it doesn't hide the lsp signature help
+	pattern = "*",
+	callback = function()
+		if vim.g.diagnostic_active then
+			vim.diagnostic.open_float({ header = "", focus = false })
+		end
+	end,
+})
