@@ -155,15 +155,15 @@ local overrides = {
 
 	-- Nvim-tree
 	NvimTreeFolderArrowOpen = { fg = _G.colors.blue },
-	NvimTreeFolderName = { fg = _G.colors.blue },
+	NvimTreeFolderName = { fg = _G.colors.blue, bold = true },
 	NvimTreeGitDirty = { fg = _G.colors.red },
 	NvimTreeGitNewIcon = { fg = _G.colors.orange },
-	NvimTreeIndentMarker = { fg = _G.colors.neutral_blue },
+	NvimTreeIndentMarker = { fg = _G.colors.blue },
 	NvimTreeOpenedFile = { fg = _G.colors.purple },
-	NvimTreeOpenedFolderName = { fg = _G.colors.blue },
+	NvimTreeOpenedFolderName = { fg = _G.colors.blue, bold = true },
 	NvimTreeOpenedHL = { fg = _G.colors.purple },
 	NvimTreeRootFolder = { fg = _G.colors.purple },
-	NvimTreeSpecialFile = { fg = _G.colors.yellow },
+	NvimTreeSpecialFile = { fg = _G.colors.green, bold = false, underline = false },
 	NvimTreeStatusLine = { fg = _G.colors.bg }, -- Fix annoying offset
 
 	-- Startify

@@ -25,7 +25,7 @@ vim.keymap.set("n", "cc", '"_cc')
 vim.keymap.set("n", "x", '"_x')
 vim.keymap.set("v", "x", '"_x')
 
--- Rresize horzontal split window
+-- Resize horzontal split window
 vim.keymap.set("n", "<C-S-Down>", "<C-W>-<C-W>-")
 vim.keymap.set("n", "<C-S-Up>", "<C-W>+<C-W>+")
 
