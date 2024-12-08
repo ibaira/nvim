@@ -227,6 +227,13 @@ end
 vim.opt.foldtext = "v:lua.Custom_fold_text_with_line()"
 
 ---------------------------------
+-- LazyGit
+---------------------------------
+
+-- Full size
+vim.g.lazygit_floating_window_scaling_factor = 1.0
+
+---------------------------------
 -- Editing mappings
 ---------------------------------
 

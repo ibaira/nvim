@@ -12,6 +12,8 @@ local servers = {
 	"terraformls",
 	"gopls",
 	"mojo",
+	"lemminx",
+	"cmake-language-server",
 }
 for _, lsp in ipairs(servers) do
 	require("lspconfig")[lsp].setup({ flags = { debounce_text_changes = 150 } })

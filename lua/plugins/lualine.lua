@@ -103,9 +103,7 @@ ins_left({
 	file_status = true,
 	color = { fg = colors.yellow, gui = "bold" },
 	padding = { left = 2, right = 0 },
-	fmt = function(str)
-		return string.format("%-15s", str)
-	end,
+	-- fmt = function(str) return string.format("%-15s", str) end,
 })
 
 ins_left({
