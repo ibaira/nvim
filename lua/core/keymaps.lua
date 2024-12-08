@@ -103,10 +103,6 @@ vim.keymap.set("n", "<leader>g", ":Gitsigns preview_hunk<CR>", { silent = true }
 -- LazyGit
 vim.keymap.set("n", "<leader>lg", ":LazyGit<CR>", { silent = true })
 
--- Jump to next empty line
-vim.keymap.set("n", "<C-j>", "}zz", { silent = true })
-vim.keymap.set("n", "<C-k>", "{zz", { silent = true })
-
 -- Ignore lint diagnostic in-line
 vim.keymap.set("n", "<M-i>", ":lua _G.IgnoreLintInLine()<CR>", {})
 
@@ -163,6 +159,18 @@ end)
 
 -- Open mini.files
 vim.keymap.set("n", "<leader>N", ":lua MiniFiles.open()<CR>", { silent = true })
+
+-- Jump to next empty line
+-- vim.keymap.set("n", "<C-j>", "}zz", { silent = true })
+-- vim.keymap.set("n", "<C-k>", "{zz", { silent = true })
+
+-- Move to prev/next method/class
+vim.keymap.set("n", "<C-k>", "[m", { remap = true, silent = true })
+vim.keymap.set("n", "<C-j>", "]m", { remap = true, silent = true })
+
+-- Move to prev/next class/function
+vim.keymap.set("n", "(", "?^\\S<CR>:noh<CR>", { silent = true })
+vim.keymap.set("n", ")", "/^\\S<CR>:noh<CR>", { silent = true })
 
 -- inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 -- inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
