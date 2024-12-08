@@ -27,5 +27,5 @@ vim.g.startify_bookmarks = {
 -- Get rid of empty buffer and quit
 vim.g.startify_enable_special = 0
 vim.g.startify_fortune_use_unicode = true
-vim.g.startify_custom_header = "startify#pad(startify#fortune#boxed())"
--- vim.g.startify_custom_header = "startify#pad(startify#fortune#cowsay())"
+vim.g.startify_custom_header = "startify#pad(startify#fortune#cowsay())"
+-- vim.g.startify_custom_header = "startify#pad(startify#fortune#boxed())"

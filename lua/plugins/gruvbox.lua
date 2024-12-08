@@ -168,7 +168,7 @@ local overrides = {
 
 	-- Startify
 	StartifyBracket = { fg = _G.colors.bg },
-	StartifyHeader = { fg = _G.colors.green },
+	StartifyHeader = { fg = _G.colors.orange },
 	StartifyNumber = { fg = _G.colors.yellow },
 	StartifyPath = { fg = _G.colors.blue },
 	StartifySection = { fg = _G.colors.red },
