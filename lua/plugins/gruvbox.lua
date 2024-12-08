@@ -95,7 +95,7 @@ _G.colors = {
 local function_color = _G.colors.cyan
 
 local overrides = {
-	-- `TODO` comments
+	-- TODOs
 	["@comment.todo.comment"] = { fg = _G.colors.green, bold = true },
 	["@comment.error.comment"] = { fg = _G.colors.red, bold = true },
 	["@comment.note.comment"] = { fg = _G.colors.purple, bold = true },
@@ -124,6 +124,9 @@ local overrides = {
 	["@markup.link.markdown_inline"] = { fg = _G.colors.purple },
 	["@markup.link.url.markdown_inline"] = { fg = _G.colors.blue },
 	["@markup.list.markdown"] = { fg = _G.colors.purple },
+
+	-- .gitignore
+	["@string.special.path.gitignore"] = { fg = _G.colors.blue },
 
 	-- Folds
 	Folded = { fg = _G.colors.comment, bg = "none", italic = true },
