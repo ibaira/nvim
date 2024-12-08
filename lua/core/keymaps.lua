@@ -107,7 +107,7 @@ vim.keymap.set("n", "<leader>lg", ":LazyGit<CR>", { silent = true })
 vim.keymap.set("n", "<M-i>", ":lua _G.IgnoreLintInLine()<CR>", {})
 
 -- Hover
-vim.keymap.set("n", "K", ":Lspsaga hover_doc<CR>", { silent = true })
+vim.keymap.set("n", "K", ":lua vim.lsp.buf.hover()<CR>", { silent = true })
 
 -- Go to definition
 vim.keymap.set("n", "gd", ":lua vim.lsp.buf.definition()<CR>", { silent = true })
@@ -171,6 +171,9 @@ vim.keymap.set("n", "<C-j>", "]m", { remap = true, silent = true })
 -- Move to prev/next class/function
 vim.keymap.set("n", "(", "?^\\S<CR>:noh<CR>", { silent = true })
 vim.keymap.set("n", ")", "/^\\S<CR>:noh<CR>", { silent = true })
+
+-- Toggle floating terminal
+vim.keymap.set("n", "<M-r>", ":Lspsaga term_toggle<CR>", { silent = true })
 
 -- inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 -- inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"

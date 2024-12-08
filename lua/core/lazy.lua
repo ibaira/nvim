@@ -274,7 +274,7 @@ local plugins = {
 				},
 				implement = { enable = false, sign = false, lang = {}, virtual_text = false, priority = 100 },
 				beacon = { enable = false, frequency = 7 },
-				floaterm = { height = 0.7, width = 0.7 },
+				floaterm = { height = 0.8, width = 0.8 },
 			})
 		end,
 	},
