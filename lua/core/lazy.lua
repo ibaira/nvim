@@ -56,7 +56,74 @@ local plugins = {
 	{ "mfussenegger/nvim-dap", event = "VeryLazy" },
 	{ "mfussenegger/nvim-dap-python", event = "VeryLazy" },
 	{ "kdheepak/lazygit.nvim", dependencies = { "nvim-lua/plenary.nvim" }, event = "VeryLazy" },
-	{ "rcarriga/nvim-dap-ui", event = "VeryLazy", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
+	{
+		"rcarriga/nvim-dap-ui",
+		event = "VeryLazy",
+		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio", "mfussenegger/nvim-dap-python" },
+		config = function()
+			-- 1. DAP configuration
+
+			-- 1.1. DAP-Python adapter definition
+			local env = os.getenv("CONDA_DEFAULT_ENV")
+			local env_python = ""
+
+			if not env or env == "base" then
+				local env_path = os.getenv("VIRTUAL_ENV")
+				if env_path then
+					env_python = env_path .. "/bin/python"
+				end
+			else
+				env_python = os.getenv("HOME") .. "/miniconda3/envs/" .. env .. "/bin/python"
+			end
+
+			if env_python then
+				require("dap-python").setup(env_python)
+			end
+
+			-- 1.2. DAP-Python configuration
+			local dap = require("dap")
+			dap.configurations.python = {
+				{
+					-- The first three options are required by nvim-dap
+					type = "python", -- establishes the link to the adapter definition: `dap.adapters.python`
+					request = "launch",
+					name = "Launch file",
+					-- Debugpy options: https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
+					program = "${file}",
+					pythonPath = function()
+						local cwd = vim.fn.getcwd()
+
+						if env then
+							return env_python
+						elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
+							return cwd .. "/.venv/bin/python"
+						else
+							return "/usr/bin/python"
+						end
+					end,
+					justMyCode = false,
+					console = "integratedTerminal",
+					cwd = "${workspaceFolder}",
+				},
+			}
+
+			-- 2. DAP-UI -> Use DAP events to open and close the windows automatically
+			local dapui = require("dapui")
+			dapui.setup()
+			dap.listeners.before.attach.dapui_config = function()
+				dapui.open()
+			end
+			dap.listeners.before.launch.dapui_config = function()
+				dapui.open()
+			end
+			dap.listeners.before.event_terminated.dapui_config = function()
+				dapui.close()
+			end
+			dap.listeners.before.event_exited.dapui_config = function()
+				dapui.close()
+			end
+		end,
+	},
 	{
 		"nvim-telescope/telescope-fzf-native.nvim",
 		event = "VeryLazy",
@@ -579,12 +646,7 @@ local plugins = {
 	{ "nvim-tree/nvim-web-devicons", event = "VeryLazy" },
 
 	-- Themes
-	{ "savq/melange-nvim" },
-	{ "rebelot/kanagawa.nvim" },
 	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-	{ "rose-pine/neovim", name = "rose-pine" },
-	{ "EdenEast/nightfox.nvim" },
-	{ "yorickpeterse/vim-paper" },
 }
 
 require("lazy").setup(plugins, {})

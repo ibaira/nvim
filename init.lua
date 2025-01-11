@@ -15,7 +15,6 @@ require("plugins.nvim-cmp")
 require("plugins.nvim-lint")
 require("plugins.conform")
 require("plugins.hop")
-require("plugins.dap")
 -- require("plugins.neotest") -- tests
 -- require("plugins.neogen") -- auto-documentation
 
