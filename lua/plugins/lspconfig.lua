@@ -156,7 +156,7 @@ if vim.g.diagnostic_active then
 	local signs = { Error = "", Warn = "", Hint = "", Info = "" } -- "● ", Info = " "
 	for type, icon in pairs(signs) do
 		local hl = "DiagnosticSign" .. type
-		vim.fn.sign_define(hl, { text = icon, numhl = hl }) -- numhl = hl,
+		vim.fn.sign_define(hl, { text = icon, numhl = hl })
 	end
 end
 

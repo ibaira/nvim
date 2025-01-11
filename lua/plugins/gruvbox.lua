@@ -219,12 +219,17 @@ local overrides = {
 	-- Navic
 	NavicSeparator = { fg = _G.colors.comment, bg = "none", bold = true },
 	NavicIconsMethod = { fg = _G.colors.cyan, bg = "none" },
+	NavicIconsFunction = { fg = _G.colors.cyan, bg = "none" },
 
 	-- Telescope
 	TelescopeBorder = { fg = _G.colors.green },
 	TelescopePromptBorder = { fg = _G.colors.green },
 	TelescopePreviewBorder = { fg = _G.colors.green },
 	TelescopeResultsBorder = { fg = _G.colors.green },
+
+	-- Nvim-cmp autocompletion menu
+	CmpPmenu = { fg = "none", bg = _G.colors.bg0 },
+	CmpPmenuSel = { fg = "none", bg = _G.colors.bg1, bold = true },
 }
 
 require("gruvbox").setup({

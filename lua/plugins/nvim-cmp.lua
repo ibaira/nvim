@@ -725,45 +725,6 @@ ls.filetype_set("cpp", { "c" })
 -- You can also use lazy loading so you only get in memory snippets of languages you use
 require("luasnip/loaders/from_vscode").lazy_load() -- You can pass { paths = "./my-snippets/"} as well
 
--- LSPKind to show suggestion source
-require("lspkind").init({
-	-- enables text annotations
-	mode = "symbol_text",
-	-- default symbol map
-	-- can be either 'default' (requires nerd-fonts font) or
-	-- 'codicons' for codicon preset (requires vscode-codicons font)
-	-- default: 'default'
-	preset = "codicons",
-	-- override preset symbols to be empty. default: {}
-	symbol_map = {
-		Text = "",
-		Method = "",
-		Function = "",
-		Constructor = "",
-		Field = "",
-		Variable = "",
-		Class = "",
-		Interface = "",
-		Module = "",
-		Property = "",
-		Unit = "",
-		Value = "",
-		Enum = "",
-		Keyword = "",
-		Snippet = "",
-		Color = "",
-		File = "",
-		Reference = "",
-		Folder = "",
-		EnumMember = "",
-		Constant = "",
-		Struct = "",
-		Event = "",
-		Operator = "",
-		TypeParameter = "",
-	},
-})
-
 local has_words_before = function()
 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
@@ -772,27 +733,12 @@ end
 -- Setup nvim-cmp.
 local cmp = require("cmp")
 cmp.setup({
-	window = { documentation = cmp.config.window.bordered() },
-	formatting = {
-		format = function(entry, item)
-			local color_item = require("nvim-highlight-colors").format(entry, { kind = item.kind })
-			item = require("lspkind").cmp_format({
-				with_text = true,
-				menu = {
-					buffer = "[BUF]",
-					gh_issues = "[ISSUES]",
-					luasnip = "[SNIP]",
-					nvim_lsp = "[LSP]",
-					nvim_lua = "[LUA]",
-					path = "[PATH]",
-				},
-			})(entry, item)
-			if color_item.abbr_hl_group then
-				item.kind_hl_group = color_item.abbr_hl_group
-				item.kind = color_item.abbr
-			end
-			return item
-		end,
+	window = {
+		documentation = cmp.config.window.bordered(),
+		completion = {
+			border = "rounded",
+			winhighlight = "Normal:CmpPmenu,CursorLine:CmpPmenuSel,Search:None",
+		},
 	},
 	snippet = {
 		expand = function(args)
@@ -810,7 +756,6 @@ cmp.setup({
 			behavior = cmp.ConfirmBehavior.Replace,
 			select = true,
 		}),
-
 		["<c-space>"] = cmp.mapping({
 			i = cmp.mapping.complete(),
 			c = function(
@@ -825,7 +770,6 @@ cmp.setup({
 				end
 			end,
 		}),
-
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
