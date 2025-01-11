@@ -11,8 +11,8 @@ require("telescope").setup({
 		layout_strategy = "flex",
 		layout_config = {
 			prompt_position = "top",
-			horizontal = { mirror = false, width = 0.9, preview_width = 0.65 },
-			vertical = { mirror = false, width = 0.9, preview_height = 0.7 },
+			horizontal = { mirror = false, height = 0.99, width = 0.99, preview_width = 0.65 },
+			vertical = { mirror = false, height = 0.99, width = 0.99, preview_height = 0.7 },
 			preview_cutoff = 60,
 		},
 		mappings = { i = { ["<esc>"] = actions.close } },
