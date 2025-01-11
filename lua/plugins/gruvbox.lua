@@ -222,14 +222,21 @@ local overrides = {
 	NavicIconsFunction = { fg = _G.colors.cyan, bg = "none" },
 
 	-- Telescope
-	TelescopeBorder = { fg = _G.colors.green },
+	TelescopeBorder = { fg = _G.colors.green, bold = true },
 	TelescopePromptBorder = { fg = _G.colors.green },
-	TelescopePreviewBorder = { fg = _G.colors.green },
+	TelescopePreviewBorder = { fg = _G.colors.orange },
 	TelescopeResultsBorder = { fg = _G.colors.green },
 
 	-- Nvim-cmp autocompletion menu
 	CmpPmenu = { fg = "none", bg = _G.colors.bg0 },
 	CmpPmenuSel = { fg = "none", bg = _G.colors.bg1, bold = true },
+
+	-- Saga
+	SagaFinderFname = { fg = _G.colors.blue, bold = true },
+	SagaInCurrent = { fg = _G.colors.green },
+	SagaTitle = { fg = _G.colors.red, bold = true },
+	SagaSelect = { fg = _G.colors.green, bold = true },
+	SagaToggle = { fg = _G.colors.blue },
 }
 
 require("gruvbox").setup({

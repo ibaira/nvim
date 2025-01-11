@@ -114,8 +114,10 @@ vim.keymap.set("n", "gd", ":lua vim.lsp.buf.definition()<CR>", { silent = true }
 vim.keymap.set("n", "\\gd", ":vsp<CR>:lua vim.lsp.buf.definition()<CR>", { silent = true })
 
 -- Go to references
-vim.keymap.set("n", "gr", ":lua vim.lsp.buf.references()<CR>", { silent = true })
-vim.keymap.set("n", "\\gr", ":vsp<CR>:lua vim.lsp.buf.references()<CR>", { silent = true })
+-- vim.keymap.set("n", "gr", ":lua vim.lsp.buf.references()<CR>", { silent = true })
+-- vim.keymap.set("n", "\\gr", ":vsp<CR>:lua vim.lsp.buf.references()<CR>", { silent = true })
+
+vim.keymap.set("n", "gr", ":Lspsaga finder<CR>", { silent = true })
 
 -- Avoid not being able to open fold when at end of line
 vim.keymap.set("n", "zc", "zc0", { silent = true })

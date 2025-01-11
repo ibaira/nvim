@@ -145,16 +145,17 @@ ins_right({
 	padding = { left = 0 },
 })
 
+local noice_statusline_mode = require("noice").api.statusline.mode
 ins_right({
 	-- Display recording macro message
 	function()
-		local mode = require("noice").api.statusline.mode.get()
+		local mode = noice_statusline_mode.get()
 		if string.find(mode, "recording") then
 			return mode
 		end
 		return ""
 	end,
-	cond = require("noice").api.statusline.mode.has,
+	cond = noice_statusline_mode.has,
 	color = { fg = colors.orange },
 	padding = { left = 2 },
 })
