@@ -143,7 +143,7 @@ end
 if vim.g.diagnostic_active then
 	-- TODO: why does the LSP stil show sign highlights after deactivation?
 	vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-		virtual_text = false,
+		virtual_text = true, -- for LSP diagnostics only
 		signs = true,
 		update_in_insert = false,
 		underline = false,
