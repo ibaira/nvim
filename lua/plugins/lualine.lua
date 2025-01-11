@@ -39,10 +39,9 @@ local config = {
 		component_separators = "",
 		section_separators = "",
 		theme = { normal = { c = "gruvbox" }, inactive = { c = "gruvbox" } },
-		disabled_filetypes = {},
 		disabled_filetypes = { "startify" },
 		globalstatus = true,
-		icons_enabled = false,
+		icons_enabled = true,
 	},
 	sections = {
 		-- Remove the defaults
@@ -114,7 +113,7 @@ ins_left({
 
 ins_left({
 	function()
-		return "col: " .. vim.api.nvim_win_get_cursor(0)[2] -- column value only
+		return "col: " .. string.format("%02d", vim.api.nvim_win_get_cursor(0)[2]) -- column value only
 	end,
 	padding = { left = 2 },
 	color = { fg = colors.fg, gui = "bold" },
@@ -132,18 +131,18 @@ ins_left({
 })
 
 ins_left({
-	"fileformat",
-	color = { fg = colors.purple },
-	padding = { left = 2, right = 0 },
-})
-
-ins_left({
 	-- Navic breadcrumbs
 	function()
-		return require("nvim-navic").get_location()
+		return ":: " .. require("nvim-navic").get_location()
 	end,
 	cond = conditions.width_above_88,
-	padding = { left = 2 },
+	padding = { left = 1 },
+})
+
+ins_right({
+	"fileformat",
+	color = { fg = colors.purple },
+	padding = { left = 0 },
 })
 
 ins_right({
