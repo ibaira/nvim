@@ -116,14 +116,17 @@ local overrides = {
 	["@variable.builtin"] = { fg = _G.colors.purple },
 
 	-- Markdown
-	["@markup.heading.1.markdown"] = { fg = _G.colors.red },
-	["@markup.heading.2.markdown"] = { fg = _G.colors.red },
-	["@markup.heading.3.markdown"] = { fg = _G.colors.red },
-	["@markup.heading.4.markdown"] = { fg = _G.colors.red },
-	["@markup.link.label.markdown_inline"] = { fg = _G.colors.purple },
+	["@markup.heading.1.markdown"] = { fg = _G.colors.red, bold = true },
+	["@markup.heading.2.markdown"] = { fg = _G.colors.red, bold = true },
+	["@markup.heading.3.markdown"] = { fg = _G.colors.cyan, bold = true },
+	["@markup.heading.4.markdown"] = { fg = _G.colors.blue, bold = true },
+	["@markup.heading.5.markdown"] = { fg = _G.colors.purple, bold = true },
+	["@markup.link.label.markdown_inline"] = { fg = _G.colors.cyan, bold = true },
 	["@markup.link.markdown_inline"] = { fg = _G.colors.purple },
 	["@markup.link.url.markdown_inline"] = { fg = _G.colors.blue },
 	["@markup.list.markdown"] = { fg = _G.colors.purple },
+	["@markup.strong.markdown_inline"] = { fg = _G.colors.cyan, bold = true },
+	["@markup.italic.markdown_inline"] = { fg = _G.colors.yellow, italic = true },
 
 	-- .gitignore
 	["@string.special.path.gitignore"] = { fg = _G.colors.blue },
@@ -132,24 +135,24 @@ local overrides = {
 	Folded = { fg = _G.colors.comment, bg = "none", italic = true },
 
 	-- Floating window
-	FloatBorder = { fg = gruvbox_palette.light3 },
-	NormalFloat = { bg = _G.colors.bg },
+	FloatBorder = { fg = _G.colors.comment },
+	NormalFloat = { bg = _G.colors.bg0 },
 
 	-- Noice's command line window icon and border
-	NoiceCmdlinePopupTitleInput = { fg = _G.colors.blue, bg = _G.colors.bg },
-	NoiceCmdlinePopupBorder = { fg = _G.colors.blue, bg = _G.colors.bg },
-	NoiceCmdlinePopupBorderCmdline = { fg = _G.colors.blue, bg = _G.colors.bg },
+	NoiceCmdlinePopupTitleInput = { fg = _G.colors.blue, bg = _G.colors.bg0 },
+	NoiceCmdlinePopupBorder = { fg = _G.colors.blue, bg = _G.colors.bg0 },
+	NoiceCmdlinePopupBorderCmdline = { fg = _G.colors.blue, bg = _G.colors.bg0 },
 
-	NoiceCmdlineIcon = { fg = _G.colors.blue, bg = _G.colors.bg },
-	NoiceCmdlineIconSearch = { fg = _G.colors.yellow, bg = _G.colors.bg },
-	NoiceCmdlineIconLua = { fg = _G.colors.red, bg = _G.colors.bg },
-	NoiceCmdlineIconHelp = { fg = _G.colors.blue, bg = _G.colors.bg },
-	NoiceCmdlineIconFilter = { fg = _G.colors.purple, bg = _G.colors.bg },
+	NoiceCmdlineIcon = { fg = _G.colors.blue, bg = _G.colors.bg0 },
+	NoiceCmdlineIconSearch = { fg = _G.colors.yellow, bg = _G.colors.bg0 },
+	NoiceCmdlineIconLua = { fg = _G.colors.red, bg = _G.colors.bg0 },
+	NoiceCmdlineIconHelp = { fg = _G.colors.blue, bg = _G.colors.bg0 },
+	NoiceCmdlineIconFilter = { fg = _G.colors.purple, bg = _G.colors.bg0 },
 
-	NoiceCmdlinePopupBorderSearch = { fg = _G.colors.yellow, bg = _G.colors.bg },
-	NoiceCmdlinePopupBorderLua = { fg = _G.colors.red, bg = _G.colors.bg },
-	NoiceCmdlinePopupBorderHelp = { fg = _G.colors.blue, bg = _G.colors.bg },
-	NoiceCmdlinePopupBorderFilter = { fg = _G.colors.purple, bg = _G.colors.bg },
+	NoiceCmdlinePopupBorderSearch = { fg = _G.colors.yellow, bg = _G.colors.bg0 },
+	NoiceCmdlinePopupBorderLua = { fg = _G.colors.red, bg = _G.colors.bg0 },
+	NoiceCmdlinePopupBorderHelp = { fg = _G.colors.blue, bg = _G.colors.bg0 },
+	NoiceCmdlinePopupBorderFilter = { fg = _G.colors.purple, bg = _G.colors.bg0 },
 
 	-- Hop
 	HopNextKey = { fg = _G.colors.red, bg = _G.colors.bg },
@@ -186,8 +189,8 @@ local overrides = {
 	GitSignsDeletePreview = { fg = _G.colors.red, bg = _G.colors.bg },
 
 	-- Incline
-	InclineNormal = { fg = _G.colors.yellow, bg = _G.colors.bg1, bold = true },
-	InclineNormalNC = { fg = _G.colors.yellow, bg = _G.colors.bg1, bold = true },
+	InclineNormal = { fg = _G.colors.yellow, bg = _G.colors.bg0, bold = true, italic = true },
+	InclineNormalNC = { fg = _G.colors.cyan, bg = _G.colors.bg0, bold = false, italic = true },
 
 	-- Fix annotying space with wrong bg color
 	StatusLine = { fg = _G.colors.bg, bg = _G.colors.bg },
@@ -215,6 +218,7 @@ local overrides = {
 
 	-- Navic
 	NavicSeparator = { fg = _G.colors.comment, bg = "none", bold = true },
+	NavicIconsMethod = { fg = _G.colors.cyan, bg = "none" },
 
 	-- Telescope
 	TelescopeBorder = { fg = _G.colors.green },
@@ -235,7 +239,7 @@ require("gruvbox").setup({
 	invert_tabline = false,
 	invert_intend_guides = false,
 	inverse = true, -- invert background for search, diffs, statuslines and errors
-	contrast = "", -- can be "hard", "soft" or empty string
+	contrast = "hard", -- can be "hard", "soft" or empty string
 	overrides = overrides,
 	dim_inactive = false,
 	transparent_mode = false,
