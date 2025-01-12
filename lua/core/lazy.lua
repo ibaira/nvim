@@ -148,7 +148,7 @@ local plugins = {
 		end,
 		ft = { "markdown" },
 	},
-	{ "HiPhish/rainbow-delimiters.nvim", event = "VeryLazy" },
+	{ "HiPhish/rainbow-delimiters.nvim" },
 	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
