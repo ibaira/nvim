@@ -188,10 +188,6 @@ local overrides = {
 	GitSignsAddPreview = { fg = _G.colors.green, bg = _G.colors.bg },
 	GitSignsDeletePreview = { fg = _G.colors.red, bg = _G.colors.bg },
 
-	-- Incline
-	InclineNormal = { fg = _G.colors.yellow, bg = _G.colors.bg0, bold = true, italic = true },
-	InclineNormalNC = { fg = _G.colors.cyan, bg = _G.colors.bg0, bold = false, italic = true },
-
 	-- Fix annotying space with wrong bg color
 	StatusLine = { fg = _G.colors.bg, bg = _G.colors.bg },
 	StatusLineNC = { fg = _G.colors.bg, bg = _G.colors.bg },
@@ -237,6 +233,10 @@ local overrides = {
 	SagaTitle = { fg = _G.colors.red, bold = true },
 	SagaSelect = { fg = _G.colors.green, bold = true },
 	SagaToggle = { fg = _G.colors.blue },
+
+	-- Winbar
+	WinBar = { fg = _G.colors.yellow, bg = _G.colors.bg0, bold = true },
+	WinBarNC = { fg = _G.colors.cyan, bg = _G.colors.bg0, bold = true },
 }
 
 require("gruvbox").setup({

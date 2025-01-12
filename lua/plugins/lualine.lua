@@ -41,7 +41,7 @@ local config = {
 		theme = { normal = { c = "gruvbox" }, inactive = { c = "gruvbox" } },
 		disabled_filetypes = { "startify" },
 		globalstatus = true,
-		icons_enabled = true,
+		icons_enabled = false,
 	},
 	sections = {
 		-- Remove the defaults
@@ -130,15 +130,6 @@ ins_left({
 	end,
 })
 
-ins_left({
-	-- Navic breadcrumbs
-	function()
-		return ":: " .. require("nvim-navic").get_location()
-	end,
-	cond = conditions.width_above_88,
-	padding = { left = 1 },
-})
-
 ins_right({
 	"fileformat",
 	color = { fg = colors.purple },
@@ -180,7 +171,7 @@ ins_right({
 	end,
 	cond = conditions.width_above_80,
 	color = { fg = colors.blue, gui = "bold" },
-	padding = { left = 1, right = 1 },
+	padding = { left = 2, right = 1 },
 })
 
 -- Initialize lualine

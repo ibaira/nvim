@@ -363,7 +363,7 @@ local plugins = {
 				},
 				lsp = { auto_attach = true, preference = nil },
 				highlight = true,
-				separator = " > ",
+				separator = "  ",
 				depth_limit = 3,
 				depth_limit_indicator = "..",
 				safe_output = true,
@@ -504,13 +504,6 @@ local plugins = {
 					"taplo",
 				},
 			})
-		end,
-	},
-	{
-		"b0o/incline.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("incline").setup({ window = { margin = { horizontal = 0 } } })
 		end,
 	},
 	{
