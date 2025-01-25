@@ -163,7 +163,7 @@ local plugins = {
 					after_key = "l",
 					cursor_pos_before = true,
 					keys = "qwertyuiopzxcvbnmasdfghjkl",
-					manual_position = true,
+					manual_position = false,
 					highlight = "Search",
 					highlight_grey = "Comment",
 				},
