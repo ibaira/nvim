@@ -183,6 +183,8 @@ vim.keymap.set("n", "<F6>", ":DapToggleBreakpoint<CR>", { silent = true })
 vim.keymap.set("n", "<F12>", ":DapTerminate<CR>", { silent = true })
 vim.keymap.set("n", "<M-t>", ":lua require('dapui').toggle()<CR>", { silent = true })
 
+vim.keymap.set("n", "<M-q>", ":split<CR>:term python %<CR>", { silent = true })
+
 -- inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 -- inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 -- inoremap <silent> <expr> <CR> (pumvisible() && empty(v:completed_item)) ?  "\<c-y>\<cr>" : "\<CR>"
