@@ -104,6 +104,9 @@ vim.opt.mat = 2
 -- vim.o.t_vb=
 vim.opt.tm = 500
 
+-- Automatic formatting of paragraphs
+-- vim.opt.formatoptions:append("a")
+
 ---------------------------------
 -- Colors and Fonts
 ---------------------------------
