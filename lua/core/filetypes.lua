@@ -2,18 +2,22 @@
 -- For all filetypes
 ---------------------------------
 
-vim.api.nvim_create_autocmd({ "FileType" }, {
+vim.api.nvim_create_autocmd("FileType", {
 	pattern = "*",
-	command = "lua vim.opt.foldmethod='indent'",
+	callback = function()
+		vim.opt.foldmethod = "indent"
+	end,
 })
 
 ---------------------------------
 -- Python section
 ---------------------------------
 
-vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = "*.py",
-	command = "lua vim.opt.textwidth=88",
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "python",
+	callback = function()
+		vim.opt.textwidth = 88
+	end,
 })
 
 -- " Highlight for self
@@ -35,12 +39,26 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 -- " highlight! link pythonBuiltin Aqua
 
 ---------------------------------
+-- Markdown section
+---------------------------------
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "markdown",
+	callback = function()
+		vim.opt.textwidth = 80
+		vim.opt.wrap = true
+	end,
+})
+
+---------------------------------
 -- Golang section
 ---------------------------------
 
-vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = "*.go",
-	command = "lua vim.opt.foldmethod='syntax'",
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "go",
+	callback = function()
+		vim.opt.foldmethod = "syntax"
+	end,
 })
 
 ---------------------------------
