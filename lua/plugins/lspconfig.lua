@@ -15,6 +15,7 @@ local servers = {
 	"mojo",
 	"lemminx",
 	"cmake",
+	"marksman",
 }
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({ flags = { debounce_text_changes = 150 } })
@@ -58,7 +59,7 @@ lspconfig.yamlls.setup({
 				"!Split sequence",
 			},
 			schemas = {
-				kubernetes = "/*.yaml",
+				-- kubernetes = "/*.yaml",
 				[os.getenv("HOME") .. "/.config/nvim/.gitlab-ci.json"] = "/*gitlab-ci*",
 			},
 		},
@@ -133,9 +134,31 @@ function _G.nolint()
 	if vim.g.diagnostic_active then
 		vim.diagnostic.config(inactive_diagnostics_config)
 		vim.g.diagnostic_active = false
+
+		-- Why isn't this working? Need to change buffer for it to take effect for some
+		-- reason
+		vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+			virtual_text = false, -- for LSP diagnostics only
+			signs = false,
+			update_in_insert = false,
+			underline = false,
+			border = border,
+			max_width = max_width,
+			source = true,
+		})
 	else
 		vim.diagnostic.config(active_diagnostics_config)
 		vim.g.diagnostic_active = true
+
+		vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+			virtual_text = true, -- for LSP diagnostics only
+			signs = false,
+			update_in_insert = false,
+			underline = false,
+			border = border,
+			max_width = max_width,
+			source = true,
+		})
 	end
 end
 

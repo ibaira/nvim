@@ -1,20 +1,4 @@
 -- Lualine configuration
-
-local colors = {
-	bg = _G.colors.bg,
-	fg = _G.colors.fg,
-	blue = _G.colors.blue,
-	cyan = _G.colors.cyan,
-	darkblue = _G.colors.darkblue,
-	green = _G.colors.green,
-	orange = _G.colors.orange,
-	purple = _G.colors.purple,
-	red = _G.colors.red,
-	yellow = _G.colors.yellow,
-	grey = _G.colors.grey,
-	grey2 = _G.colors.comment,
-}
-
 local conditions = {
 	buffer_not_empty = function()
 		return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
@@ -33,12 +17,13 @@ local conditions = {
 }
 
 -- Config
+local theme = "gruvbox"
 local config = {
 	options = {
 		-- Disable sections and component separators
 		component_separators = "",
 		section_separators = "",
-		theme = { normal = { c = "gruvbox" }, inactive = { c = "gruvbox" } },
+		theme = { normal = { c = theme }, inactive = { c = theme } },
 		disabled_filetypes = { "startify" },
 		globalstatus = true,
 		icons_enabled = false,
@@ -90,8 +75,7 @@ ins_left({
 		end
 		return ""
 	end,
-	color = { fg = _G.colors.fg },
-	-- color = "LualineMode",
+	color = "Variable",
 	padding = { left = 1, right = 0 },
 })
 
@@ -100,41 +84,33 @@ ins_left({
 	condition = conditions.buffer_not_empty,
 	path = 0, -- 0 = just filename, 1 = relative path, 2 = absolute path
 	file_status = true,
-	color = { fg = colors.yellow, gui = "bold" },
+	color = "GruvboxYellowBold",
 	padding = { left = 2, right = 0 },
 	-- fmt = function(str) return string.format("%-15s", str) end,
 })
 
-ins_left({
-	"progress",
-	color = { fg = colors.green },
-	padding = { left = 3 },
-})
+ins_left({ "progress", color = "String", padding = { left = 3 } })
 
 ins_left({
 	function()
 		return "col: " .. string.format("%02d", vim.api.nvim_win_get_cursor(0)[2]) -- column value only
 	end,
 	padding = { left = 2 },
-	color = { fg = colors.fg, gui = "bold" },
+	color = "htmlBold",
 })
 
 ins_left({
 	"branch",
 	icon = "",
 	cond = conditions.check_git_workspace,
-	color = { fg = colors.cyan, gui = "bold" },
+	color = "@function",
 	padding = { left = 2 },
 	fmt = function(str)
 		return "(" .. str .. ")"
 	end,
 })
 
-ins_right({
-	"fileformat",
-	color = { fg = colors.purple },
-	padding = { left = 0 },
-})
+ins_right({ "fileformat", color = "Constant", padding = { left = 0 } })
 
 local noice_statusline_mode = require("noice").api.statusline.mode
 ins_right({
@@ -147,7 +123,7 @@ ins_right({
 		return ""
 	end,
 	cond = noice_statusline_mode.has,
-	color = { fg = colors.orange },
+	color = "Operator",
 	padding = { left = 2 },
 })
 
@@ -170,7 +146,7 @@ ins_right({
 		return msg
 	end,
 	cond = conditions.width_above_80,
-	color = { fg = colors.blue, gui = "bold" },
+	color = "GruvboxBlueBold",
 	padding = { left = 2, right = 1 },
 })
 

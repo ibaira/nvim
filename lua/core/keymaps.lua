@@ -189,13 +189,6 @@ vim.keymap.set("n", "<M-q>", ":split<CR>:term python %<CR>", { silent = true })
 -- inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 -- inoremap <silent> <expr> <CR> (pumvisible() && empty(v:completed_item)) ?  "\<c-y>\<cr>" : "\<CR>"
 
--- PyShell
--- nmap <leader>re :call StartPyShell()<CR>
--- nmap <leader>res :call StopPyShell()<CR>:call VimuxCloseRunner()<CR>
--- nmap <leader>s :call PyShellSendLine()<CR>j
--- vmap <leader>s :call PyShellSendMultiLine()<CR>j
--- let g:pysparkMode=1
-
 -- " Vim-test keybindings
 -- nmap <silent><leader>tt :TestNearest<CR>
 -- nmap <silent><leader>tf :TestFile<CR>

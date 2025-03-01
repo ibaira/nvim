@@ -737,7 +737,8 @@ cmp.setup({
 		documentation = cmp.config.window.bordered(),
 		completion = {
 			border = "rounded",
-			winhighlight = "Normal:CmpPmenu,CursorLine:CmpPmenuSel,Search:None",
+			winhighlight = "Normal:Normal,CursorLine:CursorLine,Search:None",
+			-- winhighlight = "Normal:CmpPmenu,CursorLine:CmpPmenuSel,Search:None",
 		},
 	},
 	snippet = {

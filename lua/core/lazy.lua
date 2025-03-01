@@ -18,6 +18,23 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
 	{ "ellisonleao/gruvbox.nvim", priority = 1000, config = true },
+	{ "miikanissi/modus-themes.nvim", priority = 1000 },
+	-- {
+	-- 	"f-person/auto-dark-mode.nvim",
+	-- 	opts = {
+	-- 		update_interval = 1000,
+	-- 		set_dark_mode = function()
+	-- 			vim.o.background = "dark"
+	-- 			require("plugins.gruvbox")
+	-- 			vim.cmd("colorscheme gruvbox")
+	-- 		end,
+	-- 		set_light_mode = function()
+	-- 			vim.o.background = "light"
+	-- 			require("plugins.gruvbox")
+	-- 			vim.cmd("colorscheme gruvbox")
+	-- 		end,
+	-- 	},
+	-- },
 	{ "mhinz/vim-startify" }, -- Single Vimscript plugin
 	{ "nvim-lualine/lualine.nvim" },
 	{

@@ -71,173 +71,48 @@ local gruvbox_material_palette = { -- fg0 = "#d4be98", fg1 = "#ddc7a1",
 }
 
 -- This is the single entrypoint to modify the default color palette
-_G.colors = {
-	bg0 = gruvbox_palette.dark0_hard,
-	bg = gruvbox_palette.dark0,
-	bg1 = gruvbox_palette.dark1,
-	fg = gruvbox_palette.light1,
+local colors = {}
+if vim.o.background == "dark" then
+	colors.bg0 = gruvbox_palette.dark0_hard
+	colors.bg = gruvbox_palette.dark0
+	colors.bg1 = gruvbox_palette.dark1
+	colors.fg = gruvbox_palette.light1
 
-	blue = gruvbox_material_palette.bright_blue,
-	cyan = gruvbox_palette.bright_aqua,
-	darkblue = gruvbox_palette.faded_blue,
-	green = gruvbox_palette.bright_green,
-	grey = gruvbox_palette.dark1,
-	grey2 = gruvbox_palette.dark3,
-	neutral_blue = gruvbox_palette.neutral_blue,
-	orange = gruvbox_material_palette.bright_orange,
-	purple = gruvbox_palette.bright_purple,
-	red = gruvbox_material_palette.bright_red,
-	yellow = gruvbox_material_palette.bright_yellow,
+	colors.blue = gruvbox_material_palette.bright_blue
+	colors.cyan = gruvbox_palette.bright_aqua
+	colors.darkblue = gruvbox_palette.faded_blue
+	colors.green = gruvbox_palette.bright_green
+	colors.grey = gruvbox_palette.dark1
+	colors.grey2 = gruvbox_palette.dark3
+	colors.neutral_blue = gruvbox_palette.neutral_blue
+	colors.orange = gruvbox_material_palette.bright_orange
+	colors.purple = gruvbox_palette.bright_purple
+	colors.red = gruvbox_material_palette.bright_red
+	colors.yellow = gruvbox_material_palette.bright_yellow
 
-	comment = gruvbox_palette.gray,
-}
+	colors.comment = gruvbox_palette.gray
+else
+	colors.bg0 = gruvbox_palette.light0_hard
+	colors.bg = gruvbox_palette.light0
+	colors.bg1 = gruvbox_palette.light1
+	colors.fg = gruvbox_palette.dark1
 
-local function_color = _G.colors.cyan
+	colors.blue = gruvbox_palette.dark_blue
+	colors.cyan = gruvbox_palette.faded_aqua
+	colors.darkblue = gruvbox_palette.dark_blue
+	colors.green = gruvbox_palette.dark_gree
+	colors.grey = gruvbox_palette.dark1
+	colors.grey2 = gruvbox_palette.dark3
+	colors.neutral_blue = gruvbox_palette.dark_blue
+	colors.orange = gruvbox_palette.dark_orange
+	colors.purple = gruvbox_palette.faded_purple
+	colors.red = gruvbox_palette.faded_red
+	colors.yellow = gruvbox_palette.dark_yellow
 
-local overrides = {
-	-- TODOs
-	["@comment.todo.comment"] = { fg = _G.colors.green, bold = true },
-	["@comment.error.comment"] = { fg = _G.colors.red, bold = true },
-	["@comment.note.comment"] = { fg = _G.colors.purple, bold = true },
-	["@comment.warning.comment"] = { fg = _G.colors.orange, bold = true },
-	["@punctuation.delimiter.comment"] = { fg = _G.colors.comment },
+	colors.comment = gruvbox_palette.gray
+end
 
-	-- Languages
-	["@constant.builtin"] = { fg = _G.colors.purple },
-	["@constructor"] = { fg = _G.colors.purple },
-
-	["@function"] = { fg = function_color, bold = true },
-	["@function.builtin"] = { fg = function_color, bold = true },
-	["@function.call"] = { fg = function_color, bold = true },
-	["@function.method"] = { fg = function_color, bold = true },
-
-	["@keyword.import"] = { fg = _G.colors.red },
-	["@lsp.type.method"] = { fg = function_color },
-	["@variable.builtin"] = { fg = _G.colors.purple },
-
-	-- Markdown
-	["@markup.heading.1.markdown"] = { fg = _G.colors.red, bold = true },
-	["@markup.heading.2.markdown"] = { fg = _G.colors.red, bold = true },
-	["@markup.heading.3.markdown"] = { fg = _G.colors.cyan, bold = true },
-	["@markup.heading.4.markdown"] = { fg = _G.colors.blue, bold = true },
-	["@markup.heading.5.markdown"] = { fg = _G.colors.purple, bold = true },
-	["@markup.link.label.markdown_inline"] = { fg = _G.colors.cyan, bold = true },
-	["@markup.link.markdown_inline"] = { fg = _G.colors.purple },
-	["@markup.link.url.markdown_inline"] = { fg = _G.colors.blue },
-	["@markup.list.markdown"] = { fg = _G.colors.purple },
-	["@markup.strong.markdown_inline"] = { fg = _G.colors.cyan, bold = true },
-	["@markup.italic.markdown_inline"] = { fg = _G.colors.yellow, italic = true },
-
-	-- .gitignore
-	["@string.special.path.gitignore"] = { fg = _G.colors.blue },
-
-	-- Folds
-	Folded = { fg = _G.colors.comment, bg = "none", italic = true },
-
-	-- Floating window
-	FloatBorder = { fg = _G.colors.comment },
-	NormalFloat = { bg = _G.colors.bg0 },
-
-	-- Noice's command line window icon and border
-	NoiceCmdlinePopupTitleInput = { fg = _G.colors.blue, bg = _G.colors.bg0 },
-	NoiceCmdlinePopupBorder = { fg = _G.colors.blue, bg = _G.colors.bg0 },
-	NoiceCmdlinePopupBorderCmdline = { fg = _G.colors.blue, bg = _G.colors.bg0 },
-
-	NoiceCmdlineIcon = { fg = _G.colors.blue, bg = _G.colors.bg0 },
-	NoiceCmdlineIconSearch = { fg = _G.colors.yellow, bg = _G.colors.bg0 },
-	NoiceCmdlineIconLua = { fg = _G.colors.red, bg = _G.colors.bg0 },
-	NoiceCmdlineIconHelp = { fg = _G.colors.blue, bg = _G.colors.bg0 },
-	NoiceCmdlineIconFilter = { fg = _G.colors.purple, bg = _G.colors.bg0 },
-
-	NoiceCmdlinePopupBorderSearch = { fg = _G.colors.yellow, bg = _G.colors.bg0 },
-	NoiceCmdlinePopupBorderLua = { fg = _G.colors.red, bg = _G.colors.bg0 },
-	NoiceCmdlinePopupBorderHelp = { fg = _G.colors.blue, bg = _G.colors.bg0 },
-	NoiceCmdlinePopupBorderFilter = { fg = _G.colors.purple, bg = _G.colors.bg0 },
-
-	-- Hop
-	HopNextKey = { fg = _G.colors.red, bg = _G.colors.bg },
-	HopNextKey1 = { fg = _G.colors.red, bg = _G.colors.bg },
-	HopNextKey2 = { fg = _G.colors.red, bg = _G.colors.bg },
-
-	-- Nvim-tree
-	NvimTreeFolderArrowOpen = { fg = _G.colors.blue },
-	NvimTreeFolderName = { fg = _G.colors.blue, bold = true },
-	NvimTreeGitDirty = { fg = _G.colors.red },
-	NvimTreeGitNewIcon = { fg = _G.colors.orange },
-	NvimTreeIndentMarker = { fg = _G.colors.blue },
-	NvimTreeOpenedFile = { fg = _G.colors.purple },
-	NvimTreeOpenedFolderName = { fg = _G.colors.blue, bold = true },
-	NvimTreeOpenedHL = { fg = _G.colors.purple },
-	NvimTreeRootFolder = { fg = _G.colors.purple },
-	NvimTreeSpecialFile = { fg = _G.colors.green, bold = false, underline = false },
-	NvimTreeStatusLine = { fg = _G.colors.bg }, -- Fix annoying offset
-
-	-- Startify
-	StartifyBracket = { fg = _G.colors.bg },
-	StartifyHeader = { fg = _G.colors.orange },
-	StartifyNumber = { fg = _G.colors.yellow },
-	StartifyPath = { fg = _G.colors.blue },
-	StartifySection = { fg = _G.colors.red },
-	StartifySelect = { fg = _G.colors.yellow },
-	StartifySlash = { fg = _G.colors.blue },
-
-	-- Gitsigns
-	GitSignsAdd = { fg = _G.colors.green, bg = _G.colors.bg1 },
-	GitSignsDelete = { fg = _G.colors.red, bg = _G.colors.bg1 },
-	GitSignsChange = { fg = _G.colors.purple, bg = _G.colors.bg1 },
-	GitSignsAddPreview = { fg = _G.colors.green, bg = _G.colors.bg },
-	GitSignsDeletePreview = { fg = _G.colors.red, bg = _G.colors.bg },
-
-	-- Fix annotying space with wrong bg color
-	StatusLine = { fg = _G.colors.bg, bg = _G.colors.bg },
-	StatusLineNC = { fg = _G.colors.bg, bg = _G.colors.bg },
-
-	-- Diagnostic messages
-	DiagnosticSignError = { fg = _G.colors.red, bg = "none" },
-	DiagnosticSignHint = { fg = _G.colors.cyan, bg = "none" },
-	DiagnosticSignInfo = { fg = _G.colors.blue, bg = "none" },
-	DiagnosticSignWarn = { fg = _G.colors.orange, bg = "none" },
-	DiagnosticVirtualTextWarn = { fg = _G.colors.orange, bg = "none" },
-	DiagnosticWarn = { fg = _G.colors.orange, bg = "none" },
-
-	-- Rainbow delimiters
-	["@punctuation.bracket.python"] = { fg = _G.colors.red },
-	RainbowDelimiterBlue = { fg = _G.colors.blue },
-	RainbowDelimiterCyan = { fg = _G.colors.cyan },
-	RainbowDelimiterGreen = { fg = _G.colors.green },
-	RainbowDelimiterOrange = { fg = _G.colors.orange },
-	RainbowDelimiterRed = { fg = _G.colors.red },
-	RainbowDelimiterYellow = { fg = _G.colors.yellow },
-
-	-- Consistent line number even when diagnostic signs are active
-	CursorLineNr = { fg = _G.colors.fg, bg = "none", bold = true },
-
-	-- Navic
-	NavicSeparator = { fg = _G.colors.comment, bg = "none", bold = true },
-	NavicIconsMethod = { fg = _G.colors.cyan, bg = "none" },
-	NavicIconsFunction = { fg = _G.colors.cyan, bg = "none" },
-
-	-- Telescope
-	TelescopeBorder = { fg = _G.colors.green, bold = true },
-	TelescopePromptBorder = { fg = _G.colors.green },
-	TelescopePreviewBorder = { fg = _G.colors.orange },
-	TelescopeResultsBorder = { fg = _G.colors.green },
-
-	-- Nvim-cmp autocompletion menu
-	CmpPmenu = { fg = "none", bg = _G.colors.bg0 },
-	CmpPmenuSel = { fg = "none", bg = _G.colors.bg1, bold = true },
-
-	-- Saga
-	SagaFinderFname = { fg = _G.colors.blue, bold = true },
-	SagaInCurrent = { fg = _G.colors.green },
-	SagaTitle = { fg = _G.colors.red, bold = true },
-	SagaSelect = { fg = _G.colors.green, bold = true },
-	SagaToggle = { fg = _G.colors.blue },
-
-	-- Winbar
-	WinBar = { fg = _G.colors.yellow, bg = _G.colors.bg0, bold = true },
-	WinBarNC = { fg = _G.colors.cyan, bg = _G.colors.bg0, bold = true },
-}
+local function_color = colors.cyan
 
 require("gruvbox").setup({
 	terminal_colors = false, -- wrong colors for lazygit
@@ -252,17 +127,180 @@ require("gruvbox").setup({
 	invert_intend_guides = false,
 	inverse = true, -- invert background for search, diffs, statuslines and errors
 	contrast = "hard", -- can be "hard", "soft" or empty string
-	overrides = overrides,
 	dim_inactive = false,
 	transparent_mode = false,
 	palette_overrides = {
-		bright_aqua = _G.colors.cyan,
-		bright_blue = _G.colors.blue,
-		bright_orange = _G.colors.orange,
-		bright_purple = _G.colors.purple,
-		bright_red = _G.colors.red,
-		bright_yellow = _G.colors.yellow,
+		bright_aqua = colors.cyan,
+		bright_blue = colors.blue,
+		bright_orange = colors.orange,
+		bright_purple = colors.purple,
+		bright_red = colors.red,
+		bright_yellow = colors.yellow,
+		bright_green = colors.green,
+
+		faded_aqua = colors.cyan,
+		faded_blue = colors.blue,
+		faded_orange = colors.orange,
+		faded_purple = colors.purple,
+		faded_red = colors.red,
+		faded_yellow = colors.yellow,
+		faded_green = colors.green,
+
+		neutral_aqua = colors.cyan,
+		neutral_blue = colors.blue,
+		neutral_orange = colors.orange,
+		neutral_purple = colors.purple,
+		neutral_red = colors.red,
+		neutral_yellow = colors.yellow,
+		neutral_green = colors.green,
+	},
+	overrides = {
+		-- TODOs
+		["@comment.todo.comment"] = { fg = colors.green, bold = true },
+		["@comment.error.comment"] = { fg = colors.red, bold = true },
+		["@comment.note.comment"] = { fg = colors.purple, bold = true },
+		["@comment.warning.comment"] = { fg = colors.orange, bold = true },
+		["@punctuation.delimiter.comment"] = { fg = colors.comment },
+
+		-- Languages
+		["@constant.builtin"] = { fg = colors.purple },
+		["@constructor"] = { fg = colors.purple },
+
+		["@function"] = { fg = function_color, bold = true },
+		["@function.builtin"] = { fg = function_color, bold = true },
+		["@function.call"] = { fg = function_color, bold = true },
+		["@function.method"] = { fg = function_color, bold = true },
+
+		["@keyword.import"] = { fg = colors.red },
+		["@lsp.type.method"] = { fg = function_color },
+		["@variable.builtin"] = { fg = colors.purple },
+
+		-- Markdown
+		["@markup.heading.1.markdown"] = { fg = colors.red, bold = true },
+		["@markup.heading.2.markdown"] = { fg = colors.red, bold = true },
+		["@markup.heading.3.markdown"] = { fg = colors.cyan, bold = true },
+		["@markup.heading.4.markdown"] = { fg = colors.blue, bold = true },
+		["@markup.heading.5.markdown"] = { fg = colors.purple, bold = true },
+		["@markup.link.label.markdown_inline"] = { fg = colors.cyan, bold = true },
+		["@markup.link.markdown_inline"] = { fg = colors.purple },
+		["@markup.link.url.markdown_inline"] = { fg = colors.blue },
+		["@markup.list.markdown"] = { fg = colors.orange },
+		["@markup.strong.markdown_inline"] = { fg = colors.cyan, bold = true },
+		["@markup.italic.markdown_inline"] = { fg = colors.yellow, italic = true },
+
+		-- .gitignore
+		["@string.special.path.gitignore"] = { fg = colors.blue },
+
+		-- Folds
+		Folded = { fg = colors.comment, bg = "none", italic = true },
+
+		-- Floating window
+		FloatBorder = { fg = colors.comment },
+		NormalFloat = { bg = colors.bg0 },
+
+		-- Noice's command line window icon and border
+		NoiceCmdlinePopupTitleInput = { fg = colors.blue, bg = colors.bg0 },
+		NoiceCmdlinePopupBorder = { fg = colors.blue, bg = colors.bg0 },
+		NoiceCmdlinePopupBorderCmdline = { fg = colors.blue, bg = colors.bg0 },
+
+		NoiceCmdlineIcon = { fg = colors.blue, bg = colors.bg0 },
+		NoiceCmdlineIconSearch = { fg = colors.yellow, bg = colors.bg0 },
+		NoiceCmdlineIconLua = { fg = colors.red, bg = colors.bg0 },
+		NoiceCmdlineIconHelp = { fg = colors.blue, bg = colors.bg0 },
+		NoiceCmdlineIconFilter = { fg = colors.purple, bg = colors.bg0 },
+
+		NoiceCmdlinePopupBorderSearch = { fg = colors.yellow, bg = colors.bg0 },
+		NoiceCmdlinePopupBorderLua = { fg = colors.red, bg = colors.bg0 },
+		NoiceCmdlinePopupBorderHelp = { fg = colors.blue, bg = colors.bg0 },
+		NoiceCmdlinePopupBorderFilter = { fg = colors.purple, bg = colors.bg0 },
+
+		-- Hop
+		HopNextKey = { fg = colors.red, bg = colors.bg },
+		HopNextKey1 = { fg = colors.red, bg = colors.bg },
+		HopNextKey2 = { fg = colors.red, bg = colors.bg },
+
+		-- Nvim-tree
+		NvimTreeFolderArrowOpen = { fg = colors.blue },
+		NvimTreeFolderName = { fg = colors.blue, bold = true },
+		NvimTreeGitDirty = { fg = colors.red },
+		NvimTreeGitNewIcon = { fg = colors.orange },
+		NvimTreeIndentMarker = { fg = colors.blue },
+		NvimTreeOpenedFile = { fg = colors.purple },
+		NvimTreeOpenedFolderName = { fg = colors.blue, bold = true },
+		NvimTreeOpenedHL = { fg = colors.purple },
+		NvimTreeRootFolder = { fg = colors.purple },
+		NvimTreeSpecialFile = { fg = colors.green, bold = false, underline = false },
+		NvimTreeStatusLine = { fg = colors.bg }, -- Fix annoying offset
+
+		-- Startify
+		StartifyBracket = { fg = colors.bg },
+		StartifyHeader = { fg = colors.orange },
+		StartifyNumber = { fg = colors.yellow },
+		StartifyPath = { fg = colors.blue },
+		StartifySection = { fg = colors.red },
+		StartifySelect = { fg = colors.yellow },
+		StartifySlash = { fg = colors.blue },
+
+		-- Gitsigns
+		GitSignsAdd = { fg = colors.green, bg = colors.bg1 },
+		GitSignsDelete = { fg = colors.red, bg = colors.bg1 },
+		GitSignsChange = { fg = colors.purple, bg = colors.bg1 },
+		GitSignsAddPreview = { fg = colors.green, bg = colors.bg },
+		GitSignsDeletePreview = { fg = colors.red, bg = colors.bg },
+
+		-- Fix annotying space with wrong bg color
+		StatusLine = { fg = colors.bg, bg = colors.bg },
+		StatusLineNC = { fg = colors.bg, bg = colors.bg },
+
+		-- Diagnostic messages
+		DiagnosticSignError = { fg = colors.red, bg = "none" },
+		DiagnosticSignHint = { fg = colors.cyan, bg = "none" },
+		DiagnosticSignInfo = { fg = colors.blue, bg = "none" },
+		DiagnosticSignWarn = { fg = colors.orange, bg = "none" },
+		DiagnosticVirtualTextWarn = { fg = colors.orange, bg = "none" },
+		DiagnosticWarn = { fg = colors.orange, bg = "none" },
+
+		-- Rainbow delimiters
+		["@punctuation.bracket.python"] = { fg = colors.red },
+		RainbowDelimiterBlue = { fg = colors.blue },
+		RainbowDelimiterCyan = { fg = colors.cyan },
+		RainbowDelimiterGreen = { fg = colors.green },
+		RainbowDelimiterOrange = { fg = colors.orange },
+		RainbowDelimiterRed = { fg = colors.red },
+		RainbowDelimiterYellow = { fg = colors.yellow },
+
+		-- Consistent line number even when diagnostic signs are active
+		CursorLineNr = { fg = colors.fg, bg = "none", bold = true },
+
+		-- Navic
+		NavicSeparator = { fg = colors.comment, bg = "none", bold = true },
+		NavicIconsMethod = { fg = colors.cyan, bg = "none" },
+		NavicIconsFunction = { fg = colors.cyan, bg = "none" },
+
+		-- Telescope
+		TelescopeBorder = { fg = colors.green, bold = true },
+		TelescopePromptBorder = { fg = colors.green },
+		TelescopePreviewBorder = { fg = colors.orange },
+		TelescopeResultsBorder = { fg = colors.green },
+
+		-- Nvim-cmp autocompletion menu
+		CmpPmenu = { fg = "none", bg = colors.bg0 },
+		CmpPmenuSel = { fg = "none", bg = colors.bg1, bold = true },
+
+		-- Saga
+		SagaFinderFname = { fg = colors.blue, bold = true },
+		SagaInCurrent = { fg = colors.green },
+		SagaTitle = { fg = colors.red, bold = true },
+		SagaSelect = { fg = colors.green, bold = true },
+		SagaToggle = { fg = colors.blue },
+
+		-- Winbar
+		WinBar = { fg = colors.yellow, bg = colors.bg0, bold = true },
+		WinBarNC = { fg = colors.cyan, bg = colors.bg0, bold = true },
+
+		-- Mason
+		MasonNormal = { bg = colors.bg },
 	},
 })
 
-vim.cmd.colorscheme("gruvbox")
+vim.cmd("colorscheme gruvbox")
