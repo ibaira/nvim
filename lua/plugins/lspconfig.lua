@@ -106,7 +106,20 @@ local max_width = 80
 local active_diagnostics_config = {
 	virtual_text = true,
 	underline = false,
-	signs = true,
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = "",
+			[vim.diagnostic.severity.WARN] = "",
+			[vim.diagnostic.severity.HINT] = "",
+			[vim.diagnostic.severity.INFO] = "",
+		},
+		numhl = {
+			[vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+			[vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+			[vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+			[vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+		},
+	},
 	float = { source = true, border = border },
 	severity_sort = true,
 }
@@ -117,8 +130,8 @@ local inactive_diagnostics_config = {
 	float = false,
 }
 
-vim.g.diagnostic_active = true
 vim.diagnostic.config(active_diagnostics_config)
+vim.g.diagnostic_active = true
 
 function _G.nolint()
 	if vim.g.diagnostic_active then
@@ -149,27 +162,6 @@ function _G.nolint()
 			max_width = max_width,
 			source = true,
 		})
-	end
-end
-
--- This is the configuration for the LSPs like Pyright
-if vim.g.diagnostic_active then
-	-- TODO: why does the LSP stil show sign highlights after deactivation?
-	vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-		virtual_text = true, -- for LSP diagnostics only
-		signs = true,
-		update_in_insert = false,
-		underline = false,
-		border = border,
-		max_width = max_width,
-		source = true,
-	})
-
-	-- Edit lsp diagnostic line icon and highlight the corresponding line number
-	local signs = { Error = "", Warn = "", Hint = "", Info = "" } -- "● ", Info = " "
-	for type, icon in pairs(signs) do
-		local hl = "DiagnosticSign" .. type
-		vim.fn.sign_define(hl, { text = icon, numhl = hl })
 	end
 end
 
