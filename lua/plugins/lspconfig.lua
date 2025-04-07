@@ -102,16 +102,6 @@ lspconfig.lua_ls.setup({
 local border = "rounded"
 local max_width = 80
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-	border = border,
-	max_width = max_width,
-})
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-	border = border,
-	max_width = max_width,
-	close_events = { "CursorMoved", "BufHidden", "InsertCharPre" },
-})
-
 -- Remove virtual text in line for diagnostics
 local active_diagnostics_config = {
 	virtual_text = true,

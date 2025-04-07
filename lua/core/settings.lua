@@ -244,6 +244,12 @@ vim.o.winbar =
 	"%{%v:lua.vim.fn.fnamemodify(v:lua.vim.fn.expand('%'), ':p:~:.')%}  %{%v:lua.require'nvim-navic'.get_location()%}"
 
 ---------------------------------
+-- Window borders
+---------------------------------
+
+vim.opt.winborder = "rounded"
+
+---------------------------------
 -- Editing mappings
 ---------------------------------
 

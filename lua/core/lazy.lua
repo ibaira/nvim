@@ -60,16 +60,9 @@ local plugins = {
 	},
 	{ "nvim-telescope/telescope.nvim", tag = "0.1.8", dependencies = { "nvim-lua/plenary.nvim" } },
 	{ "neovim/nvim-lspconfig" },
-	{ "hrsh7th/nvim-cmp" },
-	{ "hrsh7th/cmp-nvim-lsp" },
-	{ "hrsh7th/cmp-buffer" },
-	{ "hrsh7th/cmp-path" },
-	{ "hrsh7th/cmp-cmdline" },
-	{ "hrsh7th/nvim-cmp" },
 	{ "nvim-tree/nvim-tree.lua", event = "VeryLazy" },
 	{ "mfussenegger/nvim-lint", event = "VeryLazy" },
 	{ "hadronized/hop.nvim", branch = "v2", event = "VeryLazy" },
-	{ "saadparwaiz1/cmp_luasnip" },
 	{ "mfussenegger/nvim-dap", event = "VeryLazy" },
 	{ "mfussenegger/nvim-dap-python", event = "VeryLazy" },
 	{ "kdheepak/lazygit.nvim", dependencies = { "nvim-lua/plenary.nvim" }, event = "VeryLazy" },
@@ -200,88 +193,6 @@ local plugins = {
 				map_bs = true, -- map the <BS> key
 				map_c_h = false, -- Map the <C-h> key to delete a pair
 				map_c_w = false, -- map <c-w> to delete a pair if possible
-			})
-		end,
-	},
-	{
-		"nvimdev/lspsaga.nvim",
-		event = "VeryLazy",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		config = function()
-			require("lspsaga").setup({
-				ui = {
-					winbar_prefix = "",
-					border = "rounded",
-					devicon = false,
-					foldericon = false,
-					title = false,
-					code_action = "A ",
-					use_nerd = true,
-					button = { "", "" },
-					imp_sign = " ",
-				},
-				hover = { max_width = 0.9, max_height = 0.8, open_link = "gx", open_cmd = "!chrome" },
-				diagnostic = {
-					keys = {
-						exec_action = "o",
-						quit = "q",
-						toggle_or_jump = "<CR>",
-						quit_in_show = { "q", "<ESC>" },
-					},
-				},
-				code_action = {
-					num_shortcut = true,
-					show_server_name = false,
-					extend_gitsigns = false,
-					only_in_cursor = true,
-					max_height = 0.3,
-					cursorline = true,
-					keys = { quit = "q", exec = "<CR>" },
-				},
-				lightbulb = {
-					enable = false,
-					sign = false,
-					debounce = 10,
-					sign_priority = 40,
-					virtual_text = false,
-					enable_in_insert = true,
-					ignore = { clients = {}, ft = {} },
-				},
-				scroll_preview = { scroll_down = "<C-f>", scroll_up = "<C-b>" },
-				request_timeout = 2000,
-				finder = {
-					max_height = 0.6,
-					left_width = 0.5,
-					right_width = 0.5,
-					default = "ref+imp",
-					layout = "normal",
-					silent = false,
-					keys = {
-						shuttle = "<C-w><C-w>",
-						toggle_or_open = "<CR>",
-						vsplit = "v",
-						split = "s",
-						tabe = "t",
-						tabnew = "r",
-						quit = "q",
-						close = "<C-c>k",
-					},
-				},
-				definition = {
-					keys = {
-						edit = "<C-o>",
-						vsplit = "<C-v>",
-						split = "<C-x>",
-						tabe = "<C-t>",
-						tabnew = "<C-c>n",
-						quit = "q",
-						close = "<ESC>",
-					},
-				},
-				-- Breadcrumbs
-				symbol_in_winbar = { enable = false },
-				implement = { enable = false },
-				beacon = { enable = false },
 			})
 		end,
 	},
@@ -578,6 +489,88 @@ local plugins = {
 		end,
 	},
 	{ "nvim-tree/nvim-web-devicons", event = "VeryLazy" },
+	{
+		"saghen/blink.cmp",
+		-- optional: provides snippets for the snippet source
+		dependencies = { "rafamadriz/friendly-snippets" },
+
+		-- use a release tag to download pre-built binaries
+		version = "1.*",
+		-- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+		-- build = 'cargo build --release',
+		-- If you use nix, you can build from source using latest nightly rust with:
+		-- build = 'nix run .#build-plugin',
+
+		---@module 'blink.cmp'
+		---@type blink.cmp.Config
+		opts = {
+			-- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
+			-- 'super-tab' for mappings similar to vscode (tab to accept)
+			-- 'enter' for enter to accept
+			-- 'none' for no mappings
+			--
+			-- All presets have the following mappings:
+			-- C-space: Open menu or open docs if already open
+			-- C-n/C-p or Up/Down: Select next/previous item
+			-- C-e: Hide menu
+			-- C-k: Toggle signature help (if signature.enabled = true)
+			--
+			-- See :h blink-cmp-config-keymap for defining your own keymap
+			keymap = {
+				preset = "none", -- set to 'none' to disable the 'default' preset
+				["<S-Tab>"] = { "select_prev", "fallback" },
+				["<Tab>"] = { "select_next", "fallback" },
+				["<CR>"] = { "accept", "fallback" },
+				-- disable a keymap from the preset
+				["<C-e>"] = {},
+			},
+
+			appearance = {
+				-- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+				-- Adjusts spacing to ensure icons are aligned
+				nerd_font_variant = "mono",
+			},
+
+			completion = {
+				documentation = {
+					auto_show = true,
+					auto_show_delay_ms = 100,
+					window = { border = "rounded" },
+				},
+				menu = {
+					auto_show = true,
+					-- nvim-cmp style menu
+					draw = {
+						columns = {
+							{ "label", "label_description", gap = 1 },
+							{ "kind" },
+						},
+					},
+				},
+			},
+
+			-- Default list of enabled providers defined so that you can extend it
+			-- elsewhere in your config, without redefining it, due to `opts_extend`
+			sources = {
+				default = { "lsp", "path", "snippets", "buffer" },
+			},
+
+			-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
+			-- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
+			-- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
+			--
+			-- See the fuzzy documentation for more information
+			fuzzy = { implementation = "prefer_rust_with_warning" },
+
+			snippets = { preset = "luasnip" },
+
+			signature = {
+				enabled = true,
+				window = { border = "rounded", show_documentation = true },
+			},
+		},
+		opts_extend = { "sources.default" },
+	},
 
 	-- Themes
 	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },

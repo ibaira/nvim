@@ -96,7 +96,7 @@ ins_left({
 		return "col: " .. string.format("%02d", vim.api.nvim_win_get_cursor(0)[2]) -- column value only
 	end,
 	padding = { left = 2 },
-	color = "htmlBold",
+	color = "GruvboxFg0",
 })
 
 ins_left({

@@ -121,7 +121,7 @@ require("noice").setup({
 			opts = {}, -- merged with defaults from documentation
 		},
 		signature = {
-			enabled = true,
+			enabled = false,
 			auto_open = {
 				enabled = true,
 				trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
@@ -179,4 +179,16 @@ require("noice").setup({
 			opts = { skip = true },
 		},
 	},
+})
+
+-- Temporary workaround for bug due to new vim.o.winborder
+vim.api.nvim_create_autocmd("CmdlineEnter", {
+	callback = function()
+		vim.o.winborder = "none"
+	end,
+})
+vim.api.nvim_create_autocmd("CmdlineLeave", {
+	callback = function()
+		vim.o.winborder = "rounded"
+	end,
 })
