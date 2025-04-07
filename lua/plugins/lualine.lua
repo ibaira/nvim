@@ -75,7 +75,7 @@ ins_left({
 		end
 		return ""
 	end,
-	color = "Variable",
+	color = "@variable",
 	padding = { left = 1, right = 0 },
 })
 
