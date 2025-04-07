@@ -273,6 +273,7 @@ require("gruvbox").setup({
 		CursorLineNr = { fg = colors.fg, bg = "none", bold = true },
 
 		-- Navic
+		NavicText = { fg = colors.fg, bg = "none" },
 		NavicSeparator = { fg = colors.comment, bg = "none", bold = true },
 		NavicIconsMethod = { fg = colors.cyan, bg = "none" },
 		NavicIconsFunction = { fg = colors.cyan, bg = "none" },
