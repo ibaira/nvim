@@ -96,12 +96,6 @@ lspconfig.lua_ls.setup({
 	settings = { Lua = { diagnostics = { globals = { "vim" } } } },
 })
 
--- Lsp saga formatting
-
--- Hover doc popup
-local border = "rounded"
-local max_width = 80
-
 -- Remove virtual text in line for diagnostics
 local active_diagnostics_config = {
 	virtual_text = true,
@@ -120,7 +114,7 @@ local active_diagnostics_config = {
 			[vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
 		},
 	},
-	float = { source = true, border = border },
+	float = { source = true, border = "rounded" },
 	severity_sort = true,
 }
 local inactive_diagnostics_config = {
@@ -137,31 +131,9 @@ function _G.nolint()
 	if vim.g.diagnostic_active then
 		vim.diagnostic.config(inactive_diagnostics_config)
 		vim.g.diagnostic_active = false
-
-		-- Why isn't this working? Need to change buffer for it to take effect for some
-		-- reason
-		vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-			virtual_text = false, -- for LSP diagnostics only
-			signs = false,
-			update_in_insert = false,
-			underline = false,
-			border = border,
-			max_width = max_width,
-			source = true,
-		})
 	else
 		vim.diagnostic.config(active_diagnostics_config)
 		vim.g.diagnostic_active = true
-
-		vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-			virtual_text = true, -- for LSP diagnostics only
-			signs = false,
-			update_in_insert = false,
-			underline = false,
-			border = border,
-			max_width = max_width,
-			source = true,
-		})
 	end
 end
 
