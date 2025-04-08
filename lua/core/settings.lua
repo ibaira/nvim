@@ -35,6 +35,9 @@ vim.opt.splitbelow = true
 -- Copy to/from Windows
 vim.opt.clipboard:append("unnamedplus")
 
+-- Do not change directory when opening a file
+vim.opt.autochdir = false
+
 ---------------------------------
 -- Basic settings
 ---------------------------------
@@ -124,6 +127,10 @@ vim.opt.fileformats = { "unix", "dos", "mac" }
 -- Turn backup off, since most stuff is in SVN, git etc. anyway...
 vim.opt.backup = false
 vim.opt.swapfile = false
+
+-- To avoid views to save "lcd" commands that would otherwise change the cwd when
+-- opening a file
+vim.opt.viewoptions = { "folds", "cursor" }
 
 ---------------------------------
 -- Text, tab and indent related
