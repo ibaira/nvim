@@ -16,6 +16,7 @@ local servers = {
 	"lemminx",
 	"cmake",
 	"marksman",
+	"harper_ls",
 }
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({ flags = { debounce_text_changes = 150 } })

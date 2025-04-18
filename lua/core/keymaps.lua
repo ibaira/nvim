@@ -92,9 +92,8 @@ vim.keymap.set("v", "<M-m>", "gcc<Esc>gv", { remap = true })
 vim.keymap.set("n", "<leader>rn", ":lua vim.lsp.buf.rename()<CR>", { silent = true })
 
 -- Code action
-vim.keymap.set("n", "<leader>a", ":Lspsaga code_action<CR>", { silent = true })
-vim.keymap.set("n", "<M-a>", ":Lspsaga code_action<CR>", { silent = true })
--- vim.keymap.set("n", "<leader>a", ":lua vim.lsp.buf.code_action()<CR>", { silent = true })
+vim.keymap.set("n", "<leader>a", ":lua vim.lsp.buf.code_action()<CR>", { silent = true })
+vim.keymap.set("n", "<M-a>", ":lua vim.lsp.buf.code_action()<CR>", { silent = true })
 
 -- Gitsigns
 vim.keymap.set("n", "<leader>d", ":Gitsigns toggle_signs<CR>", { silent = true })
@@ -174,9 +173,6 @@ vim.keymap.set("n", "<C-j>", "]m", { remap = true, silent = true })
 vim.keymap.set("n", "(", "?^\\S<CR>:noh<CR>", { silent = true })
 vim.keymap.set("n", ")", "/^\\S<CR>:noh<CR>", { silent = true })
 
--- Toggle floating terminal
-vim.keymap.set("n", "<M-r>", ":Lspsaga term_toggle<CR>", { silent = true })
-
 -- DAP
 vim.keymap.set("n", "<F5>", ":DapContinue<CR>", { silent = true })
 vim.keymap.set("n", "<F6>", ":DapToggleBreakpoint<CR>", { silent = true })
@@ -184,6 +180,9 @@ vim.keymap.set("n", "<F12>", ":DapTerminate<CR>", { silent = true })
 vim.keymap.set("n", "<M-t>", ":lua require('dapui').toggle()<CR>", { silent = true })
 
 vim.keymap.set("n", "<M-q>", ":split<CR>:term python %<CR>", { silent = true })
+
+-- Copilot
+vim.keymap.set("i", "<M-a>", 'copilot#Accept("<CR>")', { expr = true, silent = true, replace_keycodes = true })
 
 -- inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 -- inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
