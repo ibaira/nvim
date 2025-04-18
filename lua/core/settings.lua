@@ -129,7 +129,7 @@ vim.opt.backup = false
 vim.opt.swapfile = false
 
 -- To avoid views to save "lcd" commands that would otherwise change the cwd when
--- opening a file
+-- opening a file. Views located here: `~/.local/state/nvim/view/`
 vim.opt.viewoptions = { "folds", "cursor" }
 
 ---------------------------------

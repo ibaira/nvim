@@ -61,7 +61,7 @@ local gruvbox_palette = {
 	gray = "#928374",
 }
 
-local gruvbox_material_palette = { -- fg0 = "#d4be98", fg1 = "#ddc7a1",
+local gruvbox_material_palette = {
 	bright_red = "#ea6962",
 	bright_orange = "#e78a4e",
 	bright_yellow = "#d8a657",
@@ -115,7 +115,7 @@ end
 local function_color = colors.cyan
 
 require("gruvbox").setup({
-	terminal_colors = false, -- wrong colors for lazygit
+	terminal_colors = false, -- wrong colors for LazyGit
 	undercurl = true,
 	underline = true,
 	bold = true,
@@ -248,7 +248,7 @@ require("gruvbox").setup({
 		GitSignsAddPreview = { fg = colors.green, bg = colors.bg },
 		GitSignsDeletePreview = { fg = colors.red, bg = colors.bg },
 
-		-- Fix annotying space with wrong bg color
+		-- Fix annoying space with wrong bg color
 		StatusLine = { fg = colors.bg, bg = colors.bg },
 		StatusLineNC = { fg = colors.bg, bg = colors.bg },
 
@@ -298,6 +298,7 @@ require("gruvbox").setup({
 		-- Winbar
 		WinBar = { fg = colors.yellow, bg = colors.bg0, bold = true },
 		WinBarNC = { fg = colors.cyan, bg = colors.bg0, bold = true },
+		WinBarFilename = { fg = colors.bg, bg = colors.yellow, bold = true },
 
 		-- Mason
 		MasonNormal = { bg = colors.bg },

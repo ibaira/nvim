@@ -24,7 +24,7 @@ local config = {
 		component_separators = "",
 		section_separators = "",
 		theme = { normal = { c = theme }, inactive = { c = theme } },
-		disabled_filetypes = { "startify" },
+		disabled_filetypes = { "startify", "NvimTree" },
 		globalstatus = true,
 		icons_enabled = false,
 	},
@@ -48,8 +48,34 @@ local config = {
 		lualine_c = {},
 		lualine_x = {},
 	},
+	winbar = {
+		-- Remove the defaults
+		lualine_a = {},
+		lualine_b = {},
+		lualine_y = {},
+		lualine_z = {},
+		-- These will be filled later
+		lualine_c = {},
+		lualine_x = {},
+	},
+	inactive_winbar = {
+		-- Remove the defaults
+		lualine_a = {},
+		lualine_b = {},
+		lualine_y = {},
+		lualine_z = {},
+		-- These will be filled later
+		lualine_c = {},
+		lualine_x = {},
+	},
 	extensions = { "nvim-tree" },
 }
+
+-- Inserts a component in winbar
+local function ins_left_winbar(component)
+	table.insert(config.winbar.lualine_c, component)
+	table.insert(config.inactive_winbar.lualine_c, component)
+end
 
 -- Inserts a component in lualine_c at left section
 local function ins_left(component)
@@ -113,8 +139,36 @@ ins_left({
 
 ins_left({ "fileformat", color = "Constant", padding = { left = 2 } })
 
+ins_left({
+	-- LSP server name
+	function()
+		local msg = ""
+		local buf_ft = vim.api.nvim_get_option_value("filetype", {})
+		local clients = vim.lsp.get_clients()
+		if next(clients) == nil then
+			return msg
+		end
+
+		for _, client in ipairs(clients) do
+			local filetypes = client.config["filetypes"]
+			if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+				-- Give priority to other LSPs, not Harper grammar checker
+				if client.name ~= "harper_ls" then
+					return client.name
+				else
+					msg = client.name
+				end
+			end
+		end
+		return msg
+	end,
+	cond = conditions.width_above_80,
+	color = "GruvboxBlueBold",
+	padding = { left = 2, right = 1 },
+})
+
 local noice_statusline_mode = require("noice").api.statusline.mode
-ins_right({
+ins_left({
 	-- Display recording macro message
 	function()
 		local mode = noice_statusline_mode.get()
@@ -128,27 +182,37 @@ ins_right({
 	padding = { left = 2 },
 })
 
-ins_right({
-	-- LSP server name
+-- Winbar
+ins_left_winbar({
 	function()
-		local msg = ""
-		local buf_ft = vim.api.nvim_get_option_value("filetype", {})
-		local clients = vim.lsp.get_clients()
-		if next(clients) == nil then
-			return msg
-		end
-
-		for _, client in ipairs(clients) do
-			local filetypes = client.config["filetypes"]
-			if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-				return client.name
-			end
-		end
-		return msg
+		return vim.fn.fnamemodify(vim.fn.expand("%"), ":p:~:.")
 	end,
-	cond = conditions.width_above_80,
-	color = "GruvboxBlueBold",
-	padding = { left = 2, right = 1 },
+	condition = conditions.buffer_not_empty,
+	path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
+	file_status = true,
+	color = "WinBarFilename",
+	padding = { left = 1, right = 1 },
+})
+
+ins_left_winbar({
+	-- To enforce change of background color for the rest of the winbar
+	function()
+		return " "
+	end,
+	color = "GruvboxYellowBold",
+	padding = { left = 0, right = 0 },
+})
+
+local navic = require("nvim-navic")
+ins_left_winbar({
+	function()
+		return navic.get_location()
+	end,
+	condition = conditions.buffer_not_empty,
+	path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
+	file_status = true,
+	color = { "GruvboxYellowBold" },
+	padding = { left = 1, right = 0 },
 })
 
 -- Initialize lualine

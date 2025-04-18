@@ -13,6 +13,7 @@ vim.g.startify_lists = {
 
 vim.g.startify_bookmarks = {
 	{ c = "~/.config/kitty/kitty.conf" },
+	{ d = "~/.config/harper-ls/dictionary.txt" },
 	{ g = "~/.config/nvim/lua/plugins/gruvbox.lua" },
 	{ i = "~/.config/nvim/init.vim" },
 	{ K = "~/.config/nvim/lua/core/keymaps.lua" },
@@ -26,6 +27,8 @@ vim.g.startify_bookmarks = {
 
 -- Get rid of empty buffer and quit
 vim.g.startify_enable_special = 0
+vim.g.startify_change_to_dir = 0
+vim.g.startify_change_to_vcs_root = 0
 vim.g.startify_fortune_use_unicode = true
 vim.g.startify_custom_header = "startify#pad(startify#fortune#cowsay())"
 -- vim.g.startify_custom_header = "startify#pad(startify#fortune#boxed())"

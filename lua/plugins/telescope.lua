@@ -2,6 +2,7 @@
 local actions = require("telescope.actions")
 require("telescope").setup({
 	defaults = {
+		border = false, -- temporary workaround for conflict with vim.o.winborder
 		prompt_prefix = "$ ",
 		selection_caret = "❯ ",
 		entry_prefix = "  ",
