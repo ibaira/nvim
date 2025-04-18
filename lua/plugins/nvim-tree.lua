@@ -69,7 +69,7 @@ require("nvim-tree").setup({
 		add_trailing = false,
 		group_empty = false,
 		full_name = false,
-		root_folder_label = ":~:s?$?/..?",
+		root_folder_label = ":~:s?$?/",
 		indent_width = 2,
 		special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
 		hidden_display = "none",

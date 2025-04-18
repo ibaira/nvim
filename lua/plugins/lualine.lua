@@ -48,6 +48,7 @@ local config = {
 		lualine_c = {},
 		lualine_x = {},
 	},
+	extensions = { "nvim-tree" },
 }
 
 -- Inserts a component in lualine_c at left section
@@ -110,7 +111,7 @@ ins_left({
 	end,
 })
 
-ins_right({ "fileformat", color = "Constant", padding = { left = 0 } })
+ins_left({ "fileformat", color = "Constant", padding = { left = 2 } })
 
 local noice_statusline_mode = require("noice").api.statusline.mode
 ins_right({

@@ -110,15 +110,13 @@ require("noice").setup({
 			["vim.lsp.util.convert_input_to_markdown_lines"] = false,
 			-- override the lsp markdown formatter with Noice
 			["vim.lsp.util.stylize_markdown"] = false,
-			-- override cmp documentation with Noice (needs the other options to work)
-			["cmp.entry.get_documentation"] = false,
 			["textDocument/hover"] = false,
 		},
 		hover = {
 			enabled = false,
 			silent = false, -- set to true to not show a message if hover is not available
 			view = nil, -- when nil, use defaults from documentation
-			opts = {}, -- merged with defaults from documentation
+			opts = { border = "none", scrollbar = false }, -- merged with defaults from documentation
 		},
 		signature = {
 			enabled = false,
