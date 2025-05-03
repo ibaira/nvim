@@ -16,7 +16,7 @@ local servers = {
 	"lemminx",
 	"cmake",
 	"marksman",
-	"harper_ls",
+	-- "harper_ls",
 }
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({ flags = { debounce_text_changes = 150 } })
@@ -127,15 +127,19 @@ local inactive_diagnostics_config = {
 
 vim.diagnostic.config(active_diagnostics_config)
 vim.g.diagnostic_active = true
+vim.g.float_diagnostic_active = true
 
-function _G.nolint()
+function _G.toggle_lint()
 	if vim.g.diagnostic_active then
 		vim.diagnostic.config(inactive_diagnostics_config)
-		vim.g.diagnostic_active = false
 	else
 		vim.diagnostic.config(active_diagnostics_config)
-		vim.g.diagnostic_active = true
 	end
+	vim.g.diagnostic_active = not vim.g.diagnostic_active
+end
+
+function _G.toggle_float_lint()
+	vim.g.float_diagnostic_active = not vim.g.float_diagnostic_active
 end
 
 -- Open diagnostic window when in diagnostic line without "Diagnostics:" header
@@ -143,7 +147,7 @@ vim.opt.updatetime = 50
 vim.api.nvim_create_autocmd({ "CursorHold" }, { -- Not when CursorHoldI so it doesn't hide the lsp signature help
 	pattern = "*",
 	callback = function()
-		if vim.g.diagnostic_active then
+		if vim.g.diagnostic_active and vim.g.float_diagnostic_active then
 			vim.diagnostic.open_float({ header = "", focus = false })
 		end
 	end,
