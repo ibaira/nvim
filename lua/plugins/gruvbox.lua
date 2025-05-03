@@ -309,22 +309,21 @@ require("gruvbox").setup({
 		MasonNormal = { bg = colors.bg },
 
 		-- Snacks
-		SnacksPickerDir = { fg = colors.blue },
+		SnacksGitDiagnosticsModified = { fg = colors.red },
 		SnacksIndentScope = { fg = colors.blue },
-		SnacksPickerKeymapRhs = { fg = colors.fg },
+		SnacksPickerBorder = { fg = colors.comment },
+		SnacksPickerDir = { fg = colors.blue },
+		SnacksPickerDirectory = { fg = colors.blue, bold = true },
 		SnacksPickerGitStatus = { fg = colors.red },
 		SnacksPickerGitStatusIgnored = { fg = colors.comment },
-		SnacksPickerGitStatusUntracked = { fg = colors.comment },
 		SnacksPickerGitStatusModified = { fg = colors.purple },
-		SnacksPickerDirectory = { fg = colors.blue, bold = true },
-
+		SnacksPickerGitStatusUntracked = { fg = colors.comment },
+		SnacksPickerKeymapRhs = { fg = colors.fg },
 		SnacksPickerPathHidden = { fg = colors.comment },
-
+		SnacksPickerTitle = { fg = colors.green, bold = true },
+		Directory = { fg = colors.blue },
 		LspReferenceWrite = { fg = colors.orange, bg = colors.bg1, bold = true },
 		LspReferenceRead = { fg = colors.yellow, bg = colors.bg1, bold = true },
-
-		SnacksGitDiagnosticsModified = { fg = colors.red },
-		Directory = { fg = colors.blue },
 	},
 })
 
