@@ -247,6 +247,7 @@ require("gruvbox").setup({
 		GitSignsChange = { fg = colors.purple, bg = colors.bg1 },
 		GitSignsAddPreview = { fg = colors.green, bg = colors.bg },
 		GitSignsDeletePreview = { fg = colors.red, bg = colors.bg },
+		GitSignsCurrentLineBlame = { fg = colors.comment, bg = "none" },
 
 		-- Fix annoying space with wrong bg color
 		StatusLine = { fg = colors.bg, bg = colors.bg },
