@@ -17,26 +17,9 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = "python",
 	callback = function()
 		vim.opt.textwidth = 88
+		vim.opt.wrap = false
 	end,
 })
-
--- " Highlight for self
--- au FileType python match Boolean /self/
-
--- au FileType python syn keyword pythonDecorator True None False self
--- au FileType python inoremap <buffer> $r return
--- au FileType python inoremap <buffer> $i import
--- au FileType python inoremap <buffer> $p print
--- au FileType python inoremap <buffer> $f # --- <esc>a
-
--- " highlight python and self function
--- autocmd BufEnter *.py syntax match Type /\v\.[a-zA-Z0-9_]+\ze(\[|\s|$|,|\]|\)|\.|:)/hs=s+1
--- autocmd BufEnter *.py syntax match pythonFunction /\v[[:alnum:]_]+\ze(\s?\()/
--- " autocmd BufEnter *.py syn match Self "\(\W\|^\)\@<=self\(\.\)\@="
--- " highlight self ctermfg=239
--- autocmd BufEnter *.py syn keyword Purple self
--- autocmd BufEnter *.py syn keyword Purple cls
--- " highlight! link pythonBuiltin Aqua
 
 ---------------------------------
 -- Markdown section
@@ -47,6 +30,9 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function()
 		vim.opt.textwidth = 80
 		vim.opt.wrap = true
+		-- To fix folds with indent size = 2
+		vim.opt.shiftwidth = 2
+		vim.opt.tabstop = 2
 	end,
 })
 
@@ -62,12 +48,27 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 ---------------------------------
--- Shell section
+-- Toml section
 ---------------------------------
--- if exists('$TMUX')
---     if has('nvim')
---         set termguicolors
---     else
---         set term=screen-256color
---     endif
--- endif
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "toml",
+	callback = function()
+		-- To fix folds with indent size = 2
+		vim.opt.shiftwidth = 2
+		vim.opt.tabstop = 2
+	end,
+})
+
+---------------------------------
+-- YAML section
+---------------------------------
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "yaml",
+	callback = function()
+		vim.opt.shiftwidth = 2
+		vim.opt.tabstop = 2
+		vim.opt.wrap = true
+	end,
+})
