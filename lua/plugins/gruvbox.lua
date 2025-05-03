@@ -119,7 +119,7 @@ require("gruvbox").setup({
 	undercurl = true,
 	underline = true,
 	bold = true,
-	italic = { strings = false, emphasis = false, comments = false, operators = false, folds = true },
+	italic = { strings = false, emphasis = true, comments = false, operators = false, folds = true },
 	strikethrough = false,
 	invert_selection = false,
 	invert_signs = false,
@@ -254,11 +254,15 @@ require("gruvbox").setup({
 
 		-- Diagnostic messages
 		DiagnosticSignError = { fg = colors.red, bg = "none" },
-		DiagnosticSignHint = { fg = colors.cyan, bg = "none" },
-		DiagnosticSignInfo = { fg = colors.blue, bg = "none" },
 		DiagnosticSignWarn = { fg = colors.orange, bg = "none" },
-		DiagnosticVirtualTextWarn = { fg = colors.orange, bg = "none" },
+		DiagnosticSignHint = { link = "LineNr" },
+		DiagnosticSignInfo = { link = "LineNr" },
 		DiagnosticWarn = { fg = colors.orange, bg = "none" },
+
+		DiagnosticVirtualTextError = { fg = colors.red, bg = colors.bg1 },
+		DiagnosticVirtualTextWarn = { fg = colors.orange, bg = colors.bg1 },
+		DiagnosticVirtualTextInfo = { fg = colors.blue, bg = colors.bg1 },
+		DiagnosticVirtualTextHint = { fg = colors.cyan, bg = colors.bg1 },
 
 		-- Rainbow delimiters
 		["@punctuation.bracket.python"] = { fg = colors.red },
@@ -298,10 +302,28 @@ require("gruvbox").setup({
 		-- Winbar
 		WinBar = { fg = colors.yellow, bg = colors.bg0, bold = true },
 		WinBarNC = { fg = colors.cyan, bg = colors.bg0, bold = true },
-		WinBarFilename = { fg = colors.bg, bg = colors.yellow, bold = true },
+		WinBarFilename = { fg = colors.yellow, bg = colors.bg1, bold = true },
 
 		-- Mason
 		MasonNormal = { bg = colors.bg },
+
+		-- Snacks
+		SnacksPickerDir = { fg = colors.blue },
+		SnacksIndentScope = { fg = colors.blue },
+		SnacksPickerKeymapRhs = { fg = colors.fg },
+		SnacksPickerGitStatus = { fg = colors.red },
+		SnacksPickerGitStatusIgnored = { fg = colors.comment },
+		SnacksPickerGitStatusUntracked = { fg = colors.comment },
+		SnacksPickerGitStatusModified = { fg = colors.purple },
+		SnacksPickerDirectory = { fg = colors.blue, bold = true },
+
+		SnacksPickerPathHidden = { fg = colors.comment },
+
+		LspReferenceWrite = { fg = colors.orange, bg = colors.bg1, bold = true },
+		LspReferenceRead = { fg = colors.yellow, bg = colors.bg1, bold = true },
+
+		SnacksGitDiagnosticsModified = { fg = colors.red },
+		Directory = { fg = colors.blue },
 	},
 })
 

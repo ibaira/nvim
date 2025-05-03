@@ -4,14 +4,18 @@
 vim.keymap.set("", "0", "^", { silent = true }) -- map 0 ^
 
 -- Telescope
-vim.keymap.set("n", "<leader>f", _G.my_fd, { silent = true })
+vim.keymap.set("n", "<leader>f", require("snacks").picker.files, { silent = true })
+vim.keymap.set("n", "<leader><leader>g", require("snacks").picker.git_files, { silent = true })
+-- vim.keymap.set("n", "<leader>f", _G.my_fd, { silent = true })
 vim.keymap.set("n", "<C-f>", _G.my_rg, { silent = true })
-vim.keymap.set("n", "<C-b>", require("telescope.builtin").buffers, { silent = true })
-vim.keymap.set("n", "<F1>", require("telescope.builtin").highlights, { silent = true })
+vim.keymap.set("n", "<C-b>", require("snacks").picker.buffers, { silent = true })
+vim.keymap.set("n", "<F1>", require("snacks").picker.highlights, { silent = true })
 vim.keymap.set("n", "<F2>", require("telescope.builtin").keymaps, { silent = true })
-
--- NvimTree toggle
-vim.keymap.set("n", "<leader>n", ":NvimTreeFindFileToggle<CR>", { silent = true })
+vim.keymap.set("n", "<leader>n", function()
+	return require("snacks").picker.explorer({
+		diagnostics = false,
+	})
+end, { silent = true })
 
 vim.keymap.set("c", "<Esc>", "<C-c>")
 vim.keymap.set("i", "<C-c>", "<Esc>")
@@ -71,6 +75,8 @@ vim.keymap.set("n", "<C-i>", "<C-i>zz")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
+vim.keymap.set("n", "*", "*<C-o>")
+
 -- Paste on highlighted without losing prev register
 vim.keymap.set("x", "<leader>p", '"_dP')
 
@@ -113,10 +119,8 @@ vim.keymap.set("n", "gd", ":lua vim.lsp.buf.definition()<CR>", { silent = true }
 vim.keymap.set("n", "\\gd", ":vsp<CR>:lua vim.lsp.buf.definition()<CR>", { silent = true })
 
 -- Go to references
--- vim.keymap.set("n", "gr", ":lua vim.lsp.buf.references()<CR>", { silent = true })
--- vim.keymap.set("n", "\\gr", ":vsp<CR>:lua vim.lsp.buf.references()<CR>", { silent = true })
-
-vim.keymap.set("n", "gr", ":Lspsaga finder<CR>", { silent = true })
+vim.keymap.set("n", "gr", ":lua vim.lsp.buf.references()<CR>", { silent = true })
+vim.keymap.set("n", "\\gr", ":vsp<CR>:lua vim.lsp.buf.references()<CR>", { silent = true })
 
 -- Avoid not being able to open fold when at end of line
 vim.keymap.set("n", "zc", "zc0", { silent = true })
@@ -133,25 +137,28 @@ end, { buffer = true })
 -- Go to repo website on current line or home page
 vim.api.nvim_set_keymap(
 	"n",
-	"<leader>gb",
+	"gb",
 	':lua require("gitlinker").get_buf_range_url("n", {action_callback = require("gitlinker.actions").open_in_browser})<CR>',
 	{ silent = true }
 )
 vim.api.nvim_set_keymap(
 	"v",
-	"<leader>gb",
+	"gb",
 	':lua require("gitlinker").get_buf_range_url("v", {action_callback = require("gitlinker.actions").open_in_browser})<CR>',
 	{ silent = true }
 )
 vim.api.nvim_set_keymap(
 	"n",
-	"<leader>gB",
+	"gB",
 	':lua require("gitlinker").get_repo_url({action_callback = require("gitlinker.actions").open_in_browser})<CR>',
 	{ silent = true }
 )
 
 -- Toggle lints
-vim.keymap.set("n", "<leader><leader>l", ":lua _G.nolint()<CR>", { silent = true })
+vim.keymap.set("n", "<leader><leader>l", ":lua _G.toggle_lint()<CR>", { silent = true })
+
+-- Toggle float lints
+vim.keymap.set("n", "<leader><leader>f", ":lua _G.toggle_float_lint()<CR>", { silent = true })
 
 -- Toggle blocks of code
 vim.keymap.set("n", "<leader>J", function()

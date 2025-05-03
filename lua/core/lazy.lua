@@ -60,7 +60,6 @@ local plugins = {
 	},
 	{ "nvim-telescope/telescope.nvim", tag = "0.1.8", dependencies = { "nvim-lua/plenary.nvim" } },
 	{ "neovim/nvim-lspconfig" },
-	{ "nvim-tree/nvim-tree.lua", event = "VeryLazy" },
 	{ "mfussenegger/nvim-lint", event = "VeryLazy" },
 	{ "hadronized/hop.nvim", branch = "v2", event = "VeryLazy" },
 	{ "mfussenegger/nvim-dap", event = "VeryLazy" },
@@ -291,11 +290,11 @@ local plugins = {
 				},
 				lsp = { auto_attach = true, preference = nil },
 				highlight = true,
-				separator = "  ",
+				separator = "   ",
 				depth_limit = 3,
 				depth_limit_indicator = "..",
 				safe_output = true,
-				lazy_update_context = false,
+				lazy_update_context = true,
 				click = true,
 			})
 		end,
@@ -314,11 +313,10 @@ local plugins = {
 		config = function()
 			require("gitsigns").setup({
 				signs = {
-					add = { text = "+" },
-					change = { text = "~" },
-					delete = { text = "-" },
-					topdelete = { text = "‾" },
-					changedelete = { text = "~" }, -- untracked = { text = "┆" },
+					changedelete = { text = "|" }, -- untracked = { text = "┆" },
+				},
+				signs_staged = {
+					changedelete = { text = "|" }, -- untracked = { text = "┆" },
 				},
 				signs_staged_enable = true,
 				signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
@@ -491,18 +489,7 @@ local plugins = {
 	{ "nvim-tree/nvim-web-devicons", event = "VeryLazy" },
 	{
 		"saghen/blink.cmp",
-		-- optional: provides snippets for the snippet source
-		dependencies = { "rafamadriz/friendly-snippets" },
-
-		-- use a release tag to download pre-built binaries
-		version = "1.*",
-		-- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-		-- build = 'cargo build --release',
-		-- If you use nix, you can build from source using latest nightly rust with:
-		-- build = 'nix run .#build-plugin',
-
-		---@module 'blink.cmp'
-		---@type blink.cmp.Config
+		version = "1.*", -- use a release tag to download pre-built binaries
 		opts = {
 			-- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
 			-- 'super-tab' for mappings similar to vscode (tab to accept)
@@ -523,6 +510,26 @@ local plugins = {
 				["<CR>"] = { "accept", "fallback" },
 				-- disable a keymap from the preset
 				["<C-e>"] = {},
+			},
+			cmdline = {
+				completion = {
+					ghost_text = { enabled = true },
+					menu = {
+						auto_show = function(ctx)
+							return vim.fn.getcmdtype()
+						end,
+					},
+					list = {
+						selection = {
+							-- When `true`, will automatically select the first item in
+							-- the completion list
+							preselect = false,
+							-- When `true`, inserts the completion item automatically
+							-- when selecting it
+							auto_insert = true,
+						},
+					},
+				},
 			},
 
 			appearance = {
@@ -570,6 +577,28 @@ local plugins = {
 			},
 		},
 		opts_extend = { "sources.default" },
+	},
+	{
+		"folke/snacks.nvim",
+		opts = {
+			picker = {
+				win = {
+					input = {
+						keys = {
+							["<S-Tab>"] = { "list_up", mode = { "i", "n" } },
+							["<Tab>"] = { "list_down", mode = { "i", "n" } },
+						},
+					},
+				},
+			},
+			indent = {
+				indent = {
+					only_scope = true,
+					only_current = true,
+				},
+			},
+			words = {},
+		},
 	},
 
 	-- Themes
