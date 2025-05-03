@@ -96,9 +96,15 @@ ins_left({
 		if venv then
 			return venv
 		end
-		local conda_env = os.getenv("CONDA_DEFAULT_ENV")
-		if conda_env then
-			return conda_env
+
+		venv = os.getenv("VIRTUAL_ENV")
+		if venv then
+			return "uv"
+		end
+
+		venv = os.getenv("CONDA_DEFAULT_ENV")
+		if venv then
+			return venv
 		end
 		return ""
 	end,
