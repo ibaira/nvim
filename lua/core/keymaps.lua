@@ -3,18 +3,17 @@
 -- Remap VIM 0 to first non-blank character
 vim.keymap.set("", "0", "^", { silent = true }) -- map 0 ^
 
--- Telescope
-vim.keymap.set("n", "<leader>f", require("snacks").picker.files, { silent = true })
-vim.keymap.set("n", "<leader><leader>g", require("snacks").picker.git_files, { silent = true })
--- vim.keymap.set("n", "<leader>f", _G.my_fd, { silent = true })
-vim.keymap.set("n", "<C-f>", _G.my_rg, { silent = true })
-vim.keymap.set("n", "<C-b>", require("snacks").picker.buffers, { silent = true })
-vim.keymap.set("n", "<F1>", require("snacks").picker.highlights, { silent = true })
-vim.keymap.set("n", "<F2>", require("telescope.builtin").keymaps, { silent = true })
+-- Snacks Picker
+local snacks = require("snacks").picker
+
+vim.keymap.set("n", "<leader>f", snacks.files, { silent = true })
+vim.keymap.set("n", "<leader><leader>g", snacks.git_files, { silent = true })
+vim.keymap.set("n", "<C-f>", snacks.grep, { silent = true })
+vim.keymap.set("n", "<C-b>", snacks.buffers, { silent = true })
+vim.keymap.set("n", "<F1>", snacks.highlights, { silent = true })
+vim.keymap.set("n", "<F2>", snacks.keymaps, { silent = true })
 vim.keymap.set("n", "<leader>n", function()
-	return require("snacks").picker.explorer({
-		diagnostics = false,
-	})
+	return snacks.explorer({ diagnostics = false })
 end, { silent = true })
 
 vim.keymap.set("c", "<Esc>", "<C-c>")

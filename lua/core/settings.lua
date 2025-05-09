@@ -231,7 +231,7 @@ function Custom_fold_text_with_line()
 	local line_num = vim.v.foldstart
 	local current_line_content = vim.api.nvim_buf_get_lines(0, line_num - 1, line_num, false)[1]
 	current_line_content = current_line_content:gsub("^%s+", "")
-	return custom_fold_text .. " - " .. current_line_content .. " "
+	return custom_fold_text .. " -- " .. current_line_content .. " "
 end
 
 vim.opt.foldtext = "v:lua.Custom_fold_text_with_line()"
@@ -242,13 +242,6 @@ vim.opt.foldtext = "v:lua.Custom_fold_text_with_line()"
 
 -- Full size
 vim.g.lazygit_floating_window_scaling_factor = 1.0
-
----------------------------------
--- Breadcrumbs
----------------------------------
-
-vim.o.winbar =
-	"%{%v:lua.vim.fn.fnamemodify(v:lua.vim.fn.expand('%'), ':p:~:.')%}  %{%v:lua.require'nvim-navic'.get_location()%}"
 
 ---------------------------------
 -- Window borders

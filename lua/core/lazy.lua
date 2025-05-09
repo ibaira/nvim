@@ -58,7 +58,6 @@ local plugins = {
 			})
 		end,
 	},
-	{ "nvim-telescope/telescope.nvim", tag = "0.1.8", dependencies = { "nvim-lua/plenary.nvim" } },
 	{ "neovim/nvim-lspconfig" },
 	{ "mfussenegger/nvim-lint", event = "VeryLazy" },
 	{ "hadronized/hop.nvim", branch = "v2", event = "VeryLazy" },
@@ -133,11 +132,6 @@ local plugins = {
 			end
 		end,
 	},
-	{
-		"nvim-telescope/telescope-fzf-native.nvim",
-		event = "VeryLazy",
-		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
-	},
 	{ "folke/noice.nvim", event = "VeryLazy", dependencies = { "MunifTanjim/nui.nvim" } }, -- not lazy or lag
 	{
 		"ruifm/gitlinker.nvim",
@@ -176,7 +170,7 @@ local plugins = {
 					highlight = "Search",
 					highlight_grey = "Comment",
 				},
-				disable_filetype = { "TelescopePrompt", "spectre_panel" },
+				disable_filetype = { "spectre_panel" },
 				disable_in_macro = true, -- disable when recording or executing a macro
 				disable_in_visualblock = false, -- disable when insert after visual block mode
 				disable_in_replace_mode = true,
@@ -592,10 +586,7 @@ local plugins = {
 				},
 			},
 			indent = {
-				indent = {
-					only_scope = true,
-					only_current = true,
-				},
+				indent = { only_scope = true, only_current = true },
 			},
 			words = {},
 		},

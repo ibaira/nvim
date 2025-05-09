@@ -233,7 +233,7 @@ require("gruvbox").setup({
 		NvimTreeStatusLine = { fg = colors.bg }, -- Fix annoying offset
 
 		-- Startify
-		StartifyBracket = { fg = colors.bg },
+		StartifyBracket = { fg = colors.bg0 },
 		StartifyHeader = { fg = colors.orange },
 		StartifyNumber = { fg = colors.yellow },
 		StartifyPath = { fg = colors.blue },
@@ -283,12 +283,6 @@ require("gruvbox").setup({
 		NavicIconsMethod = { fg = colors.cyan, bg = "none" },
 		NavicIconsFunction = { fg = colors.cyan, bg = "none" },
 
-		-- Telescope
-		TelescopeBorder = { fg = colors.green, bold = true },
-		TelescopePromptBorder = { fg = colors.green },
-		TelescopePreviewBorder = { fg = colors.orange },
-		TelescopeResultsBorder = { fg = colors.green },
-
 		-- Nvim-cmp autocompletion menu
 		CmpPmenu = { fg = "none", bg = colors.bg0 },
 		CmpPmenuSel = { fg = "none", bg = colors.bg1, bold = true },
@@ -309,8 +303,9 @@ require("gruvbox").setup({
 		MasonNormal = { bg = colors.bg },
 
 		-- Snacks
+		Directory = { fg = colors.blue },
 		SnacksGitDiagnosticsModified = { fg = colors.red },
-		SnacksIndentScope = { fg = colors.blue },
+		SnacksIndentScope = { fg = colors.comment },
 		SnacksPickerBorder = { fg = colors.comment },
 		SnacksPickerDir = { fg = colors.blue },
 		SnacksPickerDirectory = { fg = colors.blue, bold = true },
@@ -321,9 +316,9 @@ require("gruvbox").setup({
 		SnacksPickerKeymapRhs = { fg = colors.fg },
 		SnacksPickerPathHidden = { fg = colors.comment },
 		SnacksPickerTitle = { fg = colors.green, bold = true },
-		Directory = { fg = colors.blue },
+		LspReferenceRead = { fg = "none", bg = colors.bg1, bold = true },
+		LspReferenceText = { fg = "none", bg = colors.bg1, bold = true },
 		LspReferenceWrite = { fg = colors.orange, bg = colors.bg1, bold = true },
-		LspReferenceRead = { fg = colors.yellow, bg = colors.bg1, bold = true },
 	},
 })
 

@@ -456,11 +456,5 @@ require("modus-themes").setup({
 		highlights.FloatBorder = { fg = colors.comment, bg = colors.bg0 }
 		highlights.SignColumn = { bg = colors.bg0 }
 		highlights.WinSeparator = { bg = colors.border }
-
-		-- Telescope
-		highlights.TelescopeBorder = { fg = colors.comment, bg = colors.bg0 }
-		highlights.TelescopePromptBorder = { fg = colors.comment, bg = colors.bg0 }
-		highlights.TelescopePromptTitle = { bg = colors.bg0 }
-		highlights.TelescopeTitle = { bg = colors.bg0 }
 	end,
 })

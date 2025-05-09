@@ -20,16 +20,15 @@ local conditions = {
 local theme = "gruvbox"
 local config = {
 	options = {
-		-- Disable sections and component separators
 		component_separators = "",
 		section_separators = "",
 		theme = { normal = { c = theme }, inactive = { c = theme } },
-		disabled_filetypes = { "startify", "NvimTree" },
+		disabled_filetypes = { "startify" },
 		globalstatus = true,
 		icons_enabled = false,
 	},
+	-- Remove the defaults
 	sections = {
-		-- Remove the defaults
 		lualine_a = {},
 		lualine_b = {},
 		lualine_y = {},
@@ -39,7 +38,6 @@ local config = {
 		lualine_x = {},
 	},
 	inactive_sections = {
-		-- Remove the defaults
 		lualine_a = {},
 		lualine_v = {},
 		lualine_y = {},
@@ -49,7 +47,6 @@ local config = {
 		lualine_x = {},
 	},
 	winbar = {
-		-- Remove the defaults
 		lualine_a = {},
 		lualine_b = {},
 		lualine_y = {},
@@ -59,7 +56,6 @@ local config = {
 		lualine_x = {},
 	},
 	inactive_winbar = {
-		-- Remove the defaults
 		lualine_a = {},
 		lualine_b = {},
 		lualine_y = {},
@@ -68,7 +64,6 @@ local config = {
 		lualine_c = {},
 		lualine_x = {},
 	},
-	extensions = { "nvim-tree" },
 }
 
 -- Inserts a component in winbar
@@ -81,12 +76,6 @@ end
 local function ins_left(component)
 	table.insert(config.sections.lualine_c, component)
 	table.insert(config.inactive_sections.lualine_c, component)
-end
-
--- Inserts a component in lualine_x ot right section
-local function ins_right(component)
-	table.insert(config.sections.lualine_x, component)
-	table.insert(config.inactive_sections.lualine_x, component)
 end
 
 -- Python environment with nvim mode colored background
@@ -109,7 +98,7 @@ ins_left({
 		return ""
 	end,
 	color = "@variable",
-	padding = { left = 1, right = 0 },
+	padding = { left = 2, right = 0 },
 })
 
 ins_left({
