@@ -160,7 +160,7 @@ local plugins = {
 				fast_wrap = {
 					map = "<M-f>",
 					chars = { "{", "[", "(", '"', "'", "`" },
-					pattern = [=[[%'%"%>%]%)%}%,]]=],
+					pattern = [=[[%`%'%"%>%]%)%}%,%:%;]]=],
 					end_key = "$",
 					before_key = "h",
 					after_key = "l",
