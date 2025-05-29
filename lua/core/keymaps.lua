@@ -64,6 +64,8 @@ vim.keymap.set("n", "<leader>v", ":set cursorcolumn!<CR>", { silent = true })
 
 -- Git blame enabling
 vim.keymap.set("n", "<M-g>", ":Gitsigns toggle_current_line_blame<CR>", { silent = true })
+vim.keymap.set("n", "<leader>hn", ":Gitsigns next_hunk<CR>", { silent = true })
+vim.keymap.set("n", "<leader>hp", ":Gitsigns prev_hunk<CR>", { silent = true })
 
 -- Keep the cursor centerd in place when moving across searches or joining lines
 vim.keymap.set("n", "n", "nzzzv")
