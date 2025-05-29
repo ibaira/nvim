@@ -164,7 +164,7 @@ require("gruvbox").setup({
 
 		-- Languages
 		["@constant.builtin"] = { fg = colors.purple },
-		["@constructor"] = { fg = colors.purple },
+		["@constructor"] = { fg = colors.cyan },
 
 		["@function"] = { fg = function_color, bold = true },
 		["@function.builtin"] = { fg = function_color, bold = true },
@@ -215,9 +215,9 @@ require("gruvbox").setup({
 		NoiceCmdlinePopupBorderFilter = { fg = colors.purple, bg = colors.bg0 },
 
 		-- Hop
-		HopNextKey = { fg = colors.red, bg = colors.bg },
-		HopNextKey1 = { fg = colors.red, bg = colors.bg },
-		HopNextKey2 = { fg = colors.red, bg = colors.bg },
+		HopNextKey = { fg = colors.green, bg = colors.bg },
+		HopNextKey1 = { fg = colors.green, bg = colors.bg },
+		HopNextKey2 = { fg = colors.green, bg = colors.bg },
 
 		-- Nvim-tree
 		NvimTreeFolderArrowOpen = { fg = colors.blue },
