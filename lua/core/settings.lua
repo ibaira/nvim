@@ -2,6 +2,9 @@
 -- Settings
 ---------------------------------
 
+vim.opt.termguicolors = true
+vim.opt.relativenumber = true
+
 vim.opt.fileformat = "unix"
 vim.opt.shortmess:append("c")
 

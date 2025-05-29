@@ -468,9 +468,6 @@ local plugins = {
 		"Wansmer/treesj",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		keys = {}, -- remove default <space>-keybindings
-		config = function()
-			require("treesj").setup()
-		end,
 	},
 	{ "github/copilot.vim", event = "VeryLazy" },
 	{
@@ -585,15 +582,27 @@ local plugins = {
 					},
 				},
 			},
-			indent = {
-				indent = { only_scope = true, only_current = true },
-			},
 			words = {},
 		},
 	},
 
 	-- Themes
 	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+	{
+	{
+		"echasnovski/mini.indentscope",
+		opts = {
+			mappings = {
+				object_scope = "ii",
+				object_scope_with_border = "ai",
+				goto_top = "[i",
+				goto_bottom = "]i",
+			},
+			symbol = "│",
+		},
+	},
+	{ "m4xshen/hardtime.nvim", lazy = false, dependencies = { "MunifTanjim/nui.nvim" }, opts = {} },
+	{
 }
 
 require("lazy").setup(plugins, {})
