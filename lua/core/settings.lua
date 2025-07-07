@@ -29,14 +29,17 @@ vim.opt.foldtext = "" -- The first line of the fold will be syntax highlighted
 
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true -- save undos
-vim.opt.undolevels = 10000 -- maximum number of changes that can be undone
-vim.opt.undoreload = 100000 -- maximum number lines to save for undo on a buffer reload
+vim.opt.undolevels = 100 -- maximum number of changes that can be undone
+vim.opt.undoreload = 1000 -- maximum number lines to save for undo on a buffer reload
 
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
--- Copy to/from Windows
-vim.opt.clipboard:append("unnamedplus")
+-- Copy to/from Windows. Avoid in Fedora since it adds a lag due to app refocus
+local os_name = vim.loop.os_uname().sysname
+if os_name == "Windows" or os_name == "Linux" then
+	vim.opt.clipboard:append("unnamedplus")
+end
 
 -- Do not change directory when opening a file
 vim.opt.autochdir = false
@@ -304,7 +307,6 @@ vim.opt.winborder = "rounded"
 -- set t_vb=
 -- set viminfo='20,<1000  " allow copying of more than 50 lines to other applications
 --
--- " set clipboard=unnamedplus
 -- " set completeopt=menu,noselect,noinsert,preview
 -- set completeopt=menu,menuone,preview
 --
