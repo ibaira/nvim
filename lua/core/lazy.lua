@@ -589,7 +589,6 @@ local plugins = {
 	-- Themes
 	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 	{
-	{
 		"echasnovski/mini.indentscope",
 		opts = {
 			mappings = {
@@ -601,8 +600,6 @@ local plugins = {
 			symbol = "│",
 		},
 	},
-	{ "m4xshen/hardtime.nvim", lazy = false, dependencies = { "MunifTanjim/nui.nvim" }, opts = {} },
-	{
 }
 
 require("lazy").setup(plugins, {})
