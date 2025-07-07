@@ -12,3 +12,4 @@ git clone https://github.com/ibaira/nvim.git ~/.config/nvim
 
 - Ripgrep
 - LazyGit
+- Tmux (for panel/buffer navigation)

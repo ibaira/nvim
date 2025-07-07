@@ -16,14 +16,13 @@ local servers = {
 	"lemminx",
 	"cmake",
 	"marksman",
-	-- "harper_ls",
 }
 for _, lsp in ipairs(servers) do
-	lspconfig[lsp].setup({ flags = { debounce_text_changes = 150 } })
+	vim.lsp.config(lsp, { flags = { debounce_text_changes = 150 } })
 end
 
 -- YAML
-lspconfig.yamlls.setup({
+vim.lsp.config("yamlls", {
 	cmd = { "yaml-language-server", "--stdio" },
 	filetypes = { "yaml", "yml", "yaml.docker-compose" },
 	flags = { debounce_text_changes = 150 },
@@ -68,33 +67,19 @@ lspconfig.yamlls.setup({
 })
 
 -- Lua
-lspconfig.lua_ls.setup({
+vim.lsp.config("lua_ls", {
 	on_init = function(client)
-		local path = client.workspace_folders[1].name
-		if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
-			return
-		end
-
 		client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
-			runtime = {
-				-- Tell the language server which version of Lua you're using (most
-				-- likely LuaJIT in the case of Neovim)
-				version = "LuaJIT",
-			},
+			runtime = { version = "LuaJIT" },
 			-- Make the server aware of Neovim runtime files
 			workspace = {
 				checkThirdParty = false,
-				library = {
-					vim.env.VIMRUNTIME,
-					-- Depending on the usage, you might want to add additional paths here.
-					-- "${3rd}/luv/library"
-				},
-				-- or pull in all of 'runtimepath'. NOTE: this is a lot slower
-				-- library = vim.api.nvim_get_runtime_file("", true)
+				library = { vim.env.VIMRUNTIME, "${3rd}/luv/library" },
 			},
 		})
 	end,
 	settings = { Lua = { diagnostics = { globals = { "vim" } } } },
+	telemetry = { enable = false },
 })
 
 -- Remove virtual text in line for diagnostics

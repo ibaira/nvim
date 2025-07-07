@@ -58,7 +58,7 @@ local plugins = {
 			})
 		end,
 	},
-	{ "neovim/nvim-lspconfig" },
+	-- { "neovim/nvim-lspconfig" },
 	{ "mfussenegger/nvim-lint", event = "VeryLazy" },
 	{ "hadronized/hop.nvim", branch = "v2", event = "VeryLazy" },
 	{ "mfussenegger/nvim-dap", event = "VeryLazy" },
@@ -410,7 +410,7 @@ local plugins = {
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
-		dependencies = { "williamboman/mason.nvim" },
+		dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
 		config = function()
 			require("mason").setup() -- Important to chain this before
 			require("mason-lspconfig").setup({
