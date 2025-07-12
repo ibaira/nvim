@@ -35,9 +35,7 @@ vim.opt.undoreload = 1000 -- maximum number lines to save for undo on a buffer r
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
--- Copy to/from Windows. Avoid in Fedora since it adds a lag due to app refocus
--- vim.opt.clipboard:append("unnamedplus")
-vim.opt.clipboard = "unnamedplus"
+vim.opt.clipboard:append("unnamedplus")
 
 -- Do not change directory when opening a file
 vim.opt.autochdir = false

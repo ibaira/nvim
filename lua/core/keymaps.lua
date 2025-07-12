@@ -166,15 +166,11 @@ end)
 -- Open mini.files
 vim.keymap.set("n", "<leader>N", ":lua MiniFiles.open()<CR>", { silent = true })
 
--- Jump to next empty line
--- vim.keymap.set("n", "<C-j>", "}zz", { silent = true })
--- vim.keymap.set("n", "<C-k>", "{zz", { silent = true })
-
 -- Move to prev/next method/class
 -- vim.keymap.set("n", "<C-k>", "[m", { remap = true, silent = true })
 -- vim.keymap.set("n", "<C-j>", "]m", { remap = true, silent = true })
-vim.keymap.set("n", "<C-k>", "{", { remap = true, silent = true })
-vim.keymap.set("n", "<C-j>", "}", { remap = true, silent = true })
+vim.keymap.set("n", "<C-k>", "{zz", { remap = true, silent = true })
+vim.keymap.set("n", "<C-j>", "}zz", { remap = true, silent = true })
 
 -- Move to prev/next class/function (line starting with a non-whitespace character)
 vim.keymap.set("n", "(", "?^\\S<CR>:noh<CR>zz", { silent = true })
@@ -195,7 +191,7 @@ vim.keymap.set("i", "<M-a>", 'copilot#Accept("<CR><CR>")', { expr = true, silent
 local function search_in_browser()
 	local word = vim.fn.expand("<cWORD>")
 	if word ~= "" then
-		word = word:gsub("[\"'()]*`", "") -- remove brackets, quotes, *
+		word = word:gsub("[](){}<>`'\"*,;", "") -- remove brackets, quotes, *
 		local url = "https://www.google.com/search?q=" .. vim.fn.escape(word, " ")
 		vim.ui.open(url)
 	else
@@ -214,14 +210,6 @@ vim.keymap.set("n", "gX", search_in_browser, { silent = true })
 -- nmap <silent><leader>ta :TestSuite<CR>
 -- nmap <silent><leader>ts :TestSuite<CR>
 -- nmap <silent><leader>tl :TestLast<CR>
-
--- " Doge auto-docstring
--- let g:doge_mapping='<leader><leader>d'
--- let g:doge_mapping_comment_jump_forward='<C-j>'
--- let g:doge_mapping_comment_jump_backward='<C-k>'
-
--- Git browse
--- nmap gb :GBrowse<CR>
 
 -- Luasnips
 -- imap <silent><expr><C-j> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'
