@@ -1,14 +1,15 @@
 -- Hop configuration
 
-local hop = require("hop")
-local direction = require("hop.hint").HintDirection
-
 -- Search everywhere at once
 vim.keymap.set("n", "s", ":HopWord<CR>", { remap = true })
 
+local hop = require("hop")
+local direction = require("hop.hint").HintDirection
+
 -- Forward and backward
--- vim.keymap.set("n", "f", function()
--- hop.hint_char1({ current_line_only = true }) end, { remap = true })
+vim.keymap.set("n", "f", function()
+	hop.hint_char1({ current_line_only = true })
+end, { remap = true })
 
 -- With direction
 vim.keymap.set("n", "F", function()

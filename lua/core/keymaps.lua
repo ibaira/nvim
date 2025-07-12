@@ -158,9 +158,6 @@ vim.api.nvim_set_keymap(
 -- Toggle lints
 vim.keymap.set("n", "<leader><leader>l", ":lua _G.toggle_lint()<CR>", { silent = true })
 
--- Toggle float lints
-vim.keymap.set("n", "<leader><leader>f", ":lua _G.toggle_float_lint()<CR>", { silent = true })
-
 -- Toggle blocks of code
 vim.keymap.set("n", "<leader>J", function()
 	require("treesj").toggle({ split = { recursive = true } })
@@ -174,12 +171,14 @@ vim.keymap.set("n", "<leader>N", ":lua MiniFiles.open()<CR>", { silent = true })
 -- vim.keymap.set("n", "<C-k>", "{zz", { silent = true })
 
 -- Move to prev/next method/class
-vim.keymap.set("n", "<C-k>", "[m", { remap = true, silent = true })
-vim.keymap.set("n", "<C-j>", "]m", { remap = true, silent = true })
+-- vim.keymap.set("n", "<C-k>", "[m", { remap = true, silent = true })
+-- vim.keymap.set("n", "<C-j>", "]m", { remap = true, silent = true })
+vim.keymap.set("n", "<C-k>", "{", { remap = true, silent = true })
+vim.keymap.set("n", "<C-j>", "}", { remap = true, silent = true })
 
--- Move to prev/next class/function
-vim.keymap.set("n", "(", "?^\\S<CR>:noh<CR>", { silent = true })
-vim.keymap.set("n", ")", "/^\\S<CR>:noh<CR>", { silent = true })
+-- Move to prev/next class/function (line starting with a non-whitespace character)
+vim.keymap.set("n", "(", "?^\\S<CR>:noh<CR>zz", { silent = true })
+vim.keymap.set("n", ")", "/^\\S<CR>:noh<CR>zz", { silent = true })
 
 -- DAP
 vim.keymap.set("n", "<F5>", ":DapContinue<CR>", { silent = true })
@@ -190,7 +189,20 @@ vim.keymap.set("n", "<M-t>", ":lua require('dapui').toggle()<CR>", { silent = tr
 vim.keymap.set("n", "<M-q>", ":split<CR>:term python %<CR>", { silent = true })
 
 -- Copilot
-vim.keymap.set("i", "<M-a>", 'copilot#Accept("<CR>")', { expr = true, silent = true, replace_keycodes = true })
+vim.keymap.set("i", "<M-a>", 'copilot#Accept("<CR><CR>")', { expr = true, silent = true, replace_keycodes = false })
+
+-- Quick search in browser of the current Word under cursor
+local function search_in_browser()
+	local word = vim.fn.expand("<cWORD>")
+	if word ~= "" then
+		word = word:gsub("[\"'()]*`", "") -- remove brackets, quotes, *
+		local url = "https://www.google.com/search?q=" .. vim.fn.escape(word, " ")
+		vim.ui.open(url)
+	else
+		print("No word under cursor to search.")
+	end
+end
+vim.keymap.set("n", "gX", search_in_browser, { silent = true })
 
 -- inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 -- inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
