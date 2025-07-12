@@ -36,10 +36,8 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 -- Copy to/from Windows. Avoid in Fedora since it adds a lag due to app refocus
-local os_name = vim.loop.os_uname().sysname
-if os_name == "Windows" or os_name == "Linux" then
-	vim.opt.clipboard:append("unnamedplus")
-end
+-- vim.opt.clipboard:append("unnamedplus")
+vim.opt.clipboard = "unnamedplus"
 
 -- Do not change directory when opening a file
 vim.opt.autochdir = false
@@ -155,8 +153,9 @@ vim.opt.shiftwidth = 4
 vim.opt.linebreak = true
 vim.opt.textwidth = 88
 vim.opt.autoindent = true
-vim.opt.smartindent = true
 vim.opt.wrap = false
+-- Fix issue when indenting embedded code with comments
+vim.opt.smartindent = false
 
 ---------------------------------
 -- Moving around, tabs, windows and buffers
