@@ -41,7 +41,6 @@ local plugins = {
 			})
 		end,
 	},
-	-- { "neovim/nvim-lspconfig" },
 	{ "mfussenegger/nvim-lint", event = "VeryLazy" },
 	{ "hadronized/hop.nvim", branch = "v2", event = "VeryLazy" },
 	{ "mfussenegger/nvim-dap", event = "VeryLazy" },
@@ -391,24 +390,8 @@ local plugins = {
 			})
 		end,
 	},
-	{
-		"williamboman/mason-lspconfig.nvim",
-		dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
-		config = function()
-			require("mason").setup() -- Important to chain this before
-			require("mason-lspconfig").setup({
-				ensure_installed = {
-					"clangd",
-					"lua_ls",
-					"pyright",
-					"ruff",
-					"rust_analyzer",
-					"sqlls",
-					"taplo",
-				},
-			})
-		end,
-	},
+	{ "mason-org/mason.nvim", opts = {} },
+	{ "neovim/nvim-lspconfig" },
 	{
 		"alexghergh/nvim-tmux-navigation",
 		event = "VeryLazy",
@@ -580,7 +563,7 @@ local plugins = {
 				goto_top = "[i",
 				goto_bottom = "]i",
 			},
-			symbol = "│",
+			symbol = "", -- symbol = "│",
 		},
 	},
 }

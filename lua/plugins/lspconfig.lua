@@ -1,5 +1,4 @@
 -- LSP config
-local lspconfig = require("lspconfig")
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
@@ -19,6 +18,7 @@ local servers = {
 }
 for _, lsp in ipairs(servers) do
 	vim.lsp.config(lsp, { flags = { debounce_text_changes = 150 } })
+	vim.lsp.enable(lsp)
 end
 
 -- YAML
@@ -65,6 +65,7 @@ vim.lsp.config("yamlls", {
 		},
 	},
 })
+vim.lsp.enable("yamlls")
 
 -- Lua
 vim.lsp.config("lua_ls", {
@@ -81,10 +82,16 @@ vim.lsp.config("lua_ls", {
 	settings = { Lua = { diagnostics = { globals = { "vim" } } } },
 	telemetry = { enable = false },
 })
+vim.lsp.enable("lua_ls")
 
 -- Remove virtual text in line for diagnostics
+local function diagnostic_format(diagnostic)
+	return string.format("%s (%s): %s", diagnostic.source, diagnostic.code, diagnostic.message)
+end
+
 local active_diagnostics_config = {
-	virtual_text = true,
+	virtual_text = false,
+	virtual_lines = { current_line = true, format = diagnostic_format },
 	underline = false,
 	signs = {
 		text = {
@@ -100,11 +107,11 @@ local active_diagnostics_config = {
 			[vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
 		},
 	},
-	float = { source = true, border = "rounded" },
 	severity_sort = true,
 }
 local inactive_diagnostics_config = {
 	virtual_text = false,
+	virtual_lines = false,
 	underline = false,
 	signs = false,
 	float = false,
@@ -112,7 +119,6 @@ local inactive_diagnostics_config = {
 
 vim.diagnostic.config(active_diagnostics_config)
 vim.g.diagnostic_active = true
-vim.g.float_diagnostic_active = true
 
 function _G.toggle_lint()
 	if vim.g.diagnostic_active then
@@ -123,17 +129,4 @@ function _G.toggle_lint()
 	vim.g.diagnostic_active = not vim.g.diagnostic_active
 end
 
-function _G.toggle_float_lint()
-	vim.g.float_diagnostic_active = not vim.g.float_diagnostic_active
-end
-
--- Open diagnostic window when in diagnostic line without "Diagnostics:" header
 vim.opt.updatetime = 50
-vim.api.nvim_create_autocmd({ "CursorHold" }, { -- Not when CursorHoldI so it doesn't hide the lsp signature help
-	pattern = "*",
-	callback = function()
-		if vim.g.diagnostic_active and vim.g.float_diagnostic_active then
-			vim.diagnostic.open_float({ header = "", focus = false })
-		end
-	end,
-})
