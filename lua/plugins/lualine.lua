@@ -83,7 +83,7 @@ ins_left({
 	function()
 		local venv = os.getenv("VIRTUAL_ENV_PROMPT")
 		if venv then
-			return venv
+			return venv:sub(2, -3) -- remove first and last characters '()'
 		end
 
 		venv = os.getenv("VIRTUAL_ENV")
@@ -203,7 +203,7 @@ ins_left_winbar({
 	function()
 		return navic.get_location()
 	end,
-	condition = conditions.buffer_not_empty,
+	condition = navic.is_available,
 	path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
 	file_status = true,
 	color = { "GruvboxYellowBold" },

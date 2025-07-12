@@ -2,6 +2,7 @@
 require("core.lazy")
 
 -- Theme
+vim.o.background = "dark"
 require("plugins.gruvbox")
 
 -- Custom configs
