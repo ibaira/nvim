@@ -176,6 +176,23 @@ require("noice").setup({
 			filter = { event = "msg_show", find = "No information available" },
 			opts = { skip = true },
 		},
+		{
+			view = "split",
+			filter = { event = "msg_show", min_height = 5 },
+		},
+		{
+			view = "popup",
+			filter = { event = "msg_show", min_width = 120 },
+		},
+		{
+			view = "mini",
+			filter = { event = "msg_show", min_height = 1 },
+		},
+	},
+	views = {
+		popup = { scrollbar = false },
+		split = { scrollbar = false, enter = true },
+		mini = { scrollbar = false },
 	},
 })
 
