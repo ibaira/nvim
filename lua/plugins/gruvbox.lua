@@ -65,8 +65,8 @@ local gruvbox_material_palette = {
 	bright_red = "#ea6962",
 	bright_orange = "#e78a4e",
 	bright_yellow = "#d8a657",
-	bright_green = "#a9b665",
-	bright_aqua = "#89b482",
+	-- bright_green = "#a9b665",
+	-- bright_aqua = "#89b482",
 	bright_blue = "#7daea3",
 }
 
@@ -97,17 +97,17 @@ else
 	colors.bg1 = gruvbox_palette.light1
 	colors.fg = gruvbox_palette.dark1
 
-	colors.blue = gruvbox_palette.dark_blue
+	colors.blue = gruvbox_palette.faded_blue
 	colors.cyan = gruvbox_palette.faded_aqua
-	colors.darkblue = gruvbox_palette.dark_blue
-	colors.green = gruvbox_palette.dark_gree
+	colors.darkblue = gruvbox_palette.faded_blue
+	colors.green = gruvbox_palette.dark_green
 	colors.grey = gruvbox_palette.dark1
 	colors.grey2 = gruvbox_palette.dark3
-	colors.neutral_blue = gruvbox_palette.dark_blue
-	colors.orange = gruvbox_palette.dark_orange
+	colors.neutral_blue = gruvbox_palette.faded_blue
+	colors.orange = gruvbox_palette.faded_orange
 	colors.purple = gruvbox_palette.faded_purple
 	colors.red = gruvbox_palette.faded_red
-	colors.yellow = gruvbox_palette.dark_yellow
+	colors.yellow = gruvbox_palette.faded_yellow
 
 	colors.comment = gruvbox_palette.gray
 end
