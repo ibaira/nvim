@@ -42,7 +42,35 @@ local plugins = {
 		end,
 	},
 	{ "mfussenegger/nvim-lint", event = "VeryLazy" },
-	{ "hadronized/hop.nvim", branch = "v2", event = "VeryLazy" },
+	{
+		"hadronized/hop.nvim",
+		branch = "v2",
+		event = "VeryLazy",
+		config = function()
+			local hop = require("hop")
+			local direction = require("hop.hint").HintDirection
+
+			vim.keymap.set("n", "s", ":HopWord<CR>", { remap = true })
+
+			vim.keymap.set("n", "f", function()
+				hop.hint_char1({ current_line_only = true })
+			end, { remap = true })
+
+			vim.keymap.set("n", "F", function()
+				hop.hint_char1({ direction = direction.BEFORE_CURSOR, current_line_only = true })
+			end, { remap = true })
+
+			vim.keymap.set("n", "t", function()
+				hop.hint_char1({ direction = direction.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })
+			end, { remap = true })
+
+			vim.keymap.set("n", "T", function()
+				hop.hint_char1({ direction = direction.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })
+			end, { remap = true })
+
+			hop.setup()
+		end,
+	},
 	{ "mfussenegger/nvim-dap", event = "VeryLazy" },
 	{ "mfussenegger/nvim-dap-python", event = "VeryLazy" },
 	{ "kdheepak/lazygit.nvim", dependencies = { "nvim-lua/plenary.nvim" }, event = "VeryLazy" },

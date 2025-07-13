@@ -13,7 +13,6 @@ require("plugins.lspconfig")
 require("plugins.luasnip")
 require("plugins.nvim-lint")
 require("plugins.conform")
-require("plugins.hop")
 -- require("plugins.neotest") -- tests
 -- require("plugins.neogen") -- auto-documentation
 
