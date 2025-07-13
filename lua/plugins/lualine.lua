@@ -10,9 +10,9 @@ local conditions = {
 		return vim.fn.winwidth(0) > 88
 	end,
 	check_git_workspace = function()
-		local filepath = vim.fn.expand("%:p:h")
-		local gitdir = vim.fn.finddir(".git", filepath .. ";")
-		return gitdir and #gitdir > 0 and #gitdir < #filepath
+		local file_path = vim.fn.expand("%:p:h")
+		local git_dir = vim.fn.finddir(".git", file_path .. ";")
+		return git_dir and #git_dir > 0 and #git_dir < #file_path
 	end,
 }
 

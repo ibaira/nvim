@@ -1,14 +1,14 @@
 -- Luasnips
-local ls = require("luasnip")
+local luasnip = require("luasnip")
 
-local s = ls.snippet
-local t = ls.text_node
-local i = ls.insert_node
-local f = ls.function_node
+local snippet = luasnip.snippet
+local text_node = luasnip.text_node
+local insert_node = luasnip.insert_node
+local function_node = luasnip.function_node
 local types = require("luasnip.util.types")
 
 -- Every unspecified option will be set to the default.
-ls.config.set_config({
+luasnip.config.set_config({
 	history = true,
 	updateevents = "TextChanged,TextChangedI",
 	ext_opts = {
@@ -28,107 +28,6 @@ local function copy(args)
 	return args[1]
 end
 
--- -- 'recursive' dynamic snippet. Expands to some text followed by itself.
--- local rec_ls
--- rec_ls = function()
--- 	return sn(
--- 		nil,
--- 		c(1, {
--- 			-- Order is important, sn(...) first would cause infinite loop of expansion.
--- 			t(""),
--- 			sn(nil, { t({ "", "\t\\item " }), i(1), d(2, rec_ls, {}) }),
--- 		})
--- 	)
--- end
-
--- -- complicated function for dynamicNode.
--- local function jdocsnip(args, _, old_state)
--- 	-- !!! old_state is used to preserve user-input here. DON'T DO IT THAT WAY!
--- 	-- Using a restoreNode instead is much easier.
--- 	-- View this only as an example on how old_state functions.
--- 	local nodes = {
--- 		t({ "/**", " * " }),
--- 		i(1, "A short Description"),
--- 		t({ "", "" }),
--- 	}
---
--- 	-- These will be merged with the snippet; that way, should the snippet be updated,
--- 	-- some user input eg. text can be referred to in the new snippet.
--- 	local param_nodes = {}
---
--- 	if old_state then
--- 		nodes[2] = i(1, old_state.descr:get_text())
--- 	end
--- 	param_nodes.descr = nodes[2]
---
--- 	-- At least one param.
--- 	if string.find(args[2][1], ", ") then
--- 		vim.list_extend(nodes, { t({ " * ", "" }) })
--- 	end
---
--- 	local insert = 2
--- 	for indx, arg in ipairs(vim.split(args[2][1], ", ", true)) do
--- 		-- Get actual name parameter.
--- 		arg = vim.split(arg, " ", true)[2]
--- 		if arg then
--- 			local inode
--- 			-- if there was some text in this parameter, use it as static_text for this new snippet.
--- 			if old_state and old_state[arg] then
--- 				inode = i(insert, old_state["arg" .. arg]:get_text())
--- 			else
--- 				inode = i(insert)
--- 			end
--- 			vim.list_extend(nodes, { t({ " * @param " .. arg .. " " }), inode, t({ "", "" }) })
--- 			param_nodes["arg" .. arg] = inode
---
--- 			insert = insert + 1
--- 		end
--- 	end
---
--- 	if args[1][1] ~= "void" then
--- 		local inode
--- 		if old_state and old_state.ret then
--- 			inode = i(insert, old_state.ret:get_text())
--- 		else
--- 			inode = i(insert)
--- 		end
---
--- 		vim.list_extend(nodes, { t({ " * ", " * @return " }), inode, t({ "", "" }) })
--- 		param_nodes.ret = inode
--- 		insert = insert + 1
--- 	end
---
--- 	if vim.tbl_count(args[3]) ~= 1 then
--- 		local exc = string.gsub(args[3][2], " throws ", "")
--- 		local ins
--- 		if old_state and old_state.ex then
--- 			ins = i(insert, old_state.ex:get_text())
--- 		else
--- 			ins = i(insert)
--- 		end
--- 		vim.list_extend(nodes, { t({ " * ", " * @throws " .. exc .. " " }), ins, t({ "", "" }) })
--- 		param_nodes.ex = ins
--- 		insert = insert + 1
--- 	end
---
--- 	vim.list_extend(nodes, { t({ " */" }) })
---
--- 	local snip = sn(nil, nodes)
--- 	-- Error on attempting overwrite.
--- 	snip.old_state = param_nodes
--- 	return snip
--- end
-
--- -- Make sure to not pass an invalid command, as io.popen() may write over nvim-text.
--- local function bash(_, _, command)
--- 	local file = io.popen(command, "r")
--- 	local res = {}
--- 	for line in file:lines() do
--- 		table.insert(res, line)
--- 	end
--- 	return res
--- end
-
 -- When trying to expand a snippet, luasnip first searches the tables for
 -- each filetype specified in 'filetype' followed by 'all'.
 -- If ie. the filetype is 'lua.c'
@@ -136,584 +35,339 @@ end
 --     - luasnip.c
 --     - luasnip.all
 -- are searched in that order.
-ls.add_snippets("python", {
+luasnip.add_snippets("python", {
 	-- Main block
-	s("main", {
-		t({ 'if __name__ == "__main__":', "    " }),
+	snippet("main", {
+		text_node({ 'if __name__ == "__main__":', "    " }),
 	}),
 	-- Function with return type
-	s("def", {
-		t({ "def " }),
-		i(1, "function_name"),
-		t("("),
-		i(2, "arg1"),
-		t({ ") -> " }),
-		i(3),
-		t({ ":", "    " }),
-		i(4),
+	snippet("def", {
+		text_node({ "def " }),
+		insert_node(1, "function_name"),
+		text_node("("),
+		insert_node(2, "arg1"),
+		text_node({ ") -> " }),
+		insert_node(3),
+		text_node({ ":", "    " }),
+		insert_node(4),
 	}),
 	-- Add constructor
-	s("defi", {
-		t({ "def __init__(self" }),
-		i(1),
-		t({ ") -> None:", "" }),
-		t({ '\t"""Initialize class instance."""', "" }),
-		t({ "\t" }),
-		i(2),
-		t({ "", "" }),
+	snippet("defi", {
+		text_node({ "def __init__(self" }),
+		insert_node(1),
+		text_node({ ") -> None:", "" }),
+		text_node({ '\t"""Initialize class instance."""', "" }),
+		text_node({ "\t" }),
+		insert_node(2),
+		text_node({ "", "" }),
 	}),
 	-- Dataclass
-	s("dcl", {
-		t({ "@dataclass", "" }),
-		t({ "class " }),
-		i(1, "ClassName"),
-		t({ ":", "    " }),
-		t({ '"""' }),
-		i(2, "Description"),
-		t({ '."""', "" }),
-		t({ "", "    " }),
-		i(3),
-		t({ "", "" }),
+	snippet("dcl", {
+		text_node({ "@dataclass", "" }),
+		text_node({ "class " }),
+		insert_node(1, "ClassName"),
+		text_node({ ":", "    " }),
+		text_node({ '"""' }),
+		insert_node(2, "Description"),
+		text_node({ '."""', "" }),
+		text_node({ "", "    " }),
+		insert_node(3),
+		text_node({ "", "" }),
 	}),
 	-- Class without inheritance and constructor
-	s("cl", {
-		t({ "class " }),
-		i(1, "ClassName"),
-		t({ ":", "    " }),
-		t({ '"""' }),
-		i(2, "Description"),
-		t({ '."""', "" }),
-		t({ "", "" }),
-		t({ "    def __init__(self) -> None:", "        " }),
-		t({ '"""Initialize class instance."""', "" }),
-		t({ "\t\tsuper().__init__()", "" }),
-		t({ "\t\t", "" }),
-		i(3),
-		t({ "", "" }),
+	snippet("cl", {
+		text_node({ "class " }),
+		insert_node(1, "ClassName"),
+		text_node({ ":", "    " }),
+		text_node({ '"""' }),
+		insert_node(2, "Description"),
+		text_node({ '."""', "" }),
+		text_node({ "", "" }),
+		text_node({ "    def __init__(self) -> None:", "        " }),
+		text_node({ '"""Initialize class instance."""', "" }),
+		text_node({ "\t\tsuper().__init__()", "" }),
+		text_node({ "\t\t", "" }),
+		insert_node(3),
+		text_node({ "", "" }),
 	}),
 	-- Class with inheritance and constructor
-	s("cli", {
-		t({ "class " }),
-		i(1, "ClassName"),
-		t("("),
-		i(2, "arg1"),
-		t({ "):" }),
-		t({ "", "" }),
-		t({ '\t"""' }),
-		i(3),
-		t({ '."""', "" }),
-		t({ "", "" }),
-		t({ "\tdef __init__(self) -> None:", "" }),
-		t({ '\t\t"""Initialize class instance."""', "" }),
-		t({ "\t\tsuper().__init__()", "" }),
-		t({ "\t\t" }),
-		i(4),
-		t({ "\t\t", "" }),
+	snippet("cli", {
+		text_node({ "class " }),
+		insert_node(1, "ClassName"),
+		text_node("("),
+		insert_node(2, "arg1"),
+		text_node({ "):" }),
+		text_node({ "", "" }),
+		text_node({ '\t"""' }),
+		insert_node(3),
+		text_node({ '."""', "" }),
+		text_node({ "", "" }),
+		text_node({ "\tdef __init__(self) -> None:", "" }),
+		text_node({ '\t\t"""Initialize class instance."""', "" }),
+		text_node({ "\t\tsuper().__init__()", "" }),
+		text_node({ "\t\t" }),
+		insert_node(4),
+		text_node({ "\t\t", "" }),
 	}),
 	-- Fast imports of common libraries
-	s("num", {
-		t({ "import numpy as np", "" }),
+	snippet("num", {
+		text_node({ "import numpy as np", "" }),
 	}),
-	s("pan", {
-		t({ "import pandas as pd", "" }),
+	snippet("pan", {
+		text_node({ "import pandas as pd", "" }),
 	}),
 	-- Path utility
-	s("osp", {
-		t({ "os.path.join(" }),
-		i(1, "base_path"),
-		t({ ", " }),
-		i(2, "sub_path"),
-		t({ ")", "" }),
+	snippet("osp", {
+		text_node({ "os.path.join(" }),
+		insert_node(1, "base_path"),
+		text_node({ ", " }),
+		insert_node(2, "sub_path"),
+		text_node({ ")", "" }),
 	}),
 	-- Disabling Pylint
-	s("pylint", {
-		t({ " # pylint: disable=" }),
-		i(1, "error_code"),
+	snippet("pylint", {
+		text_node({ " # pylint: disable=" }),
+		insert_node(1, "error_code"),
 	}),
 	-- Disabling Coverage
-	s("pylint", {
-		t({ " # pragma: no cover" }),
+	snippet("pylint", {
+		text_node({ " # pragma: no cover" }),
 	}),
 	-- Disabling Bandit
-	s("pylint", {
-		t({ " # nosec" }),
+	snippet("pylint", {
+		text_node({ " # nosec" }),
 	}),
 	-- Disabling Flake8
-	s("pylint", {
-		t({ " # noqa:" }),
-		i(1, "error_code"),
+	snippet("pylint", {
+		text_node({ " # noqa:" }),
+		insert_node(1, "error_code"),
 	}),
 	-- Get logger
-	s("getl", {
-		t({ "import logging", "" }),
-		t({ "LOG = logging.getLogger(" }),
-		i(1, "__name__"),
-		t({ ")", "" }),
+	snippet("getl", {
+		text_node({ "import logging", "" }),
+		text_node({ "LOG = logging.getLogger(" }),
+		insert_node(1, "__name__"),
+		text_node({ ")", "" }),
 	}),
 	-- Log error
-	s("le", {
-		t({ "LOG.error(" }),
-		i(1, "e"),
-		t({ ")", "" }),
+	snippet("le", {
+		text_node({ "LOG.error(" }),
+		insert_node(1, "e"),
+		text_node({ ")", "" }),
 	}),
 	-- Log info
-	s("li", {
-		t({ "LOG.info(" }),
-		i(1, "msg"),
-		t({ ")", "" }),
+	snippet("li", {
+		text_node({ "LOG.info(" }),
+		insert_node(1, "msg"),
+		text_node({ ")", "" }),
 	}),
 	-- Log warning
-	s("lw", {
-		t({ "LOG.warning(" }),
-		i(1, "msg"),
-		t({ ")", "" }),
+	snippet("lw", {
+		text_node({ "LOG.warning(" }),
+		insert_node(1, "msg"),
+		text_node({ ")", "" }),
 	}),
 	-- Log debug
-	s("ld", {
-		t({ "LOG.debug(" }),
-		i(1, "msg"),
-		t({ ")", "" }),
+	snippet("ld", {
+		text_node({ "LOG.debug(" }),
+		insert_node(1, "msg"),
+		text_node({ ")", "" }),
 	}),
 	-- Log critical
-	s("ld", {
-		t({ "LOG.critical(" }),
-		i(1, "msg"),
-		t({ ")", "" }),
+	snippet("ld", {
+		text_node({ "LOG.critical(" }),
+		insert_node(1, "msg"),
+		text_node({ ")", "" }),
 	}),
 	-- Enumerate
-	s("en", {
-		t({ "for i, " }),
-		i(1, "val"),
-		t({ " in enumerate(" }),
-		i(2, "items"),
-		t({ "):", "" }),
-		t({ "\t" }),
+	snippet("en", {
+		text_node({ "for i, " }),
+		insert_node(1, "val"),
+		text_node({ " in enumerate(" }),
+		insert_node(2, "items"),
+		text_node({ "):", "" }),
+		text_node({ "\t" }),
 	}),
 	-- List comprehension
-	s("lcp", {
-		t({ "[" }),
-		i(1, "elem"),
-		t({ " for " }),
-		i(2, "val"),
-		t({ " in " }),
-		i(3, "items"),
-		t({ "]", "" }),
+	snippet("lcp", {
+		text_node({ "[" }),
+		insert_node(1, "elem"),
+		text_node({ " for " }),
+		insert_node(2, "val"),
+		text_node({ " in " }),
+		insert_node(3, "items"),
+		text_node({ "]", "" }),
 	}),
 	-- Set comprehension
-	s("scp", {
-		t({ "{" }),
-		i(1, "elem"),
-		t({ " for " }),
-		i(2, "val"),
-		t({ " in " }),
-		i(3, "items"),
-		t({ "}", "" }),
+	snippet("scp", {
+		text_node({ "{" }),
+		insert_node(1, "elem"),
+		text_node({ " for " }),
+		insert_node(2, "val"),
+		text_node({ " in " }),
+		insert_node(3, "items"),
+		text_node({ "}", "" }),
 	}),
 	-- Generator
-	s("scp", {
-		t({ "(" }),
-		i(1, "elem"),
-		t({ " for " }),
-		i(2, "val"),
-		t({ " in " }),
-		i(3, "items"),
-		t({ ")", "" }),
+	snippet("scp", {
+		text_node({ "(" }),
+		insert_node(1, "elem"),
+		text_node({ " for " }),
+		insert_node(2, "val"),
+		text_node({ " in " }),
+		insert_node(3, "items"),
+		text_node({ ")", "" }),
 	}),
 	-- Dict comprehension
-	s("dcp", {
-		t({ "{" }),
-		i(1, "key"),
-		t({ ": " }),
-		i(2, "value"),
-		t({ " for " }),
-		i(3, "val"),
-		t({ " in " }),
-		i(4, "items"),
-		t({ "}", "" }),
+	snippet("dcp", {
+		text_node({ "{" }),
+		insert_node(1, "key"),
+		text_node({ ": " }),
+		insert_node(2, "value"),
+		text_node({ " for " }),
+		insert_node(3, "val"),
+		text_node({ " in " }),
+		insert_node(4, "items"),
+		text_node({ "}", "" }),
 	}),
 	-- Lambda
-	s("lam", {
-		i(1),
-		t({ " = lambda " }),
-		i(2, "vars"),
-		t({ ": " }),
-		i(3, "action"),
+	snippet("lam", {
+		insert_node(1),
+		text_node({ " = lambda " }),
+		insert_node(2, "vars"),
+		text_node({ ": " }),
+		insert_node(3, "action"),
 	}),
 	-- Parser
-	s("par", {
-		t({ "parser = argparse.ArgumentParser()", "" }),
-		t({ 'parser.add_argument("-' }),
-		i(1, "p"),
-		t({ '", "--' }),
-		i(2, "param"),
-		t({ '", default=' }),
-		i(3, "None"),
-		t({ ', help="' }),
-		i(4, "Help text"),
-		t({ '.")', "" }),
-		i(5),
-		t({ "return parser", "" }),
+	snippet("par", {
+		text_node({ "parser = argparse.ArgumentParser()", "" }),
+		text_node({ 'parser.add_argument("-' }),
+		insert_node(1, "p"),
+		text_node({ '", "--' }),
+		insert_node(2, "param"),
+		text_node({ '", default=' }),
+		insert_node(3, "None"),
+		text_node({ ', help="' }),
+		insert_node(4, "Help text"),
+		text_node({ '.")', "" }),
+		insert_node(5),
+		text_node({ "return parser", "" }),
 	}),
 	-- Add argument to the parser
-	s("arg", {
-		t({ 'parser.add_argument("-' }),
-		i(1, "p"),
-		t({ '", "--' }),
-		i(2, "param"),
-		t({ '", default=' }),
-		i(3, "None"),
-		t({ ', help="' }),
-		i(4, "Help text"),
-		t({ '.")', "" }),
+	snippet("arg", {
+		text_node({ 'parser.add_argument("-' }),
+		insert_node(1, "p"),
+		text_node({ '", "--' }),
+		insert_node(2, "param"),
+		text_node({ '", default=' }),
+		insert_node(3, "None"),
+		text_node({ ', help="' }),
+		insert_node(4, "Help text"),
+		text_node({ '.")', "" }),
 	}),
 	-- With statement using a context manager
-	s("with", {
-		t({ "with " }),
-		i(1, "ctx_manager"),
-		t({ " as " }),
-		i(2, "alias"),
-		t({ ":", "" }),
-		t({ "\t" }),
-		i(3),
-		t({ "", "" }),
+	snippet("with", {
+		text_node({ "with " }),
+		insert_node(1, "ctx_manager"),
+		text_node({ " as " }),
+		insert_node(2, "alias"),
+		text_node({ ":", "" }),
+		text_node({ "\t" }),
+		insert_node(3),
+		text_node({ "", "" }),
 	}),
 	-- Mock function
-	s("mock", {
-		t({ "with mock.patch(", "" }),
-		t({ "\t" }),
-		i(1, "module.function"),
-		t({ ",", "" }),
-		t({ "\treturn_value=" }),
-		i(2, "mocked_result"),
-		t({ ",", "" }),
-		t({ "):", "" }),
-		t({ "\t" }),
-		i(3),
-		t({ "", "" }),
+	snippet("mock", {
+		text_node({ "with mock.patch(", "" }),
+		text_node({ "\t" }),
+		insert_node(1, "module.function"),
+		text_node({ ",", "" }),
+		text_node({ "\treturn_value=" }),
+		insert_node(2, "mocked_result"),
+		text_node({ ",", "" }),
+		text_node({ "):", "" }),
+		text_node({ "\t" }),
+		insert_node(3),
+		text_node({ "", "" }),
 	}),
 	-- Mock dictionary
-	s("mockd", {
-		t({ "@mock.path.dict(", "" }),
-		t({ "\t" }),
-		i(1, "os.environ"),
-		t({ ",", "" }),
-		t({ "\t{", "" }),
-		t({ '\t\t"' }),
-		i(2, "key"),
-		t({ '": ' }),
-		i(3, "val"),
-		t({ "", "" }),
-		t({ "\t}", "" }),
-		t({ ")", "" }),
-		i(4),
+	snippet("mockd", {
+		text_node({ "@mock.path.dict(", "" }),
+		text_node({ "\t" }),
+		insert_node(1, "os.environ"),
+		text_node({ ",", "" }),
+		text_node({ "\t{", "" }),
+		text_node({ '\t\t"' }),
+		insert_node(2, "key"),
+		text_node({ '": ' }),
+		insert_node(3, "val"),
+		text_node({ "", "" }),
+		text_node({ "\t}", "" }),
+		text_node({ ")", "" }),
+		insert_node(4),
 	}),
 	-- Parametric Pytest
-	s("ptest", {
-		t({ "@pytest.mark.parametrize(", "" }),
-		t({ '\t"' }),
-		i(1, "input_args"),
-		t({ ',expected",', "" }),
-		t({ "\t[", "" }),
-		t({ "\t\t(" }),
-		i(2, "case"),
-		t({ ", " }),
-		i(3, "expected_result"),
-		t({ "),", "" }),
-		t({ "\t\tpytest.param(" }),
-		f(copy, 2),
-		t({ ", " }),
-		f(copy, 3),
-		t({ ", marks=pytest.mark.xfail()),", "" }),
-		t({ "\t]", "" }),
-		t({ ")", "" }),
-		t({ "def test_" }),
-		i(4, "name"),
-		t({ "(" }),
-		f(copy, 1),
-		t({ ", expected):", "" }),
-		t({ '\t"""' }),
-		i(5, "Description"),
-		t({ '."""', "" }),
-		t({ "\t" }),
-		i(6),
-		t({ "", "" }),
-		t({ "\tassert(" }),
-		f(copy, 1),
-		t({ " == expected", "" }),
+	snippet("ptest", {
+		text_node({ "@pytest.mark.parametrize(", "" }),
+		text_node({ '\t"' }),
+		insert_node(1, "input_args"),
+		text_node({ ',expected",', "" }),
+		text_node({ "\t[", "" }),
+		text_node({ "\t\t(" }),
+		insert_node(2, "case"),
+		text_node({ ", " }),
+		insert_node(3, "expected_result"),
+		text_node({ "),", "" }),
+		text_node({ "\t\tpytest.param(" }),
+		function_node(copy, 2),
+		text_node({ ", " }),
+		function_node(copy, 3),
+		text_node({ ", marks=pytest.mark.xfail()),", "" }),
+		text_node({ "\t]", "" }),
+		text_node({ ")", "" }),
+		text_node({ "def test_" }),
+		insert_node(4, "name"),
+		text_node({ "(" }),
+		function_node(copy, 1),
+		text_node({ ", expected):", "" }),
+		text_node({ '\t"""' }),
+		insert_node(5, "Description"),
+		text_node({ '."""', "" }),
+		text_node({ "\t" }),
+		insert_node(6),
+		text_node({ "", "" }),
+		text_node({ "\tassert(" }),
+		function_node(copy, 1),
+		text_node({ " == expected", "" }),
 	}),
 })
-ls.add_snippets("yaml", {
+luasnip.add_snippets("yaml", {
 	-- Avoid detached pipeline when in a MR
-	s("nodet", {
-		t({ ".avoid-detached-mr-pipeline: &no-detached-pipeline", "" }),
-		t({ '  if: $CI_PIPELINE_SOURCE == "merge_request_event"', "" }),
-		t({ "  when: never", "" }),
+	snippet("nodet", {
+		text_node({ ".avoid-detached-mr-pipeline: &no-detached-pipeline", "" }),
+		text_node({ '  if: $CI_PIPELINE_SOURCE == "merge_request_event"', "" }),
+		text_node({ "  when: never", "" }),
 	}),
 	-- Create a .gitlab-ci anchor
-	s("anchor", {
-		t({ "." }),
-		i(1, "name"),
-		t({ ": &" }),
-		i(2, "alias"),
-		t({ "", "" }),
-		t({ "\t" }),
-		i(3),
-		t({ "", "" }),
+	snippet("anchor", {
+		text_node({ "." }),
+		insert_node(1, "name"),
+		text_node({ ": &" }),
+		insert_node(2, "alias"),
+		text_node({ "", "" }),
+		text_node({ "\t" }),
+		insert_node(3),
+		text_node({ "", "" }),
 	}),
 })
--- ls.add_snippets("all", {
--- 	-- trigger is fn.
--- 	s("fn", {
--- 		-- Simple static text.
--- 		t("//Parameters: "),
--- 		-- function, first parameter is the function, second the Placeholders
--- 		-- whose text it gets as input.
--- 		f(copy, 2),
--- 		t({ "", "function " }),
--- 		-- Placeholder/Insert.
--- 		i(1),
--- 		t("("),
--- 		-- Placeholder with initial text.
--- 		i(2, "int foo"),
--- 		-- Linebreak
--- 		t({ ") {", "\t" }),
--- 		-- Last Placeholder, exit Point of the snippet. EVERY 'outer' SNIPPET NEEDS Placeholder 0.
--- 		i(0),
--- 		t({ "", "}" }),
--- 	}),
--- 	s("class", {
--- 		-- Choice: Switch between two different Nodes, first parameter is its position, second a list of nodes.
--- 		c(1, {
--- 			t("public "),
--- 			t("private "),
--- 		}),
--- 		t("class "),
--- 		i(2),
--- 		t(" "),
--- 		c(3, {
--- 			t("{"),
--- 			-- sn: Nested Snippet. Instead of a trigger, it has a position, just like insert-nodes. !!! These don't expect a 0-node!!!!
--- 			-- Inside Choices, Nodes don't need a position as the choice node is the one being jumped to.
--- 			sn(nil, {
--- 				t("extends "),
--- 				-- restoreNode: stores and restores nodes.
--- 				-- pass position, store-key and nodes.
--- 				r(1, "other_class", i(1)),
--- 				t(" {"),
--- 			}),
--- 			sn(nil, {
--- 				t("implements "),
--- 				-- no need to define the nodes for a given key a second time.
--- 				r(1, "other_class"),
--- 				t(" {"),
--- 			}),
--- 		}),
--- 		t({ "", "\t" }),
--- 		i(0),
--- 		t({ "", "}" }),
--- 	}),
--- 	-- Parsing snippets: First parameter: Snippet-Trigger, Second: Snippet body.
--- 	-- Placeholders are parsed into choices with 1. the placeholder text(as a snippet) and 2. an empty string.
--- 	-- This means they are not SELECTed like in other editors/Snippet engines.
--- 	ls.parser.parse_snippet("lspsyn", "Wow! This ${1:Stuff} really ${2:works. ${3:Well, a bit.}}"),
---
--- 	-- When wordTrig is set to false, snippets may also expand inside other words.
--- 	ls.parser.parse_snippet({ trig = "te", wordTrig = false }, "${1:cond} ? ${2:true} : ${3:false}"),
---
--- 	-- When regTrig is set, trig is treated like a pattern, this snippet will expand after any number.
--- 	-- ls.parser.parse_snippet({ trig = "%d", regTrig = true }, "A Number!!"),
--- 	-- Using the condition, it's possible to allow expansion only in specific cases.
--- 	s("cond", {
--- 		t("will only expand in c-style comments"),
--- 	}, {
--- 		condition = function(line_to_cursor, matched_trigger, captures)
--- 			-- optional whitespace followed by //
--- 			return line_to_cursor:match("%s*//")
--- 		end,
--- 	}),
--- 	-- there's some built-in conditions in "luasnip.extras.expand_conditions".
--- 	s("cond2", {
--- 		t("will only expand at the beginning of the line"),
--- 	}, {
--- 		condition = conds.line_begin,
--- 	}),
--- 	-- The last entry of args passed to the user-function is the surrounding snippet.
--- 	s(
--- 		{ trig = "a%d", regTrig = true },
--- 		f(function(_, snip)
--- 			return "Triggered with " .. snip.trigger .. "."
--- 		end, {})
--- 	),
--- 	-- It's possible to use capture-groups inside regex-triggers.
--- 	s(
--- 		{ trig = "b(%d)", regTrig = true },
--- 		f(function(_, snip)
--- 			return "Captured Text: " .. snip.captures[1] .. "."
--- 		end, {})
--- 	),
--- 	s({ trig = "c(%d+)", regTrig = true }, {
--- 		t("will only expand for even numbers"),
--- 	}, {
--- 		condition = function(line_to_cursor, matched_trigger, captures)
--- 			return tonumber(captures[1]) % 2 == 0
--- 		end,
--- 	}),
--- 	-- Use a function to execute any shell command and print its text.
--- 	s("bash", f(bash, {}, "ls")),
--- 	-- Short version for applying String transformations using function nodes.
--- 	s("transform", {
--- 		i(1, "initial text"),
--- 		t({ "", "" }),
--- 		-- lambda nodes accept an l._1,2,3,4,5, which in turn accept any string transformations.
--- 		-- This list will be applied in order to the first node given in the second argument.
--- 		l(l._1:match("[^i]*$"):gsub("i", "o"):gsub(" ", "_"):upper(), 1),
--- 	}),
--- 	s("transform2", {
--- 		i(1, "initial text"),
--- 		t("::"),
--- 		i(2, "replacement for e"),
--- 		t({ "", "" }),
--- 		-- Lambdas can also apply transforms USING the text of other nodes:
--- 		l(l._1:gsub("e", l._2), { 1, 2 }),
--- 	}),
--- 	s({ trig = "trafo(%d+)", regTrig = true }, {
--- 		-- env-variables and captures can also be used:
--- 		l(l.CAPTURE1:gsub("1", l.TM_FILENAME), {}),
--- 	}),
--- 	-- Set store_selection_keys = "<Tab>" (for example) in your
--- 	-- luasnip.config.setup() call to access TM_SELECTED_TEXT. In
--- 	-- this case, select a URL, hit Tab, then expand this snippet.
--- 	s("link_url", {
--- 		t('<a href="'),
--- 		f(function(_, snip)
--- 			return snip.env.TM_SELECTED_TEXT[1] or {}
--- 		end, {}),
--- 		t('">'),
--- 		i(1),
--- 		t("</a>"),
--- 		i(0),
--- 	}),
--- 	-- Shorthand for repeating the text in a given node.
--- 	s("repeat", { i(1, "text"), t({ "", "" }), rep(1) }),
--- 	-- Directly insert the ouput from a function evaluated at runtime.
--- 	s("part", p(os.date, "%Y")),
--- 	-- use matchNodes to insert text based on a pattern/function/lambda-evaluation.
--- 	s("mat", {
--- 		i(1, { "sample_text" }),
--- 		t(": "),
--- 		m(1, "%d", "contains a number", "no number :("),
--- 	}),
--- 	-- The inserted text defaults to the first capture group/the entire
--- 	-- match if there are none
--- 	s("mat2", {
--- 		i(1, { "sample_text" }),
--- 		t(": "),
--- 		m(1, "[abc][abc][abc]"),
--- 	}),
--- 	-- It is even possible to apply gsubs' or other transformations
--- 	-- before matching.
--- 	s("mat3", {
--- 		i(1, { "sample_text" }),
--- 		t(": "),
--- 		m(1, l._1:gsub("[123]", ""):match("%d"), "contains a number that isn't 1, 2 or 3!"),
--- 	}),
--- 	-- `match` also accepts a function, which in turn accepts a string
--- 	-- (text in node, \n-concatted) and returns any non-nil value to match.
--- 	-- If that value is a string, it is used for the default-inserted text.
--- 	s("mat4", {
--- 		i(1, { "sample_text" }),
--- 		t(": "),
--- 		m(1, function(text)
--- 			return (#text % 2 == 0 and text) or nil
--- 		end),
--- 	}),
--- 	-- The nonempty-node inserts text depending on whether the arg-node is
--- 	-- empty.
--- 	s("nempty", {
--- 		i(1, "sample_text"),
--- 		n(1, "i(1) is not empty!"),
--- 	}),
--- 	-- dynamic lambdas work exactly like regular lambdas, except that they
--- 	-- don't return a textNode, but a dynamicNode containing one insertNode.
--- 	-- This makes it easier to dynamically set preset-text for insertNodes.
--- 	s("dl1", {
--- 		i(1, "sample_text"),
--- 		t({ ":", "" }),
--- 		dl(2, l._1, 1),
--- 	}),
--- 	-- Obviously, it's also possible to apply transformations, just like lambdas.
--- 	s("dl2", {
--- 		i(1, "sample_text"),
--- 		i(2, "sample_text_2"),
--- 		t({ "", "" }),
--- 		dl(3, l._1:gsub("\n", " linebreak ") .. l._2, { 1, 2 }),
--- 	}),
--- 	-- Alternative printf-like notation for defining snippets. It uses format
--- 	-- string with placeholders similar to the ones used with Python's .format().
--- 	s(
--- 		"fmt1",
--- 		fmt("To {title} {} {}.", {
--- 			i(2, "Name"),
--- 			i(3, "Surname"),
--- 			title = c(1, { t("Mr."), t("Ms.") }),
--- 		})
--- 	),
--- 	-- To escape delimiters use double them, e.g. `{}` -> `{{}}`.
--- 	-- Multi-line format strings by default have empty first/last line removed.
--- 	-- Indent common to all lines is also removed. Use the third `opts` argument
--- 	-- to control this behaviour.
--- 	s(
--- 		"fmt2",
--- 		fmt(
--- 			[[
--- 			foo({1}, {3}) {{
--- 				return {2} * {4}
--- 			}}
--- 			]],
--- 			{
--- 				i(1, "x"),
--- 				rep(1),
--- 				i(2, "y"),
--- 				rep(2),
--- 			}
--- 		)
--- 	),
--- 	-- Empty placeholders are numbered automatically starting from 1 or the last
--- 	-- value of a numbered placeholder. Named placeholders do not affect numbering.
--- 	s(
--- 		"fmt3",
--- 		fmt("{} {a} {} {1} {}", {
--- 			t("1"),
--- 			t("2"),
--- 			a = t("A"),
--- 		})
--- 	),
--- 	-- The delimiters can be changed from the default `{}` to something else.
--- 	s("fmt4", fmt("foo() { return []; }", i(1, "x"), { delimiters = "[]" })),
--- 	-- `fmta` is a convenient wrapper that uses `<>` instead of `{}`.
--- 	s("fmt5", fmta("foo() { return <>; }", i(1, "x"))),
--- 	-- By default all args must be used. Use strict=false to disable the check
--- 	s("fmt6", fmt("use {} only", { t("this"), t("not this") }, { strict = false })),
--- })
--- 	tex = {
--- 		-- rec_ls is self-referencing. That makes this snippet 'infinite' eg. have as many
--- 		-- \item as necessary by utilizing a choiceNode.
--- 		s("ls", {
--- 			t({ "\\begin{itemize}", "\t\\item " }),
--- 			i(1),
--- 			d(2, rec_ls, {}),
--- 			t({ "", "\\end{itemize}" }),
--- 		}),
--- 	},
--- })
 
 -- autotriggered snippets have to be defined in a separate table, luasnip.autosnippets.
-ls.autosnippets = { all = { s("autotrigger", { t("autosnippet") }) } }
+luasnip.autosnippets = { all = { snippet("autotrigger", { text_node("autosnippet") }) } }
 
 -- in a lua file: search lua-, then c-, then all-snippets.
-ls.filetype_extend("lua", { "c" })
+luasnip.filetype_extend("lua", { "c" })
 -- in a cpp file: search c-snippets, then all-snippets only (no cpp-snippets!!).
-ls.filetype_set("cpp", { "c" })
+luasnip.filetype_set("cpp", { "c" })
 
 -- Beside defining your own snippets you can also load snippets from "vscode-like" packages
 -- that expose snippets in json files, for example <https://github.com/rafamadriz/friendly-snippets>.
@@ -723,4 +377,4 @@ ls.filetype_set("cpp", { "c" })
 -- require("luasnip/loaders/from_vscode").load({ paths = { "./my-snippets" } }) -- Load snippets from my-snippets folder
 
 -- You can also use lazy loading so you only get in memory snippets of languages you use
-require("luasnip/loaders/from_vscode").lazy_load() -- You can pass { paths = "./my-snippets/"} as well
+require("luasnip/loaders/from_vscode").lazy_load()
