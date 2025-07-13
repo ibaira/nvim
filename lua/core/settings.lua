@@ -253,6 +253,17 @@ vim.g.lazygit_floating_window_scaling_factor = 1.0
 vim.opt.winborder = "rounded"
 
 ---------------------------------
+-- Auto-formatting
+---------------------------------
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = "*",
+	callback = function(args)
+		require("conform").format({ bufnr = args.buf })
+	end,
+})
+
+---------------------------------
 -- Editing mappings
 ---------------------------------
 
