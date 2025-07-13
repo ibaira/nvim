@@ -1,7 +1,7 @@
 -- Lazy configuration
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then ---@diagnostic disable-line: undefined-field
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
 	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
 	if vim.v.shell_error ~= 0 then
@@ -206,10 +206,10 @@ local plugins = {
 			require("nvim-highlight-colors").setup({
 				---Render style
 				---@usage 'background'|'foreground'|'virtual'
-				render = "background",
+				render = "virtual",
 
 				---Set virtual symbol (requires render to be set to 'virtual')
-				virtual_symbol = "■",
+				virtual_symbol = "██",
 
 				---Set virtual symbol suffix (defaults to '')
 				virtual_symbol_prefix = "",
