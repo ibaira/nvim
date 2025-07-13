@@ -484,6 +484,9 @@ require("gruvbox").setup({
 		LspReferenceRead = { fg = "none", bg = colors.bg1, bold = true },
 		LspReferenceText = { fg = "none", bg = colors.bg1, bold = true },
 		LspReferenceWrite = { fg = colors.orange, bg = colors.bg1, bold = true },
+
+		-- Tmux
+		tmuxOptions = { fg = colors.yellow, bold = true },
 	},
 })
 
