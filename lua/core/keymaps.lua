@@ -18,10 +18,10 @@ end, { silent = true })
 
 vim.keymap.set("c", "<Esc>", "<C-c>")
 vim.keymap.set("i", "<C-c>", "<Esc>")
-vim.keymap.set("n", "<C-z>", "<Esc>") -- disable terminal ctrl-z
+-- vim.keymap.set("n", "<C-z>", "<Esc>") -- disable terminal ctrl-z
 
--- Map S to replace current word with pasteboard
-vim.keymap.set("n", "S", 'diw"0P')
+-- Map S to replace current word with pasteboard (do not save deleted word to register)
+vim.keymap.set("n", "S", '"_diw"0P')
 vim.keymap.set("n", "cc", '"_cc')
 
 -- Map paste, yank and delete to named register so the content will not be overwritten
@@ -47,8 +47,8 @@ vim.keymap.set("n", "<C-space>", "?")
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
--- Remove hightlight by pressing escape twice
-vim.keymap.set("n", "<esc><esc>", ":noh<CR>", { silent = true })
+-- Remove hightlight by pressing escape
+vim.keymap.set("n", "<esc>", ":noh<CR>", { silent = true })
 
 -- Move lines in visual mode
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true })
@@ -191,7 +191,7 @@ vim.keymap.set("i", "<M-a>", 'copilot#Accept("<CR><CR>")', { expr = true, silent
 local function search_in_browser()
 	local word = vim.fn.expand("<cWORD>")
 	if word ~= "" then
-		word = word:gsub("[](){}<>`'\"*,;", "") -- remove brackets, quotes, *
+		word = word:gsub("<{[()]}>`'\"*,;", "") -- remove brackets, quotes, *
 		local url = "https://www.google.com/search?q=" .. vim.fn.escape(word, " ")
 		vim.ui.open(url)
 	else
