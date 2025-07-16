@@ -48,10 +48,7 @@ require("lint").linters.tflint = {
 -- Luacheck
 local pattern = "[^:]+:(%d+):(%d+)-(%d+): %((%a)(%d+)%) (.*)"
 local groups = { "lnum", "col", "end_col", "severity", "code", "message" }
-local severities = {
-	W = vim.diagnostic.severity.WARN,
-	E = vim.diagnostic.severity.ERROR,
-}
+local severities = { W = vim.diagnostic.severity.WARN, E = vim.diagnostic.severity.ERROR }
 
 require("lint").linters.luacheck = {
 	cmd = "luacheck",
@@ -93,10 +90,10 @@ _G.IgnoreLintInLine = function()
 	-- Ignore line diagnostics by filetype
 	local buffer_filetype = vim.api.nvim_get_option_value("filetype", {})
 
-	-- Python
 	if buffer_filetype == "python" then
 		local is_pyright_ignore = false
 		local ignored_codes = {}
+		local has_noqa = string.find(vim.api.nvim_get_current_line(), "# noqa:")
 
 		for _, diagnostic in pairs(current_buffer_diag_table) do
 			local source = diagnostic.source
@@ -105,7 +102,7 @@ _G.IgnoreLintInLine = function()
 				vim.cmd("normal A  # type: ignore")
 				is_pyright_ignore = true
 			elseif source ~= nil and source:lower() == "ruff" and not ignored_codes[diagnostic.code] then
-				if _G.isTableEmpty(ignored_codes) then
+				if not has_noqa and _G.isTableEmpty(ignored_codes) then
 					vim.cmd("normal A  # noqa: " .. diagnostic.code)
 				else
 					vim.cmd("normal A," .. diagnostic.code)
@@ -113,17 +110,11 @@ _G.IgnoreLintInLine = function()
 				ignored_codes[diagnostic.code] = true
 			end
 		end
-	end
-
-	-- Lua
-	if buffer_filetype == "lua" then
+	elseif buffer_filetype == "lua" then
 		local diagnostic = current_buffer_diag_table[1]
 		vim.cmd("normal A ---@diagnostic disable-line: " .. diagnostic.code)
 		return
-	end
-
-	-- YAML
-	if buffer_filetype == "yaml" then
+	elseif buffer_filetype == "yaml" then
 		local diagnostic = current_buffer_diag_table[1]
 		vim.cmd("normal A  # yamllint disable-line rule:" .. diagnostic.code)
 		return
