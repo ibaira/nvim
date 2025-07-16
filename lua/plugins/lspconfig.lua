@@ -18,8 +18,8 @@ local servers = {
 }
 for _, lsp in ipairs(servers) do
 	vim.lsp.config(lsp, { flags = { debounce_text_changes = 150 } })
-	vim.lsp.enable(lsp)
 end
+vim.lsp.enable(servers)
 
 -- YAML
 vim.lsp.config("yamlls", {
@@ -75,7 +75,11 @@ vim.lsp.config("lua_ls", {
 			-- Make the server aware of Neovim runtime files
 			workspace = {
 				checkThirdParty = false,
-				library = { vim.env.VIMRUNTIME, "${3rd}/luv/library" },
+				library = {
+					vim.env.VIMRUNTIME,
+					"${3rd}/luv/library",
+					os.getenv("HOME") .. "/.local/share/nvim/lazy",
+				},
 			},
 		})
 	end,
