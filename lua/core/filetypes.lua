@@ -6,6 +6,8 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = "*",
 	callback = function()
 		vim.opt.foldmethod = "indent"
+		vim.opt.shiftwidth = 4
+		vim.opt.tabstop = 4
 	end,
 })
 
@@ -33,17 +35,6 @@ vim.api.nvim_create_autocmd("FileType", {
 		-- To fix folds with indent size = 2
 		vim.opt.shiftwidth = 2
 		vim.opt.tabstop = 2
-	end,
-})
-
----------------------------------
--- Golang section
----------------------------------
-
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "go",
-	callback = function()
-		vim.opt.foldmethod = "syntax"
 	end,
 })
 
