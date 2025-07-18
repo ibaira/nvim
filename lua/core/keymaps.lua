@@ -207,6 +207,15 @@ vim.keymap.set("n", "<leader>c", ":norm cs", { silent = false })
 -- Select the whole buffer
 vim.keymap.set("n", "<leader>G", "ggVG")
 
+-- Navigate to Quickfix location automatically when moving across its lines
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "qf",
+	callback = function()
+		vim.keymap.set("n", "j", "<Down><CR>zz<C-w>p", { buffer = true, remap = false })
+		vim.keymap.set("n", "k", "<Up><CR>zz<C-w>p", { buffer = true, remap = false })
+	end,
+})
+
 -- inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 -- inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 -- inoremap <silent> <expr> <CR> (pumvisible() && empty(v:completed_item)) ?  "\<c-y>\<cr>" : "\<CR>"
