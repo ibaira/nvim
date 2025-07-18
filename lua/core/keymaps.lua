@@ -200,6 +200,10 @@ local function search_in_browser()
 end
 vim.keymap.set("n", "gX", search_in_browser, { silent = true })
 
+-- Surround
+vim.keymap.set("n", "<leader>s", ":norm ysiw", { silent = false })
+vim.keymap.set("n", "<leader>c", ":norm cs", { silent = false })
+
 -- inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 -- inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 -- inoremap <silent> <expr> <CR> (pumvisible() && empty(v:completed_item)) ?  "\<c-y>\<cr>" : "\<CR>"
