@@ -34,6 +34,7 @@ local plugins = {
 				{ K = "~/.config/nvim/lua/core/keymaps.lua" },
 				{ l = "~/.config/nvim/lua/core/lazy.lua" },
 				{ L = "~/.config/lazygit/config.yml" },
+				{ p = "~/.config/presenterm/config.yaml" },
 				{ r = "~/.config/ruff/pyproject.toml" },
 				{ t = "~/.tmux.conf" },
 				{ T = "~/notes/todo.md" },
