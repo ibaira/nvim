@@ -216,6 +216,10 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+-- Insert date
+vim.keymap.set("n", "<M-d>", ":put=strftime('%b %d, %Y')<CR>kJ", { silent = true })
+vim.keymap.set("i", "<M-d>", ":put=strftime('%b %d, %Y')<CR>kJ", { silent = true })
+
 -- inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 -- inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 -- inoremap <silent> <expr> <CR> (pumvisible() && empty(v:completed_item)) ?  "\<c-y>\<cr>" : "\<CR>"
