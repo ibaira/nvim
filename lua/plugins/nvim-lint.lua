@@ -1,69 +1,46 @@
--- Bandit linter
-local pattern = "[>]+(%d+):(%d):(%w+):(%w+):([^%c]+)"
-local groups = { "lnum", "start_col", "code", "severity", "message" }
-local bandit_severities = {
-	LOW = vim.lsp.protocol.DiagnosticSeverity.Information,
-	MEDIUM = vim.lsp.protocol.DiagnosticSeverity.Warning,
-	HIGH = vim.lsp.protocol.DiagnosticSeverity.Error,
-}
-require("lint").linters.bandit = {
-	cmd = "bandit",
-	stdin = true,
-	args = {
-		-- '-lll', '-ii',
-		"--format",
-		"custom",
-		"--msg-template",
-		'">>{line}:1:{test_id}:{severity}:{msg}"',
-		"-n",
-		"-1",
-		"--exit-zero",
-		"-",
-	},
-	ignore_exitcode = true,
-	parser = require("lint.parser").from_pattern(pattern, groups, bandit_severities, {
-		["source"] = "bandit",
-	}),
-}
+---------------------------------------------------------------------
+-- Custom linter configurations
+---------------------------------------------------------------------
 
--- Tflint
-local pattern_tf = "([^%c]-):(%d+),(%d+).-:(.+)"
-local groups_tf = { "file", "lnum", "col", "message" }
-require("lint").linters.tflint = {
-	cmd = "tflint",
-	stdin = false,
-	args = {
-		"--format",
-		"compact",
-		"--no-color",
-		"--force",
-		"/Users/iojeda/repos/infra-tf/aws/svc-gai-cd/variables.tf", -- could it accept stdin instead?
-	},
-	parser = require("lint.parser").from_pattern(pattern_tf, groups_tf, nil, {
-		["source"] = "tflint",
-		["severity"] = vim.lsp.protocol.DiagnosticSeverity.Error, --luacheck:ignore 113
-	}),
-}
+lint = require("lint")
+parser = require("lint.parser")
 
 -- Luacheck
 local pattern = "[^:]+:(%d+):(%d+)-(%d+): %((%a)(%d+)%) (.*)"
 local groups = { "lnum", "col", "end_col", "severity", "code", "message" }
 local severities = { W = vim.diagnostic.severity.WARN, E = vim.diagnostic.severity.ERROR }
 
-require("lint").linters.luacheck = {
+lint.linters.luacheck = {
 	cmd = "luacheck",
 	stdin = true,
-	-- With "vim" as global variable
-	args = { "--formatter", "plain", "--codes", "--ranges", "-", "--global", "vim" },
+	args = { "--formatter", "plain", "--codes", "--ranges", "-", "--global", "vim" }, -- With "vim" as global variable
 	ignore_exitcode = true,
-	parser = require("lint.parser").from_pattern(
-		pattern,
-		groups,
-		severities,
-		{ ["source"] = "luacheck" },
-		{ end_col_offset = 0 }
-	),
+	parser = parser.from_pattern(pattern, groups, severities, { ["source"] = "luacheck" }, { end_col_offset = 0 }),
 }
+
+-- Tflint
+local pattern_tf = "([^%c]-):(%d+),(%d+).-:(.+)"
+local groups_tf = { "file", "lnum", "col", "message" }
+lint.linters.tflint = {
+	cmd = "tflint",
+	stdin = false,
+	args = { "--format", "compact", "--no-color", "--force", "variables.tf" }, -- could it accept stdin instead?
+	parser = parser.from_pattern(pattern_tf, groups_tf, nil, {
+		["source"] = "tflint",
+		["severity"] = vim.lsp.protocol.DiagnosticSeverity.Error, --luacheck:ignore 113
+	}),
+}
+
+-- Set linters for each language
+require("lint").linters_by_ft = {
+	terraform = { "tflint" },
+	markdown = { "markdownlint" },
+	dockerfile = { "hadolint" },
+}
+
+---------------------------------------------------------------------
+--- Auto-commands and functions for keybindings
+---------------------------------------------------------------------
 
 vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave", "TextChanged", "BufWritePost" }, {
 	pattern = "*",
@@ -120,10 +97,3 @@ _G.IgnoreLintInLine = function()
 		return
 	end
 end
-
--- Set linters for each language
-require("lint").linters_by_ft = {
-	terraform = { "tflint" },
-	markdown = { "markdownlint" },
-	dockerfile = { "hadolint" },
-}
