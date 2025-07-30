@@ -152,6 +152,30 @@ local plugins = {
 					console = "integratedTerminal",
 					cwd = "${workspaceFolder}",
 				},
+				{
+					type = "python",
+					request = "launch",
+					name = "Launch file with arguments",
+					program = "${file}",
+					pythonPath = function()
+						local cwd = vim.fn.getcwd()
+
+						if env then
+							return env_python
+						elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
+							return cwd .. "/.venv/bin/python"
+						else
+							return "/usr/bin/python"
+						end
+					end,
+					justMyCode = false,
+					console = "integratedTerminal",
+					cwd = "${workspaceFolder}",
+					args = function()
+						local args_string = vim.fn.input("Arguments: ")
+						return vim.split(args_string, " +")
+					end,
+				},
 			}
 
 			-- 2. DAP-UI -> Use DAP events to open and close the windows automatically
@@ -816,7 +840,7 @@ local plugins = {
 					enabled = true,
 					inline = true,
 					float = true,
-					max_width = 60,
+					max_width = 80,
 					max_height = 60,
 				},
 			},
