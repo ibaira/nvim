@@ -1,4 +1,6 @@
+--------------------------------------------------------------------------------
 -- LSP config
+--------------------------------------------------------------------------------
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
@@ -88,7 +90,10 @@ vim.lsp.config("lua_ls", {
 })
 vim.lsp.enable("lua_ls")
 
+--------------------------------------------------------------------------------
 -- Remove virtual text in line for diagnostics
+--------------------------------------------------------------------------------
+
 local function diagnostic_format(diagnostic)
 	return string.format("%s (%s): %s", diagnostic.source, diagnostic.code, diagnostic.message)
 end
@@ -133,7 +138,10 @@ function _G.toggle_lint()
 	vim.g.diagnostic_active = not vim.g.diagnostic_active
 end
 
+--------------------------------------------------------------------------------
 -- Avoid flickering of virtual lines when scrolling
+--------------------------------------------------------------------------------
+
 vim.opt.updatetime = 200
 
 vim.api.nvim_create_autocmd("CursorHold", {

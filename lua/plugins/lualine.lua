@@ -204,11 +204,9 @@ ins_left_winbar({
 		return navic.get_location()
 	end,
 	condition = navic.is_available,
-	path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
-	file_status = true,
 	color = { "GruvboxYellowBold" },
 	padding = { left = 1, right = 0 },
 })
 
 -- Initialize lualine
-require("lualine").setup(config)
+require("lualine").setup(config) ---@diagnostic disable-line: undefined-field

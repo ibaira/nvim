@@ -28,13 +28,6 @@ local function copy(args)
 	return args[1]
 end
 
--- When trying to expand a snippet, luasnip first searches the tables for
--- each filetype specified in 'filetype' followed by 'all'.
--- If ie. the filetype is 'lua.c'
---     - luasnip.lua
---     - luasnip.c
---     - luasnip.all
--- are searched in that order.
 luasnip.add_snippets("python", {
 	-- Main block
 	snippet("main", {
@@ -368,13 +361,6 @@ luasnip.autosnippets = { all = { snippet("autotrigger", { text_node("autosnippet
 luasnip.filetype_extend("lua", { "c" })
 -- in a cpp file: search c-snippets, then all-snippets only (no cpp-snippets!!).
 luasnip.filetype_set("cpp", { "c" })
-
--- Beside defining your own snippets you can also load snippets from "vscode-like" packages
--- that expose snippets in json files, for example <https://github.com/rafamadriz/friendly-snippets>.
--- Mind that this will extend  `ls.snippets` so you need to do it after your own snippets or you
--- will need to extend the table yourself instead of setting a new one.
--- require("luasnip/loaders/from_vscode").load({ include = { "python" } }) -- Load only python snippets
--- require("luasnip/loaders/from_vscode").load({ paths = { "./my-snippets" } }) -- Load snippets from my-snippets folder
 
 -- You can also use lazy loading so you only get in memory snippets of languages you use
 require("luasnip/loaders/from_vscode").lazy_load()
