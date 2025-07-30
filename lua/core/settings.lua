@@ -3,7 +3,7 @@
 ---------------------------------
 
 vim.opt.termguicolors = true
-vim.opt.relativenumber = true
+vim.opt.relativenumber = false
 
 -- vim.opt.fileformat = "unix" -- error 'non-modifiable' when Lazy installs/updates plugins
 vim.opt.shortmess:append("c")

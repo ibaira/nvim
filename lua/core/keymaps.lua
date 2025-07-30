@@ -33,8 +33,8 @@ vim.keymap.set("n", "<C-S-Down>", "<C-W>-<C-W>-")
 vim.keymap.set("n", "<C-S-Up>", "<C-W>+<C-W>+")
 
 -- Resize vertical split window
-vim.keymap.set("n", "<C-Right>", "<C-W>><C-W>>")
-vim.keymap.set("n", "<C-Left>", "<C-W><<C-W><")
+vim.keymap.set("n", "<C-S-Right>", "<C-W>><C-W>>")
+vim.keymap.set("n", "<C-S-Left>", "<C-W><<C-W><")
 
 -- Toggle relative line numbers
 vim.keymap.set("n", "<leader>r", ":set relativenumber!<CR>", { silent = true })

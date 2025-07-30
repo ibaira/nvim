@@ -430,6 +430,11 @@ require("gruvbox").setup({
 		DiagnosticVirtualTextInfo = { fg = colors.blue, bg = colors.bg1 },
 		DiagnosticVirtualTextHint = { fg = colors.cyan, bg = colors.bg1 },
 
+		DiagnosticVirtualLinesError = { fg = colors.red, bg = colors.bg1 },
+		DiagnosticVirtualLinesWarn = { fg = colors.orange, bg = colors.bg1 },
+		DiagnosticVirtualLinesInfo = { fg = colors.blue, bg = colors.bg1 },
+		DiagnosticVirtualLinesHint = { fg = colors.cyan, bg = colors.bg1 },
+
 		-- Rainbow delimiters
 		["@punctuation.bracket.python"] = { fg = colors.red },
 		RainbowDelimiterBlue = { fg = colors.blue },
@@ -487,6 +492,9 @@ require("gruvbox").setup({
 
 		-- Tmux
 		tmuxOptions = { fg = colors.yellow, bold = true },
+
+		-- Lazy
+		LazyNormal = { bg = colors.bg },
 	},
 })
 
