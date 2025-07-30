@@ -133,4 +133,25 @@ function _G.toggle_lint()
 	vim.g.diagnostic_active = not vim.g.diagnostic_active
 end
 
-vim.opt.updatetime = 50
+-- Avoid flickering of virtual lines when scrolling
+vim.opt.updatetime = 200
+
+vim.api.nvim_create_autocmd("CursorHold", {
+	pattern = "*",
+	callback = function()
+		if vim.g.diagnostic_active then
+			vim.diagnostic.config({ virtual_lines = { current_line = true } })
+		end
+	end,
+	desc = "Enable virtual_lines on CursorHold",
+})
+
+vim.api.nvim_create_autocmd("CursorMoved", {
+	pattern = "*",
+	callback = function()
+		if vim.g.diagnostic_active then
+			vim.diagnostic.config({ virtual_lines = false })
+		end
+	end,
+	desc = "Disable virtual_lines on CursorMoved",
+})
