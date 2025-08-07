@@ -76,7 +76,7 @@ vim.keymap.set("n", "<C-i>", "<C-i>zz")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
-vim.keymap.set("n", "*", "*<C-o>")
+vim.keymap.set("n", "*", "*N")
 
 -- Paste on highlighted without losing prev register
 vim.keymap.set("x", "<leader>p", '"_dP')
