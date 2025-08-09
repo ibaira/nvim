@@ -148,7 +148,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
 	pattern = "*",
 	callback = function()
 		if vim.g.diagnostic_active then
-			vim.diagnostic.config({ virtual_lines = { current_line = true, format = diagnostic_format } })
+			vim.diagnostic.config(active_diagnostics_config)
 		end
 	end,
 	desc = "Enable virtual_lines on CursorHold",

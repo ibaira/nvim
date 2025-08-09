@@ -15,6 +15,13 @@ vim.keymap.set("n", "<F2>", snacks.keymaps, { silent = true })
 vim.keymap.set("n", "<leader>n", function()
 	return snacks.explorer({ diagnostics = false })
 end, { silent = true })
+vim.keymap.set("n", "<leader>lg", function()
+	require("snacks").lazygit({
+		theme = {
+			activeBorderColor = { fg = "String" },
+		},
+	})
+end, { silent = true })
 
 vim.keymap.set("c", "<Esc>", "<C-c>")
 vim.keymap.set("i", "<C-c>", "<Esc>")
@@ -105,9 +112,6 @@ vim.keymap.set("n", "<M-a>", ":lua vim.lsp.buf.code_action()<CR>", { silent = tr
 -- Gitsigns
 vim.keymap.set("n", "<leader>d", ":Gitsigns toggle_signs<CR>", { silent = true })
 vim.keymap.set("n", "<leader>g", ":Gitsigns preview_hunk<CR>", { silent = true })
-
--- LazyGit
-vim.keymap.set("n", "<leader>lg", ":LazyGit<CR>", { silent = true })
 
 -- Ignore lint diagnostic in-line
 vim.keymap.set("n", "<M-i>", ":lua _G.IgnoreLintInLine()<CR>", {})

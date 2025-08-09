@@ -1,22 +1,7 @@
--- Lualine configuration
-local conditions = {
-	buffer_not_empty = function()
-		return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
-	end,
-	width_above_80 = function()
-		return vim.fn.winwidth(0) > 80
-	end,
-	width_above_88 = function()
-		return vim.fn.winwidth(0) > 88
-	end,
-	check_git_workspace = function()
-		local file_path = vim.fn.expand("%:p:h")
-		local git_dir = vim.fn.finddir(".git", file_path .. ";")
-		return git_dir and #git_dir > 0 and #git_dir < #file_path
-	end,
-}
-
+--------------------------------------------------------------------------------
 -- Config
+--------------------------------------------------------------------------------
+
 local theme = "gruvbox"
 local config = {
 	options = {
@@ -66,20 +51,42 @@ local config = {
 	},
 }
 
--- Inserts a component in winbar
-local function ins_left_winbar(component)
-	table.insert(config.winbar.lualine_c, component)
-	table.insert(config.inactive_winbar.lualine_c, component)
-end
-
 -- Inserts a component in lualine_c at left section
-local function ins_left(component)
+local function insert_left(component)
 	table.insert(config.sections.lualine_c, component)
 	table.insert(config.inactive_sections.lualine_c, component)
 end
 
+-- Inserts a component in winbar
+local function insert_left_winbar(component)
+	table.insert(config.winbar.lualine_c, component)
+	table.insert(config.inactive_winbar.lualine_c, component)
+end
+
+-- Lualine configuration
+local conditions = {
+	buffer_not_empty = function()
+		return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
+	end,
+	width_above_80 = function()
+		return vim.fn.winwidth(0) > 80
+	end,
+	width_above_88 = function()
+		return vim.fn.winwidth(0) > 88
+	end,
+	check_git_workspace = function()
+		local file_path = vim.fn.expand("%:p:h")
+		local git_dir = vim.fn.finddir(".git", file_path .. ";")
+		return git_dir and #git_dir > 0 and #git_dir < #file_path
+	end,
+}
+
+--------------------------------------------------------------------------------
+-- Status line
+--------------------------------------------------------------------------------
+
 -- Python environment with nvim mode colored background
-ins_left({
+insert_left({
 	function()
 		local venv = os.getenv("VIRTUAL_ENV_PROMPT")
 		if venv then
@@ -95,25 +102,25 @@ ins_left({
 		if venv then
 			return venv
 		end
+
 		return ""
 	end,
 	color = "@variable",
 	padding = { left = 2, right = 0 },
 })
 
-ins_left({
+insert_left({
 	"filename",
 	condition = conditions.buffer_not_empty,
 	path = 0, -- 0 = just filename, 1 = relative path, 2 = absolute path
 	file_status = true,
 	color = "GruvboxYellowBold",
 	padding = { left = 2, right = 0 },
-	-- fmt = function(str) return string.format("%-15s", str) end,
 })
 
-ins_left({ "progress", color = "String", padding = { left = 3 } })
+insert_left({ "progress", color = "String", padding = { left = 3 } })
 
-ins_left({
+insert_left({
 	function()
 		return "col: " .. string.format("%02d", vim.api.nvim_win_get_cursor(0)[2]) -- column value only
 	end,
@@ -121,7 +128,7 @@ ins_left({
 	color = "GruvboxFg0",
 })
 
-ins_left({
+insert_left({
 	"branch",
 	icon = "",
 	cond = conditions.check_git_workspace,
@@ -132,9 +139,9 @@ ins_left({
 	end,
 })
 
-ins_left({ "fileformat", color = "Constant", padding = { left = 2 } })
+insert_left({ "fileformat", color = "Constant", padding = { left = 2 } })
 
-ins_left({
+insert_left({
 	-- LSP server name
 	function()
 		local msg = ""
@@ -163,7 +170,7 @@ ins_left({
 })
 
 local noice_statusline_mode = require("noice").api.statusline.mode
-ins_left({
+insert_left({
 	-- Display recording macro message
 	function()
 		local mode = noice_statusline_mode.get()
@@ -177,8 +184,11 @@ ins_left({
 	padding = { left = 2 },
 })
 
+--------------------------------------------------------------------------------
 -- Winbar
-ins_left_winbar({
+--------------------------------------------------------------------------------
+
+insert_left_winbar({
 	function()
 		return vim.fn.fnamemodify(vim.fn.expand("%"), ":p:~:.")
 	end,
@@ -189,7 +199,7 @@ ins_left_winbar({
 	padding = { left = 1, right = 1 },
 })
 
-ins_left_winbar({
+insert_left_winbar({
 	-- To enforce change of background color for the rest of the winbar
 	function()
 		return " "
@@ -199,7 +209,7 @@ ins_left_winbar({
 })
 
 local navic = require("nvim-navic")
-ins_left_winbar({
+insert_left_winbar({
 	function()
 		return navic.get_location()
 	end,
@@ -208,5 +218,8 @@ ins_left_winbar({
 	padding = { left = 1, right = 0 },
 })
 
+--------------------------------------------------------------------------------
 -- Initialize lualine
+--------------------------------------------------------------------------------
+
 require("lualine").setup(config) ---@diagnostic disable-line: undefined-field
