@@ -120,8 +120,8 @@ vim.keymap.set("n", "<M-i>", ":lua _G.IgnoreLintInLine()<CR>", {})
 vim.keymap.set("n", "K", ":lua vim.lsp.buf.hover()<CR>", { silent = true })
 
 -- Go to definition
-vim.keymap.set("n", "gd", ":lua vim.lsp.buf.definition()<CR>", { silent = true })
-vim.keymap.set("n", "\\gd", ":vsp<CR>:lua vim.lsp.buf.definition()<CR>", { silent = true })
+vim.keymap.set("n", "gd", ":lua vim.lsp.buf.definition()<CR>zz", { silent = true })
+vim.keymap.set("n", "\\gd", ":vsp<CR>:lua vim.lsp.buf.definition()<CR>zz", { silent = true })
 
 -- Go to references
 vim.keymap.set("n", "gr", ":lua vim.lsp.buf.references()<CR>", { silent = true })
@@ -135,7 +135,7 @@ vim.keymap.set("n", "<C-h>", ":bprevious<CR>", { silent = true })
 vim.keymap.set("n", "<C-l>", ":bnext<CR>", { silent = true })
 
 -- Show signature help
-vim.keymap.set("i", "<C-k>", function()
+vim.keymap.set("i", "<C-space>", function()
 	vim.lsp.buf.signature_help()
 end, { buffer = true })
 
@@ -189,7 +189,13 @@ vim.keymap.set("n", "<M-t>", ":lua require('dapui').toggle()<CR>", { silent = tr
 vim.keymap.set("n", "<M-q>", ":split<CR>:term python %<CR>", { silent = true })
 
 -- Copilot
-vim.keymap.set("i", "<M-a>", 'copilot#Accept("<CR><CR>")', { expr = true, silent = true, replace_keycodes = false })
+vim.g.copilot_no_tab_map = true
+vim.keymap.set(
+	"i",
+	"<M-a>",
+	'copilot#Accept("<CR><CR>")',
+	{ silent = true, expr = true, silent = true, replace_keycodes = false }
+)
 
 -- Quick search in browser of the current Word under cursor
 local function search_in_browser()
@@ -207,6 +213,9 @@ vim.keymap.set("n", "gX", search_in_browser, { silent = true })
 -- Surround
 vim.keymap.set("n", "<leader>s", ":norm ysiw", { silent = false })
 vim.keymap.set("n", "<leader>c", ":norm cs", { silent = false })
+
+-- Exit terminal mode
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
 -- Select the whole buffer
 vim.keymap.set("n", "<leader>G", "ggVG")
