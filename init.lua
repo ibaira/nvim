@@ -3,7 +3,7 @@ require("core.lazy")
 
 -- Theme
 vim.opt.background = "dark"
-require("plugins.gruvbox")
+-- require("plugins.gruvbox")
 
 -- Custom configs
 require("plugins.lualine")
@@ -14,3 +14,5 @@ require("plugins.lspconfig")
 require("core.settings")
 require("core.filetypes")
 require("core.keymaps")
+
+vim.cmd("colorscheme catppuccin-mocha")

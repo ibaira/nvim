@@ -1336,7 +1336,156 @@ local plugins = {
 	},
 
 	-- Themes
-	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		priority = 1000,
+		opts = {
+			dim_inactive = { enabled = true, shade = "dark", pecentage = 0.15 },
+			no_italic = true,
+			no_underline = true,
+			styles = {
+				comments = {},
+				conditionals = { "bold" },
+				loops = { "bold" },
+				functions = {},
+				keywords = { "bold" },
+				strings = {},
+				variables = {},
+				numbers = { "bold" },
+				booleans = { "bold" },
+				properties = {},
+				types = {},
+			},
+			color_overrides = {
+				mocha = {
+					rosewater = "#e4e4e4",
+					flamingo = "#e4e4e4",
+					red = "#ff4f58",
+					maroon = "#e4e4e4",
+					pink = "#ffdd33",
+					mauve = "#ffdd33",
+					peach = "#96a6c8",
+					yellow = "#95a99f",
+					green = "#73c936",
+					teal = "#73c936",
+					sky = "#cc8c3c",
+					sapphire = "#9e95c7",
+					blue = "#96a6c8",
+					lavender = "#95a99f",
+					text = "#e4e4e4",
+					subtext1 = "#d5c9b7",
+					subtext0 = "#bfb3a5",
+					overlay2 = "#aca195",
+					ovelay1 = "#958b7e",
+					overlay0 = "#6f6660",
+					surface2 = "#585858",
+					surface1 = "#4b4b4b",
+					surface0 = "#353535",
+					base = "#1d2021",
+					mantle = "#1d2021",
+					crust = "#453d41",
+				},
+			},
+			integrations = {
+				mason = true,
+				navic = { enabled = true, custom_bg = "NONE" },
+				snacks = { enabled = true, indent_scope_color = "" },
+			},
+			custom_highlights = function(colors)
+				return {
+					-- General
+					["@boolean"] = { fg = colors.pink, bold = true },
+					["@boolean.lua"] = { fg = colors.pink, bold = true },
+					["@comment"] = { fg = colors.sky },
+					["@comment.todo"] = { fg = colors.sky, bg = "none", bold = true },
+					["@constant"] = { fg = colors.yellow },
+					["@constant.builtin"] = { fg = colors.pink, bold = true },
+					["@constructor.python"] = { fg = colors.blue },
+					["@module"] = { fg = colors.text },
+					["@property"] = { fg = colors.text },
+					["@punctuation.delimiter"] = { fg = colors.text },
+					["@variable.builtin"] = { fg = colors.pink, bg = "none" },
+
+					Boolean = { fg = colors.pink, bold = true },
+					Normal = { bg = colors.base },
+					NormalFloat = { bg = colors.base },
+					Folded = { fg = "gray", bg = "none" },
+					CursorLineNr = { fg = colors.pink },
+					Constant = { fg = colors.yellow },
+					Number = { fg = colors.sapphire },
+					Operator = { fg = colors.text },
+					SignColumn = { fg = colors.surface0 },
+
+					-- Markdown
+					["@markup.headin.1.markdown"] = { fg = colors.pink, bold = true },
+					["@markup.headin.2.markdown"] = { fg = colors.pink, bold = true },
+					["@markup.headin.3.markdown"] = { fg = colors.sky, bold = true },
+					["@markup.headin.4.markdown"] = { fg = colors.peach, bold = true },
+					["@markup.headin.5.markdown"] = { fg = colors.blue, bold = true },
+					["@markup.headin.6.markdown"] = { fg = colors.green, bold = true },
+					["@markup.link.label.markdown_inline"] = { fg = colors.pink },
+					["@markup.link.markdown_inline"] = { fg = "gray" },
+					["@markup.list.markdown"] = { fg = colors.pink, bold = true },
+					["@markup.italic.markdown_inline"] = { fg = colors.pink, italic = true },
+					["@markup.strong.markdown_inline"] = { fg = colors.pink, bold = true },
+					["@lsp.type.class.markdown"] = { fg = colors.green },
+
+					-- Startify
+					StartifyBracket = { fg = colors.base, bg = "none" },
+					StartifyHeader = { fg = colors.sky, bg = "none" },
+					StartifyNumber = { fg = colors.pink, bg = "none" },
+					StartifySection = { fg = colors.yellow, bg = "none" },
+					StartifySlash = { fg = colors.blue, bg = "none" },
+
+					-- Navic
+					NavicSeparator = { fg = "gray", bold = true },
+					NavicText = { fg = colors.text, bold = true },
+
+					-- Winbar
+					WinBar = { fg = colors.text, bg = colors.base, bold = true },
+					WinBarNC = { fg = colors.text, bg = colors.base, bold = true },
+					WinBarFilename = { fg = colors.text, bg = colors.surface0, bold = true },
+
+					-- Gitsigns
+					GitSignsChange = { fg = colors.sapphire },
+
+					-- Rainbow Delimiters
+					RainbowDelimiterRed = { fg = colors.sapphire },
+
+					-- Snacks
+					SnacksPickerDir = { fg = colors.blue },
+					SnacksPickerFile = { fg = colors.text },
+
+					-- Diagnostics
+					DiagnosticSignError = { fg = colors.red },
+					DiagnosticError = { fg = colors.red },
+					DiagnosticVirtualTextError = { fg = colors.red },
+
+					DiagnosticSignWarn = { fg = colors.sky },
+					DiagnosticWarn = { fg = colors.sky },
+					DiagnosticVirtualTextWarn = { fg = colors.sky },
+
+					DiagnosticSignInfo = { fg = colors.blue },
+					DiagnosticInfo = { fg = colors.blue },
+					DiagnosticVirtualTextInfo = { fg = colors.blue },
+
+					DiagnosticSignHint = { fg = colors.yellow },
+					DiagnosticHint = { fg = colors.yellow },
+					DiagnosticVirtualTextHint = { fg = colors.yellow },
+
+					-- Lualine
+					GruvboxBlueBold = { fg = colors.blue },
+					GruvboxYellowBold = { fg = colors.text, bold = true },
+
+					-- Hop
+					HopNext = { fg = colors.pink, bold = true },
+					HopNextKey1 = { fg = colors.pink, bold = true },
+					HopNextKey2 = { fg = colors.pink, bold = true },
+				}
+			end,
+		},
+	},
 }
 
 require("lazy").setup(plugins, {})
