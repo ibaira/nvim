@@ -519,6 +519,7 @@ local plugins = {
 	},
 	{
 		"iamcco/markdown-preview.nvim",
+		event = "VeryLazy",
 		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
 		build = "cd app && yarn install",
 		init = function()
@@ -526,7 +527,7 @@ local plugins = {
 		end,
 		ft = { "markdown" },
 	},
-	{ "HiPhish/rainbow-delimiters.nvim" },
+	{ "HiPhish/rainbow-delimiters.nvim", event = "VeryLazy" },
 	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
@@ -545,7 +546,7 @@ local plugins = {
 					highlight = "Search",
 					highlight_grey = "Comment",
 				},
-				disable_filetype = { "spectre_panel" },
+				disable_filetype = { "spectre_panel", "snacks_picker_input" },
 				disable_in_macro = true, -- disable when recording or executing a macro
 				disable_in_visualblock = false, -- disable when insert after visual block mode
 				disable_in_replace_mode = true,
@@ -687,7 +688,7 @@ local plugins = {
 				signs_staged = {
 					changedelete = { text = "|" }, -- untracked = { text = "┆" },
 				},
-				signs_staged_enable = true,
+				signs_staged_enable = false,
 				signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
 				numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
 				linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
@@ -1199,6 +1200,7 @@ local plugins = {
 	{ "github/copilot.vim", event = "VeryLazy" },
 	{
 		"ThePrimeagen/refactoring.nvim",
+		event = "VeryLazy",
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" },
 		config = function()
 			require("refactoring").setup()
@@ -1298,6 +1300,7 @@ local plugins = {
 	},
 	{
 		"folke/snacks.nvim",
+		event = "VeryLazy",
 		opts = {
 			picker = {
 				win = {
@@ -1341,7 +1344,7 @@ local plugins = {
 		name = "catppuccin",
 		priority = 1000,
 		opts = {
-			dim_inactive = { enabled = true, shade = "dark", pecentage = 0.15 },
+			dim_inactive = { enabled = true, shade = "dark", percentage = 0.15 },
 			no_italic = true,
 			no_underline = true,
 			styles = {
@@ -1377,7 +1380,7 @@ local plugins = {
 					subtext1 = "#d5c9b7",
 					subtext0 = "#bfb3a5",
 					overlay2 = "#aca195",
-					ovelay1 = "#958b7e",
+					overlay1 = "#958b7e",
 					overlay0 = "#6f6660",
 					surface2 = "#585858",
 					surface1 = "#4b4b4b",
@@ -1418,12 +1421,12 @@ local plugins = {
 					SignColumn = { fg = colors.surface0 },
 
 					-- Markdown
-					["@markup.headin.1.markdown"] = { fg = colors.pink, bold = true },
-					["@markup.headin.2.markdown"] = { fg = colors.pink, bold = true },
-					["@markup.headin.3.markdown"] = { fg = colors.sky, bold = true },
-					["@markup.headin.4.markdown"] = { fg = colors.peach, bold = true },
-					["@markup.headin.5.markdown"] = { fg = colors.blue, bold = true },
-					["@markup.headin.6.markdown"] = { fg = colors.green, bold = true },
+					["@markup.heading.1.markdown"] = { fg = colors.pink, bold = true },
+					["@markup.heading.2.markdown"] = { fg = colors.pink, bold = true },
+					["@markup.heading.3.markdown"] = { fg = colors.sky, bold = true },
+					["@markup.heading.4.markdown"] = { fg = colors.peach, bold = true },
+					["@markup.heading.5.markdown"] = { fg = colors.blue, bold = true },
+					["@markup.heading.6.markdown"] = { fg = colors.green, bold = true },
 					["@markup.link.label.markdown_inline"] = { fg = colors.pink },
 					["@markup.link.markdown_inline"] = { fg = "gray" },
 					["@markup.list.markdown"] = { fg = colors.pink, bold = true },
@@ -1442,12 +1445,12 @@ local plugins = {
 					NavicSeparator = { fg = "gray", bold = true },
 					NavicText = { fg = colors.text, bold = true },
 
-					-- Winbar
+					-- WinBar
 					WinBar = { fg = colors.text, bg = colors.base, bold = true },
 					WinBarNC = { fg = colors.text, bg = colors.base, bold = true },
 					WinBarFilename = { fg = colors.text, bg = colors.surface0, bold = true },
 
-					-- Gitsigns
+					-- GitSigns
 					GitSignsChange = { fg = colors.sapphire },
 
 					-- Rainbow Delimiters

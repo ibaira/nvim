@@ -234,7 +234,7 @@ function Custom_fold_text_with_line()
 	local line_num = vim.v.foldstart
 	local current_line_content = vim.api.nvim_buf_get_lines(0, line_num - 1, line_num, false)[1]
 	current_line_content = current_line_content:gsub("^%s+", "")
-	return custom_fold_text .. " ⋯  " .. current_line_content .. " "
+	return custom_fold_text .. " ⋯  " .. current_line_content .. " ↙  "
 end
 
 vim.opt.foldtext = "v:lua.Custom_fold_text_with_line()"
